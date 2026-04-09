@@ -80,7 +80,7 @@ const projects = [
       "Caching, throttling, and async event processing",
     ],
     github: "https://github.com/NiranjanS8/snapurl",
-    demo: "",
+    demo: "https://snapurl.online/",
     image:
       "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80",
   },
@@ -147,13 +147,6 @@ const projects = [
     image:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
   },
-] as const;
-
-const stats = [
-  { icon: FolderGit2, value: 6, suffix: "", label: "Published Projects" },
-  { icon: Briefcase, value: 1, suffix: "", label: "Internship Experience" },
-  { icon: Layers, value: 4, suffix: "+", label: "Backend Domains Explored" },
-  { icon: Award, value: 2026, suffix: "", label: "Final Year Target" },
 ] as const;
 
 const experience = [
@@ -226,52 +219,6 @@ function useTypedText(text: string, speed = 100) {
   }, [speed, text]);
 
   return typedText;
-}
-
-function Counter({ end, duration = 2 }: { end: number; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    const node = ref.current;
-    if (node) {
-      observer.observe(node);
-    }
-
-    return () => {
-      if (node) {
-        observer.unobserve(node);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    let startTime: number | null = null;
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / (duration * 1000), 1);
-      setCount(Math.floor(progress * end));
-      if (progress < 1) {
-        window.requestAnimationFrame(animate);
-      }
-    };
-
-    window.requestAnimationFrame(animate);
-  }, [duration, end, isVisible]);
-
-  return <div ref={ref}>{count}</div>;
 }
 
 function ScrollProgress() {
@@ -538,7 +485,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="relative px-6 py-24">
+      <section id="about" className="relative px-6 pb-16 pt-24">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
@@ -573,33 +520,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 py-16">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 md:grid-cols-4">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="rounded-xl border border-white/10 bg-card p-6 text-center transition-colors hover:border-accent/50"
-            >
-              <div className="mb-3 flex justify-center">
-                <div className="rounded-lg bg-accent/10 p-3">
-                  <stat.icon className="h-6 w-6 text-accent" />
-                </div>
-              </div>
-              <div className="mb-1 text-3xl font-bold text-white">
-                <Counter end={stat.value} />
-                {stat.suffix}
-              </div>
-              <div className="text-sm text-gray-400">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <section id="skills" className="relative bg-white/[0.02] px-6 py-24">
+      <section id="skills" className="relative bg-white/[0.02] px-6 py-20">
         <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-6xl">
           <motion.div
@@ -733,7 +654,7 @@ export default function Home() {
                         className="inline-flex flex-1 items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm text-white transition-colors hover:bg-accent/90"
                       >
                         <ExternalLink className="mr-1 h-4 w-4" />
-                        Demo
+                        Live
                       </a>
                     ) : null}
                   </div>
