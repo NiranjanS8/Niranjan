@@ -70,90 +70,90 @@ const skillCategories = [
 
 const projects = [
   {
-    title: "Expense Tracker",
+    title: "SnapURL",
     description:
-      "A backend-focused application for managing personal expenses, categories, and transaction history with secure APIs and practical database design.",
-    techStack: ["Spring Boot", "PostgreSQL", "JWT", "Docker"],
+      "A full-stack URL shortening platform built around scalable backend patterns, async analytics, secure authentication, and Redis-backed performance features.",
+    techStack: ["Spring Boot", "Redis", "PostgreSQL", "RabbitMQ"],
     features: [
-      "User authentication and authorization",
-      "Expense and category management APIs",
-      "Monthly summaries and filters",
+      "Short link creation with analytics",
+      "JWT auth with refresh flows",
+      "Caching, throttling, and async event processing",
     ],
-    github: "https://github.com/your-github",
-    demo: "",
-    image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "GraphQL Project",
-    description:
-      "A Spring Boot backend built to explore schema-driven development and flexible data fetching using GraphQL.",
-    techStack: ["Spring Boot", "GraphQL", "PostgreSQL", "JPA"],
-    features: [
-      "GraphQL schema-based API design",
-      "Query and mutation handling",
-      "Layered backend architecture",
-    ],
-    github: "https://github.com/your-github",
-    demo: "",
-    image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "YouTube Bookmark Manager",
-    description:
-      "An application for saving, organizing, and tracking useful YouTube videos designed to manage learning resources efficiently.",
-    techStack: ["Spring Boot", "PostgreSQL", "REST API"],
-    features: [
-      "Save and organize video links",
-      "Track watch progress",
-      "Category and tag-based filtering",
-    ],
-    github: "https://github.com/your-github",
-    demo: "",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "URL Shortener",
-    description:
-      "A scalable utility backend that converts long URLs into short links and handles redirection efficiently with performance optimizations.",
-    techStack: ["Java", "Spring Boot", "PostgreSQL", "Redis"],
-    features: ["Short URL generation", "Redirect handling", "Optional analytics tracking"],
-    github: "https://github.com/your-github",
+    github: "https://github.com/NiranjanS8/snapurl",
     demo: "",
     image:
       "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    title: "Microservices Project",
+    title: "Quizze",
     description:
-      "A beginner-friendly microservices backend system built to demonstrate service separation, centralized routing, and messaging basics.",
-    techStack: ["Spring Boot", "PostgreSQL", "Docker", "Kafka"],
-    features: ["Multiple independent services", "Centralized API routing", "Event-driven communication"],
-    github: "https://github.com/your-github",
+      "A full-stack online quiz platform featuring secure authentication, role-based workflows, analytics, notifications, and backend monitoring.",
+    techStack: ["Spring Boot", "PostgreSQL", "Redis", "Kafka"],
+    features: [
+      "Admin and user quiz workflows",
+      "Auto-scoring, leaderboard, and analytics",
+      "Caching and async notification flow",
+    ],
+    github: "https://github.com/NiranjanS8/Quizze",
     demo: "",
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    title: "Backend Utility APIs",
+    title: "Whisprly",
     description:
-      "A set of practical backend utilities exploring validation, secure endpoints, ORM concepts, and reusable service structure.",
-    techStack: ["Java", "Spring Boot", "PostgreSQL", "Maven"],
-    features: ["Reusable service patterns", "Validation and exception handling", "Clean backend structure"],
-    github: "https://github.com/your-github",
+      "A real-time chat platform combining Spring Boot APIs with WebSocket messaging, distributed presence, and token-based authentication flows.",
+    techStack: ["Spring Boot", "PostgreSQL", "WebSocket", "React"],
+    features: [
+      "Direct messages and room chat",
+      "Typing, unread, and presence updates",
+      "Refresh-token rotation and Google sign-in",
+    ],
+    github: "https://github.com/NiranjanS8/Whisprly",
     demo: "",
     image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Expense Tracker",
+    description:
+      "A backend-focused personal finance application designed to practice CRUD flows, data modeling, and clean service-layer structure.",
+    techStack: ["Java", "Spring Boot", "PostgreSQL", "JPA"],
+    features: ["Expense and category management", "Validation and structured backend layers", "Practical persistence workflows"],
+    github: "https://github.com/NiranjanS8/Expense_Tracker",
+    demo: "",
+    image:
+      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Video Streaming Application",
+    description:
+      "A backend-oriented streaming project exploring media delivery, service design, and content-oriented application workflows.",
+    techStack: ["Java", "Spring Boot", "REST API", "PostgreSQL"],
+    features: ["Content delivery workflows", "Backend API design", "Scalable media application foundation"],
+    github: "https://github.com/NiranjanS8/video-streaming-application",
+    demo: "",
+    image:
+      "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Patient Management System",
+    description:
+      "A structured backend application centered on healthcare-style data management, entity relationships, and operational workflows.",
+    techStack: ["Java", "Spring Boot", "PostgreSQL", "Hibernate"],
+    features: ["Domain-focused backend modeling", "Entity and DTO handling", "Service and persistence layer practice"],
+    github: "https://github.com/NiranjanS8/patient-management-system",
+    demo: "",
+    image:
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
   },
 ] as const;
 
 const stats = [
-  { icon: FolderGit2, value: 5, suffix: "+", label: "Core Projects" },
+  { icon: FolderGit2, value: 6, suffix: "", label: "Published Projects" },
   { icon: Briefcase, value: 1, suffix: "", label: "Internship Experience" },
-  { icon: Layers, value: 6, suffix: "+", label: "Backend Tools" },
-  { icon: Award, value: 2026, suffix: "", label: "Graduation Year" },
+  { icon: Layers, value: 4, suffix: "+", label: "Backend Domains Explored" },
+  { icon: Award, value: 2026, suffix: "", label: "Final Year Target" },
 ] as const;
 
 const experience = [
@@ -172,31 +172,31 @@ const experience = [
 
 const certifications = [
   {
-    title: "Java Backend Learning Track",
-    issuer: "Self-driven coursework and project practice",
-    date: "Ongoing",
-    credentialId: "Java, Spring Boot, PostgreSQL",
+    title: "Scalable API Design",
+    issuer: "Learned through SnapURL and Quizze",
+    date: "Backend focus",
+    credentialId: "Auth, caching, async processing",
     link: "#skills",
   },
   {
-    title: "REST API and Authentication Practice",
-    issuer: "Project-based learning",
-    date: "Ongoing",
-    credentialId: "JWT, validation, CRUD APIs",
+    title: "Realtime Systems Practice",
+    issuer: "Learned through Whisprly",
+    date: "Backend focus",
+    credentialId: "WebSocket, presence, token flows",
     link: "#projects",
   },
   {
-    title: "Database Design and ORM Fundamentals",
-    issuer: "Hands-on backend implementation",
-    date: "Ongoing",
+    title: "Database and ORM Fundamentals",
+    issuer: "Internship and project implementation",
+    date: "Backend focus",
     credentialId: "PostgreSQL, JPA, Hibernate",
     link: "#about",
   },
   {
-    title: "Microservices and Messaging Basics",
-    issuer: "Architecture exploration",
-    date: "Ongoing",
-    credentialId: "Docker, Kafka, system design",
+    title: "System Design Foundations",
+    issuer: "Project architecture exploration",
+    date: "Backend focus",
+    credentialId: "Redis, Kafka, Docker, layered design",
     link: "#projects",
   },
 ] as const;
@@ -437,9 +437,9 @@ function NavBar() {
 function SocialLinks() {
   const links = useMemo(
     () => [
-      { href: "https://github.com/your-github", label: "GitHub", icon: Github },
-      { href: "https://linkedin.com/in/your-linkedin", label: "LinkedIn", icon: Linkedin },
-      { href: "mailto:youremail@example.com", label: "Email", icon: Mail },
+      { href: "https://github.com/NiranjanS8", label: "GitHub", icon: Github },
+      { href: "https://www.linkedin.com/in/niranjans8/", label: "LinkedIn", icon: Linkedin },
+      { href: "mailto:niranjansankeshwari9@gmail.com", label: "Email", icon: Mail },
     ],
     [],
   );
@@ -870,13 +870,14 @@ export default function Home() {
                 <h3 className="mb-6 text-xl font-bold text-white">Let&apos;s Connect</h3>
                 <div className="space-y-4">
                   {[
-                    { icon: Mail, label: "Email", value: "youremail@example.com", href: "mailto:youremail@example.com" },
-                    { icon: Github, label: "GitHub", value: "github.com/your-github", href: "https://github.com/your-github" },
+                    { icon: Mail, label: "Email", value: "niranjansankeshwari9@gmail.com", href: "mailto:niranjansankeshwari9@gmail.com" },
+                    { icon: Briefcase, label: "Phone", value: "+91 9606694256", href: "tel:+919606694256" },
+                    { icon: Github, label: "GitHub", value: "github.com/NiranjanS8", href: "https://github.com/NiranjanS8" },
                     {
                       icon: Linkedin,
                       label: "LinkedIn",
-                      value: "linkedin.com/in/your-linkedin",
-                      href: "https://linkedin.com/in/your-linkedin",
+                      value: "linkedin.com/in/niranjans8",
+                      href: "https://www.linkedin.com/in/niranjans8/",
                     },
                   ].map((item) => (
                     <a
@@ -899,21 +900,38 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <motion.form
+            <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="space-y-4"
+              className="rounded-2xl border border-white/10 bg-card p-6"
             >
-              <input type="text" placeholder="Your Name" className="form-input" required />
-              <input type="email" placeholder="Your Email" className="form-input" required />
-              <textarea placeholder="Your Message" rows={5} className="form-input resize-none" required />
-              <button type="submit" className="primary-button w-full justify-center">
-                <Send className="mr-2 h-4 w-4" />
-                Send Message
-              </button>
-            </motion.form>
+              <h3 className="text-xl font-bold text-white">Best Ways To Reach Me</h3>
+              <p className="mt-3 text-sm leading-7 text-gray-400">
+                I respond fastest on email and LinkedIn. If you&apos;re reaching out about backend roles, internships, or project collaboration, feel free to share the role, team, or problem space you&apos;re hiring for.
+              </p>
+              <div className="mt-6 space-y-3 text-sm text-gray-300">
+                <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-accent">Current Focus</p>
+                  <p className="mt-2">Java backend development, Spring Boot applications, PostgreSQL, authentication, and scalable API design.</p>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-accent">Open To</p>
+                  <p className="mt-2">Backend developer roles, internships, entry-level software engineering opportunities, and meaningful technical collaborations.</p>
+                </div>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href="mailto:niranjansankeshwari9@gmail.com" className="primary-button">
+                  <Send className="mr-2 h-4 w-4" />
+                  Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/niranjans8/" target="_blank" rel="noopener noreferrer" className="outline-button">
+                  <Linkedin className="mr-2 h-4 w-4" />
+                  Connect On LinkedIn
+                </a>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -926,13 +944,13 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-4">
-            <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="GitHub">
+            <a href="https://github.com/NiranjanS8" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="GitHub">
               <Github className="h-5 w-5" />
             </a>
-            <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/niranjans8/" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="LinkedIn">
               <Linkedin className="h-5 w-5" />
             </a>
-            <a href="mailto:youremail@example.com" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="Email">
+            <a href="mailto:niranjansankeshwari9@gmail.com" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="Email">
               <Mail className="h-5 w-5" />
             </a>
           </div>
