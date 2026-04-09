@@ -3,21 +3,23 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import {
+  AtSign,
   ArrowRight,
   ArrowUp,
   Award,
   Briefcase,
   Code2,
+  Copyright,
   Database,
   Download,
   ExternalLink,
   FolderGit2,
   Github,
   Layers,
-  Lightbulb,
   Linkedin,
   Mail,
   Menu,
+  Phone,
   Send,
   Wrench,
   X,
@@ -36,35 +38,32 @@ const skillCategories = [
   {
     title: "Languages",
     icon: Code2,
-    skills: ["Java", "SQL", "JavaScript"],
+    skills: ["Java", "Python"],
   },
   {
     title: "Backend",
     icon: Layers,
-    skills: ["Spring Boot", "Spring Data JPA", "Hibernate", "REST APIs", "GraphQL", "JWT Authentication"],
+    skills: ["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "RESTful APIs", "JWT Authentication"],
   },
   {
     title: "Databases",
     icon: Database,
-    skills: ["PostgreSQL", "MySQL", "Redis"],
+    skills: ["MySQL", "PostgreSQL", "Redis"],
+  },
+  {
+    title: "Cloud",
+    icon: Wrench,
+    skills: ["AWS (EC2, S3, RDS, IAM)", "Docker", "Docker Compose"],
   },
   {
     title: "Tools",
     icon: Wrench,
-    skills: ["Git", "GitHub", "Maven", "Docker", "Postman"],
+    skills: ["Git", "Maven", "Postman"],
   },
   {
-    title: "Concepts",
-    icon: Lightbulb,
-    skills: [
-      "OOP",
-      "DBMS",
-      "MVC Architecture",
-      "Clean Code",
-      "Basic System Design",
-      "Microservices Fundamentals",
-      "Messaging Systems Basics",
-    ],
+    title: "Testing",
+    icon: Wrench,
+    skills: ["JUnit", "Mockito"],
   },
 ] as const;
 
@@ -297,7 +296,7 @@ function BackToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-50 rounded-full bg-accent p-4 text-white shadow-lg transition-all hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(59,130,246,0.45)]"
+          className="fixed bottom-6 right-6 z-50 rounded-full bg-accent p-3.5 text-white shadow-lg transition-all hover:bg-accent/90 hover:shadow-[0_0_30px_rgba(59,130,246,0.45)] md:bottom-8 md:right-8"
           aria-label="Back to top"
         >
           <ArrowUp className="h-5 w-5" />
@@ -453,7 +452,7 @@ export default function Home() {
                 View Projects
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a href="/resume.pdf" className="outline-button">
+              <a href="/Niranjans_resume.pdf" className="outline-button">
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
               </a>
@@ -630,7 +629,7 @@ export default function Home() {
                   <div className="space-y-1 pt-2">
                     {project.features.map((feature) => (
                       <div key={feature} className="flex items-start gap-2">
-                        <span className="mt-1 text-xs text-accent">â–¸</span>
+                        <span className="mt-1 text-xs text-accent">+</span>
                         <p className="text-xs text-gray-400">{feature}</p>
                       </div>
                     ))}
@@ -764,7 +763,6 @@ export default function Home() {
         </div>
       </section>
       <section id="contact" className="relative px-6 py-24">
-        <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -773,26 +771,31 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="mb-12 text-center"
           >
-            <h2 className="mb-4 text-4xl font-bold text-white">Get In Touch</h2>
-            <p className="text-lg text-gray-400">
-              I&apos;m currently open to backend opportunities, internships, and collaborations. Feel free to reach out and connect.
+            <div className="mb-4 flex justify-center">
+              <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium tracking-[0.16em] text-accent">
+                Available for opportunities
+              </span>
+            </div>
+            <h2 className="mb-3 text-4xl font-bold text-white">Get In Touch</h2>
+            <p className="mx-auto max-w-xl text-base leading-7 text-gray-400 md:text-lg">
+              Open to backend roles, internships, and collaborations.
+              <span className="block">Feel free to reach out - I usually respond quickly.</span>
             </p>
           </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 md:items-stretch">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="space-y-6"
+              className="flex h-full"
             >
-              <div>
+              <div className="flex h-full w-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm">
                 <h3 className="mb-6 text-xl font-bold text-white">Let&apos;s Connect</h3>
                 <div className="space-y-4">
                   {[
                     { icon: Mail, label: "Email", value: "niranjansankeshwari9@gmail.com", href: "mailto:niranjansankeshwari9@gmail.com" },
-                    { icon: Briefcase, label: "Phone", value: "+91 9606694256", href: "tel:+919606694256" },
                     { icon: Github, label: "GitHub", value: "github.com/NiranjanS8", href: "https://github.com/NiranjanS8" },
                     {
                       icon: Linkedin,
@@ -806,53 +809,92 @@ export default function Home() {
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-4 rounded-lg border border-white/10 bg-card p-4 transition-colors hover:border-accent/50"
+                      className="group flex items-center gap-4 rounded-xl border border-white/[0.08] bg-white/[0.05] p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.12] hover:bg-white/[0.07]"
                     >
-                      <div className="rounded-lg bg-accent/10 p-3 transition-colors group-hover:bg-accent/20">
-                        <item.icon className="h-5 w-5 text-accent" />
+                      <div className="rounded-lg bg-accent/10 p-3 transition-all duration-200 group-hover:bg-accent/15">
+                        <item.icon className="h-5 w-5 text-accent transition-transform duration-200 group-hover:scale-105" />
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-sm text-gray-400">{item.label}</p>
-                        <p className="text-white">{item.value}</p>
+                        <p className="truncate text-white">{item.value}</p>
                       </div>
+                      <ExternalLink className="h-4 w-4 text-gray-500 transition-colors duration-200 group-hover:text-accent" />
                     </a>
                   ))}
+                </div>
+
+                <div className="mt-auto pt-4">
+                  <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-lg bg-white/[0.04] p-2">
+                        <Phone className="h-4 w-4 text-gray-500" />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.16em] text-gray-500">Phone</p>
+                        <a href="tel:+919606694256" className="mt-1 inline-block text-sm text-gray-400 transition-colors hover:text-white">
+                          +91 9606694256
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div
+            <motion.aside
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="rounded-2xl border border-white/10 bg-card p-6"
+              className="flex h-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm"
             >
               <h3 className="text-xl font-bold text-white">Best Ways To Reach Me</h3>
-              <p className="mt-3 text-sm leading-7 text-gray-400">
-                I respond fastest on email and LinkedIn. If you&apos;re reaching out about backend roles, internships, or project collaboration, feel free to share the role, team, or problem space you&apos;re hiring for.
-              </p>
+              <ul className="mt-4 space-y-2 text-sm leading-6 text-gray-300">
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Email and LinkedIn are the fastest</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Open to backend roles and internships</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
+                  <span>Happy to discuss projects and collaborations</span>
+                </li>
+              </ul>
+
               <div className="mt-6 space-y-3 text-sm text-gray-300">
-                <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-accent">Current Focus</p>
-                  <p className="mt-2">Java backend development, Spring Boot applications, PostgreSQL, authentication, and scalable API design.</p>
-                </div>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-accent">Open To</p>
-                  <p className="mt-2">Backend developer roles, internships, entry-level software engineering opportunities, and meaningful technical collaborations.</p>
-                </div>
+                <section className="rounded-xl border border-white/[0.08] bg-white/[0.05] p-4 transition-colors duration-200 hover:bg-white/[0.07]">
+                  <h4 className="text-xs uppercase tracking-[0.18em] text-accent">Open To</h4>
+                  <ul className="mt-3 space-y-2">
+                    <li className="flex items-start gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/60" />
+                      <span>Backend developer roles</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/60" />
+                      <span>Internships and entry-level opportunities</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/60" />
+                      <span>Meaningful technical collaborations</span>
+                    </li>
+                  </ul>
+                </section>
               </div>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a href="mailto:niranjansankeshwari9@gmail.com" className="primary-button">
+
+              <div className="mt-auto flex flex-wrap gap-3 pt-6">
+                <a href="mailto:niranjansankeshwari9@gmail.com" className="primary-button shadow-[0_10px_30px_rgba(59,130,246,0.2)]">
                   <Send className="mr-2 h-4 w-4" />
                   Email Me
                 </a>
                 <a href="https://www.linkedin.com/in/niranjans8/" target="_blank" rel="noopener noreferrer" className="outline-button">
                   <Linkedin className="mr-2 h-4 w-4" />
-                  Connect On LinkedIn
+                  LinkedIn
                 </a>
               </div>
-            </motion.div>
+            </motion.aside>
           </div>
         </div>
       </section>
@@ -860,11 +902,13 @@ export default function Home() {
       <footer className="border-t border-white/10 px-6 py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
-            <p className="text-sm text-gray-400">(c) 2026 Niranjan S. All rights reserved.</p>
-            <p className="mt-1 text-xs text-gray-500">Built with Next.js &amp; Tailwind CSS</p>
+            <p className="inline-flex items-center gap-2 text-sm text-gray-400">
+              <Copyright className="h-4 w-4" />
+              <span>2026 Niranjan S. All rights reserved.</span>
+            </p>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 md:pr-20">
             <a href="https://github.com/NiranjanS8" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="GitHub">
               <Github className="h-5 w-5" />
             </a>
@@ -872,7 +916,7 @@ export default function Home() {
               <Linkedin className="h-5 w-5" />
             </a>
             <a href="mailto:niranjansankeshwari9@gmail.com" className="p-2 text-gray-400 transition-colors hover:text-accent" aria-label="Email">
-              <Mail className="h-5 w-5" />
+              <AtSign className="h-5 w-5" />
             </a>
           </div>
         </div>

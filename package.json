@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "powershell -Command \"if (Test-Path .next) { Remove-Item -LiteralPath .next -Recurse -Force }\""
   },
   "dependencies": {
     "framer-motion": "^12.6.2",
