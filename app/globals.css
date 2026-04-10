@@ -144,3 +144,40 @@ a {
 .animate-blink {
   animation: blink 1s infinite;
 }
+
+.hero-marquee {
+  position: relative;
+  margin: 0 auto;
+  max-width: 960px;
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.hero-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: marquee-scroll 22s linear infinite;
+}
+
+.hero-tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.75rem 1rem;
+  color: #d1d5db;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}

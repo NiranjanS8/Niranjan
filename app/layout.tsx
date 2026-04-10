@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Niranjan S | Backend Developer",
+  title: "Niranjan | Backend Developer",
   description:
-    "Minimalist portfolio for Niranjan S, a backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
+    "Minimalist portfolio for Niranjan, a backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
 };
 
 export default function RootLayout({

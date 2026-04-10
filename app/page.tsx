@@ -6,8 +6,9 @@ import {
   AtSign,
   ArrowRight,
   ArrowUp,
-  Award,
   Briefcase,
+  Boxes,
+  Cloud,
   Code2,
   Copyright,
   Database,
@@ -19,8 +20,10 @@ import {
   Linkedin,
   Mail,
   Menu,
+  Server,
   Phone,
   Send,
+  ShieldCheck,
   Wrench,
   X,
 } from "lucide-react";
@@ -43,7 +46,7 @@ const skillCategories = [
   {
     title: "Backend",
     icon: Layers,
-    skills: ["Spring Boot", "Spring MVC", "Spring Security", "Spring Data JPA", "RESTful APIs", "JWT Authentication"],
+    skills: ["Spring Boot", "Hibernate", "Spring Security", "Spring Data JPA", "RESTful APIs", "JWT Authentication"],
   },
   {
     title: "Databases",
@@ -71,80 +74,87 @@ const projects = [
   {
     title: "SnapURL",
     description:
-      "A full-stack URL shortening platform built around scalable backend patterns, async analytics, secure authentication, and Redis-backed performance features.",
-    techStack: ["Spring Boot", "Redis", "PostgreSQL", "RabbitMQ"],
+      "Scalable URL shortening service built with Spring Boot and Redis, designed to handle high-throughput link generation and fast redirection.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "JWT", "PostgreSQL", "Redis", "RabbitMQ"],
     features: [
-      "Short link creation with analytics",
-      "JWT auth with refresh flows",
-      "Caching, throttling, and async event processing",
+      "Implemented short URL generation with collision handling",
+      "Built JWT-based authentication with refresh token flow",
+      "Integrated Redis caching to reduce DB load and improve response time",
+      "Designed analytics pipeline for tracking link usage",
     ],
     github: "https://github.com/NiranjanS8/snapurl",
     demo: "https://snapurl.online/",
-    image:
-      "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Quizze",
     description:
-      "A full-stack online quiz platform featuring secure authentication, role-based workflows, analytics, notifications, and backend monitoring.",
-    techStack: ["Spring Boot", "PostgreSQL", "Redis", "Kafka"],
+      "Backend-driven quiz platform with real-time scoring, async notifications, and role-based workflows.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "Redis", "Kafka"],
     features: [
-      "Admin and user quiz workflows",
-      "Auto-scoring, leaderboard, and analytics",
-      "Caching and async notification flow",
+      "Built REST APIs for quiz management and user participation",
+      "Implemented role-based access (admin/user)",
+      "Designed async notification system using Kafka",
+      "Added leaderboard and scoring logic with efficient queries",
     ],
     github: "https://github.com/NiranjanS8/Quizze",
     demo: "",
-    image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Whisprly",
     description:
-      "A real-time chat platform combining Spring Boot APIs with WebSocket messaging, distributed presence, and token-based authentication flows.",
+      "Real-time chat system using Spring Boot and WebSockets with presence tracking and secure authentication.",
     techStack: ["Spring Boot", "PostgreSQL", "WebSocket", "React"],
     features: [
-      "Direct messages and room chat",
-      "Typing, unread, and presence updates",
-      "Refresh-token rotation and Google sign-in",
+      "Implemented WebSocket-based messaging with room support",
+      "Built real-time typing and presence indicators",
+      "Designed JWT-based auth with refresh tokens",
+      "Integrated PostgreSQL for message persistence",
     ],
     github: "https://github.com/NiranjanS8/Whisprly",
     demo: "",
-    image:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Expense Tracker",
     description:
-      "A backend-focused personal finance application designed to practice CRUD flows, data modeling, and clean service-layer structure.",
-    techStack: ["Java", "Spring Boot", "PostgreSQL", "JPA"],
-    features: ["Expense and category management", "Validation and structured backend layers", "Practical persistence workflows"],
+      "Personal finance platform with budgeting, recurring expense automation, async exports, insights, and role-based secure APIs.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "JUnit", "Mockito", "OpenAPI"],
+    features: [
+      "Built REST APIs for auth, expenses, categories, budgets, goals, insights, and reporting",
+      "Implemented JWT-based authentication, validation, rate limiting, and consistent error handling",
+      "Added recurring expense generation, smart category rules, and scheduled email report workflows",
+      "Designed async export jobs, observability hooks, and modular command/query service separation",
+      "Wrote integration and unit tests using JUnit, MockMvc, and Mockito",
+    ],
     github: "https://github.com/NiranjanS8/Expense_Tracker",
     demo: "",
-    image:
-      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Video Streaming Application",
     description:
-      "A backend-oriented streaming project exploring media delivery, service design, and content-oriented application workflows.",
-    techStack: ["Java", "Spring Boot", "REST API", "PostgreSQL"],
-    features: ["Content delivery workflows", "Backend API design", "Scalable media application foundation"],
+      "Backend-driven video upload and streaming platform built with Spring Boot, featuring JWT authentication, user-owned media access, async HLS processing, and performance tracking.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "JWT", "MySQL", "FFmpeg", "HLS"],
+    features: [
+      "Implemented JWT-based authentication and protected video management endpoints",
+      "Built async video processing pipeline using FFmpeg for HLS output in 360p, 720p, and 1080p",
+      "Added owner-based access control for uploaded videos and delete operations",
+      "Tracked upload throughput, processing latency, and realtime factor through a metrics summary API",
+    ],
     github: "https://github.com/NiranjanS8/video-streaming-application",
     demo: "",
-    image:
-      "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=1200&q=80",
   },
   {
     title: "Patient Management System",
     description:
-      "A structured backend application centered on healthcare-style data management, entity relationships, and operational workflows.",
-    techStack: ["Java", "Spring Boot", "PostgreSQL", "Hibernate"],
-    features: ["Domain-focused backend modeling", "Entity and DTO handling", "Service and persistence layer practice"],
+      "Production-style microservices backend system designed with Spring Boot, featuring secure service-to-service communication, event-driven architecture, and cloud-native deployment.",
+    techStack: ["Java", "Spring Boot", "Microservices", "Kafka", "gRPC", "PostgreSQL", "Docker", "AWS", "JWT", "Spring Security"],
+    features: [
+      "Built microservices architecture with REST, gRPC (low-latency billing), and Kafka for event-driven communication",
+      "Implemented centralized authentication using Spring Security + JWT with API Gateway enforcement",
+      "Containerized services with Docker and deployed using AWS CDK (IaC) with LocalStack for cloud simulation",
+      "Designed PostgreSQL-based persistence with validation and integration testing using RestAssured",
+    ],
     github: "https://github.com/NiranjanS8/patient-management-system",
     demo: "",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
   },
 ] as const;
 
@@ -162,35 +172,13 @@ const experience = [
   },
 ] as const;
 
-const certifications = [
-  {
-    title: "Scalable API Design",
-    issuer: "Learned through SnapURL and Quizze",
-    date: "Backend focus",
-    credentialId: "Auth, caching, async processing",
-    link: "#skills",
-  },
-  {
-    title: "Realtime Systems Practice",
-    issuer: "Learned through Whisprly",
-    date: "Backend focus",
-    credentialId: "WebSocket, presence, token flows",
-    link: "#projects",
-  },
-  {
-    title: "Database and ORM Fundamentals",
-    issuer: "Internship and project implementation",
-    date: "Backend focus",
-    credentialId: "PostgreSQL, JPA, Hibernate",
-    link: "#about",
-  },
-  {
-    title: "System Design Foundations",
-    issuer: "Project architecture exploration",
-    date: "Backend focus",
-    credentialId: "Redis, Kafka, Docker, layered design",
-    link: "#projects",
-  },
+const heroTechStack = [
+  { label: "Java", icon: Code2 },
+  { label: "Spring Boot", icon: Server },
+  { label: "Spring Security", icon: ShieldCheck },
+  { label: "PostgreSQL", icon: Database },
+  { label: "Redis", icon: Boxes },
+  { label: "AWS", icon: Cloud },
 ] as const;
 
 function scrollToSection(sectionId: string) {
@@ -198,26 +186,6 @@ function scrollToSection(sectionId: string) {
   if (element) {
     element.scrollIntoView({ behavior: "smooth" });
   }
-}
-
-function useTypedText(text: string, speed = 100) {
-  const [typedText, setTypedText] = useState("");
-
-  useEffect(() => {
-    let currentIndex = 0;
-    const interval = window.setInterval(() => {
-      if (currentIndex <= text.length) {
-        setTypedText(text.slice(0, currentIndex));
-        currentIndex += 1;
-      } else {
-        window.clearInterval(interval);
-      }
-    }, speed);
-
-    return () => window.clearInterval(interval);
-  }, [speed, text]);
-
-  return typedText;
 }
 
 function ScrollProgress() {
@@ -326,7 +294,7 @@ function NavBar() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <button onClick={() => scrollToSection("home")} className="text-xl font-bold text-white transition-colors hover:text-accent">
-            Niranjan S
+            Niranjan
           </button>
 
           <div className="hidden items-center gap-8 md:flex">
@@ -408,15 +376,23 @@ function SocialLinks() {
   );
 }
 
-export default function Home() {
-  const typedText = useTypedText("Java, Spring Boot, PostgreSQL");
+function SectionDivider() {
+  return (
+    <section aria-hidden="true" className="px-6">
+      <div className="mx-auto max-w-6xl">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/[0.12] to-transparent" />
+      </div>
+    </section>
+  );
+}
 
+export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <ScrollProgress />
       <NavBar />
       <SectionIndicators />
-      <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-6 pt-20">
+      <section id="home" className="relative flex min-h-[82vh] items-center overflow-hidden px-6 pb-16 pt-20 md:min-h-[88vh]">
         <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
 
@@ -424,12 +400,8 @@ export default function Home() {
           <div className="space-y-6 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-2">
               <p className="text-lg text-accent">Hi, I&apos;m</p>
-              <h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">Niranjan S</h1>
+              <h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">Niranjan</h1>
               <h2 className="text-3xl font-bold text-gray-400 md:text-4xl">Backend Developer</h2>
-              <p className="min-h-[2rem] text-xl text-accent">
-                {typedText}
-                <span className="animate-blink">|</span>
-              </p>
             </motion.div>
 
             <motion.p
@@ -465,9 +437,21 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
+        <div className="absolute inset-x-0 bottom-6 overflow-hidden">
+          <div className="hero-marquee">
+            <div className="hero-marquee-track">
+              {[...heroTechStack, ...heroTechStack].map((item, index) => (
+                <div key={`${item.label}-${index}`} className="hero-tech-pill">
+                  <item.icon className="h-4 w-4 text-accent" />
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="about" className="relative px-6 pb-16 pt-24">
+      <section id="about" className="relative border-t border-white/[0.06] bg-white/[0.02] px-6 pb-20 pt-20">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
@@ -483,9 +467,9 @@ export default function Home() {
 
           <div className="space-y-6">
             {[
-              "I am a final-year engineering student focused on backend engineering and real-world software development. I enjoy building secure and scalable applications using Java, Spring Boot, PostgreSQL, and related backend technologies.",
-              "Through projects and internship experience, I have worked on database integration, API development, ORM concepts, authentication, and clean backend structure.",
-              "I am currently looking for opportunities to contribute as a backend developer and grow in production-level engineering while continuously improving my problem-solving and development skills.",
+              "I am a final-year engineering student focused on backend development and building real-world software systems. I enjoy working with Java, Spring Boot, and PostgreSQL to design clean, scalable APIs and backend architectures.",
+              "Through hands-on projects and internship experience, I have worked on database integration, authentication, ORM frameworks like Hibernate, and backend application structure. I focus on writing clean, maintainable code and understanding how systems work beyond just implementation.",
+              "Currently, I am looking for backend developer roles and internships where I can contribute to real-world products, improve my system design skills, and grow as a software engineer.",
             ].map((paragraph, index) => (
               <motion.p
                 key={paragraph}
@@ -502,7 +486,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="skills" className="relative bg-white/[0.02] px-6 py-20">
+      <SectionDivider />
+
+      <section id="skills" className="relative bg-white/[0.02] px-6 pb-20 pt-14">
         <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-6xl">
           <motion.div
@@ -524,11 +510,11 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group rounded-xl border border-white/10 bg-card p-6 transition-colors hover:border-accent/50"
+                className="group rounded-[1.5rem] border border-white/[0.07] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.12] hover:bg-white/[0.055] hover:shadow-[0_24px_70px_rgba(0,0,0,0.2)]"
               >
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="rounded-lg bg-accent/10 p-2 transition-colors group-hover:bg-accent/20">
-                    <category.icon className="h-5 w-5 text-accent" />
+                  <div className="rounded-xl bg-accent/10 p-3 transition-all duration-300 group-hover:bg-accent/15 group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)]">
+                    <category.icon className="h-5 w-5 text-accent transition-transform duration-300 group-hover:scale-105" />
                   </div>
                   <h3 className="text-xl font-bold text-white">{category.title}</h3>
                 </div>
@@ -536,7 +522,7 @@ export default function Home() {
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-gray-300 transition-colors hover:border-accent hover:text-accent"
+                      className="rounded-full border border-white/[0.08] bg-white/[0.05] px-3 py-1 text-sm text-gray-300 transition-all duration-200 hover:border-accent/30 hover:bg-white/[0.08] hover:text-white"
                     >
                       {skill}
                     </span>
@@ -547,6 +533,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <SectionDivider />
 
       <section id="projects" className="relative px-6 py-24">
         <div className="absolute left-0 top-1/2 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
@@ -570,18 +558,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="group overflow-hidden rounded-xl border border-white/10 bg-card transition-all hover:border-accent/50 hover:shadow-[0_20px_50px_rgba(59,130,246,0.12)]"
+                className="group rounded-[1.5rem] border border-white/[0.06] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.1] hover:bg-white/[0.05] hover:shadow-[0_24px_70px_rgba(0,0,0,0.18)]"
               >
-                <div className="relative h-48 overflow-hidden bg-gray-900">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-                </div>
-
-                <div className="space-y-4 p-6">
+                <div className="space-y-4">
                   <div className="flex items-start justify-between">
                     <FolderGit2 className="h-8 w-8 text-accent" />
                     <div className="flex gap-2">
@@ -647,6 +626,8 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       <section id="experience" className="relative bg-white/[0.02] px-6 py-24">
         <div className="absolute bottom-0 right-1/2 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-4xl">
@@ -702,49 +683,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="certifications" className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 flex items-center gap-3">
-            <Award className="h-8 w-8 text-accent" />
-            <h2 className="text-4xl font-bold text-white">Learning Highlights</h2>
-          </div>
+      <SectionDivider />
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {certifications.map((cert, index) => (
-              <motion.article
-                key={cert.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group rounded-xl border border-white/10 bg-card p-6 transition-all hover:border-accent/50"
-              >
-                <div className="mb-4 flex items-start justify-between">
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 rounded-lg bg-accent/10 p-2">
-                      <Award className="h-5 w-5 text-accent" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="mb-1 text-lg font-bold text-white transition-colors group-hover:text-accent">{cert.title}</h3>
-                      <p className="text-sm text-accent">{cert.issuer}</p>
-                    </div>
-                  </div>
-                  <a href={cert.link} className="text-gray-400 transition-colors hover:text-accent">
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-gray-400">{cert.date}</span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-400">
-                    {cert.credentialId}
-                  </span>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
       <section id="contact" className="relative px-6 py-24">
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
@@ -774,7 +714,7 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               className="flex h-full"
             >
-              <div className="flex h-full w-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm">
+              <div className="flex h-full w-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md">
                 <h3 className="mb-6 text-xl font-bold text-white">Let&apos;s Connect</h3>
                 <div className="space-y-4">
                   {[
@@ -792,7 +732,7 @@ export default function Home() {
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-4 rounded-xl border border-white/[0.08] bg-white/[0.05] p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.12] hover:bg-white/[0.07]"
+                      className="group flex items-center gap-4 rounded-xl border border-white/[0.045] bg-white/[0.045] p-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.06] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)]"
                     >
                       <div className="rounded-lg bg-accent/10 p-3 transition-all duration-200 group-hover:bg-accent/15">
                         <item.icon className="h-5 w-5 text-accent transition-transform duration-200 group-hover:scale-105" />
@@ -807,7 +747,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-auto pt-4">
-                  <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3">
+                  <div className="rounded-xl border border-white/[0.04] bg-white/[0.03] px-4 py-3">
                     <div className="flex items-center gap-3">
                       <div className="rounded-lg bg-white/[0.04] p-2">
                         <Phone className="h-4 w-4 text-gray-500" />
@@ -829,7 +769,7 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="flex h-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm"
+              className="flex h-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md"
             >
               <h3 className="text-xl font-bold text-white">Best Ways To Reach Me</h3>
               <ul className="mt-4 space-y-2 text-sm leading-6 text-gray-300">
@@ -848,7 +788,7 @@ export default function Home() {
               </ul>
 
               <div className="mt-6 space-y-3 text-sm text-gray-300">
-                <section className="rounded-xl border border-white/[0.08] bg-white/[0.05] p-4 transition-colors duration-200 hover:bg-white/[0.07]">
+                <section className="rounded-xl border border-white/[0.045] bg-white/[0.045] p-4 transition-all duration-200 hover:bg-white/[0.06] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)]">
                   <h4 className="text-xs uppercase tracking-[0.18em] text-accent">Open To</h4>
                   <ul className="mt-3 space-y-2">
                     <li className="flex items-start gap-3">
@@ -882,12 +822,14 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       <footer className="border-t border-white/10 px-6 py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
             <p className="inline-flex items-center gap-2 text-sm text-gray-400">
               <Copyright className="h-4 w-4" />
-              <span>2026 Niranjan S. All rights reserved.</span>
+              <span>2026 Niranjan. All rights reserved.</span>
             </p>
           </div>
 
