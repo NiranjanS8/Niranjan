@@ -420,8 +420,8 @@ export default function Home() {
         <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 md:grid-cols-2 md:items-center">
-          <div className="space-y-6">
+        <div className="relative z-10 mx-auto flex w-full max-w-4xl justify-center">
+          <div className="space-y-6 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-2">
               <p className="text-lg text-accent">Hi, I&apos;m</p>
               <h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">Niranjan S</h1>
@@ -436,7 +436,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-xl text-lg leading-relaxed text-gray-400"
+              className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-400"
             >
               I build backend applications and APIs with a focus on clean architecture, database design, authentication,
               and scalable development. I enjoy turning ideas into practical, real-world software projects.
@@ -446,7 +446,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap justify-center gap-4"
             >
               <button onClick={() => scrollToSection("projects")} className="primary-button group">
                 View Projects
@@ -459,28 +459,11 @@ export default function Home() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.6 }}>
-              <SocialLinks />
+              <div className="flex justify-center">
+                <SocialLinks />
+              </div>
             </motion.div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="hidden items-center justify-center md:flex"
-          >
-            <div className="relative aspect-square w-full max-w-md">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-72 w-72 animate-pulse rounded-full bg-gradient-to-br from-accent/20 to-cyan-500/20 blur-3xl" />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="animate-spin-slow h-64 w-64 rounded-lg border-2 border-accent/30 rotate-45" />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-56 w-56 rounded-full border border-accent/20" />
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
