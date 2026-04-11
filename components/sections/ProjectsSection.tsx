@@ -69,7 +69,7 @@ export default function ProjectsSection() {
                 <div className="flex-1 space-y-1 pt-2">
                   {project.features.slice(0, 3).map((feature) => (
                     <div key={feature} className="flex items-start gap-2">
-                      <span className="mt-1 text-xs text-accent">+</span>
+                      <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent/80" />
                       <p className="text-xs text-gray-400">{feature}</p>
                     </div>
                   ))}

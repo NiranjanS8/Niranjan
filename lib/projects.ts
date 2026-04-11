@@ -14,13 +14,13 @@ export const projects: Project[] = [
     slug: "snapurl",
     title: "SnapURL",
     description:
-      "Scalable URL shortening service built with Spring Boot and Redis, designed to handle high-throughput link generation and fast redirection.",
-    techStack: ["Java", "Spring Boot", "Spring Security", "JWT", "PostgreSQL", "Redis", "RabbitMQ"],
+      "Full-stack URL shortener with Redis caching, RabbitMQ-driven async analytics, JWT auth with refresh token rotation, and a React dashboard with search, filtering, and link management.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "JWT", "MySQL", "Redis", "RabbitMQ"],
     features: [
-      "Implemented short URL generation with collision handling",
-      "Built JWT-based authentication with refresh token flow",
-      "Integrated Redis caching to reduce DB load and improve response time",
-      "Designed analytics pipeline for tracking link usage",
+      "Short link creation with custom aliases, collision protection, and deduplication",
+      "RabbitMQ-based async click tracking to keep redirects under low latency",
+      "Redis-backed redirect caching, analytics caching, and login rate limiting",
+      "JWT auth with refresh token rotation, account lockout, and password reset flow",
     ],
     github: "https://github.com/NiranjanS8/snapurl",
     demo: "https://snapurl.online/",
@@ -33,13 +33,13 @@ export const projects: Project[] = [
     slug: "quizze",
     title: "Quizze",
     description:
-      "Backend-driven quiz platform with real-time scoring, async notifications, and role-based workflows.",
+      "Full-stack quiz platform with role-based admin/user workflows, auto-scoring, leaderboards, Kafka-driven email notifications, Redis caching, and Prometheus + Grafana observability.",
     techStack: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "Redis", "Kafka"],
     features: [
-      "Built REST APIs for quiz management and user participation",
-      "Implemented role-based access (admin/user)",
-      "Designed async notification system using Kafka",
-      "Added leaderboard and scoring logic with efficient queries",
+      "Admin quiz CRUD with question management, publishing, and analytics dashboards",
+      "Timed quiz attempts with auto-scoring, answer review, and leaderboard rankings",
+      "Kafka-based async notifications for new quiz alerts and result summary emails",
+      "Prometheus metrics with Grafana dashboards for auth, messaging, and cache activity",
     ],
     github: "https://github.com/NiranjanS8/Quizze",
     readmeRawUrls: [
@@ -51,13 +51,13 @@ export const projects: Project[] = [
     slug: "whisprly",
     title: "Whisprly",
     description:
-      "Real-time chat system using Spring Boot and WebSockets with presence tracking and secure authentication.",
-    techStack: ["Spring Boot", "PostgreSQL", "WebSocket", "React"],
+      "Real-time chat platform with WebSocket/STOMP messaging, Redis-backed distributed presence, Google sign-in, DM request workflows, and Flyway-managed schema migrations.",
+    techStack: ["Java", "Spring Boot", "WebSocket", "PostgreSQL", "Redis", "React"],
     features: [
-      "Implemented WebSocket-based messaging with room support",
-      "Built real-time typing and presence indicators",
-      "Designed JWT-based auth with refresh tokens",
-      "Integrated PostgreSQL for message persistence",
+      "WebSocket/STOMP real-time messaging with group rooms and direct messages",
+      "Redis-backed distributed presence tracking with typing and online indicators",
+      "Message lifecycle: edit, soft delete, pin/unpin, attachments, and self-destruct",
+      "Google OAuth + JWT auth with refresh token rotation and revocation support",
     ],
     github: "https://github.com/NiranjanS8/Whisprly",
     readmeRawUrls: [
@@ -69,13 +69,13 @@ export const projects: Project[] = [
     slug: "expense-tracker",
     title: "Expense Tracker",
     description:
-      "Personal finance platform with budgeting, recurring expense automation, async exports, insights, and role-based secure APIs.",
+      "Personal finance API with budgeting, recurring expense automation, async CSV/PDF exports, spending insights, and comprehensive test coverage with JUnit and Mockito.",
     techStack: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "JUnit", "Mockito", "OpenAPI"],
     features: [
-      "Built REST APIs for auth, expenses, budgets, insights, and reporting",
-      "Implemented JWT auth, validation, rate limiting, and consistent error handling",
-      "Added recurring expenses, category rules, and scheduled email reports",
-      "Wrote unit and integration tests with JUnit, MockMvc, and Mockito",
+      "REST APIs for expenses, budgets, categories, and spending insights with pagination",
+      "Recurring expense automation with scheduled processing and category-based rules",
+      "JWT auth with validation, rate limiting, and global exception handling",
+      "Unit and integration tests with JUnit, MockMvc, and Mockito for full coverage",
     ],
     github: "https://github.com/NiranjanS8/Expense_Tracker",
     readmeRawUrls: [
@@ -85,15 +85,15 @@ export const projects: Project[] = [
   },
   {
     slug: "video-streaming-application",
-    title: "Video Streaming Application",
+    title: "Video Streaming App",
     description:
-      "Backend-driven video upload and streaming platform built with Spring Boot, featuring JWT authentication, user-owned media access, async HLS processing, and performance tracking.",
+      "Video upload and streaming platform with async FFmpeg HLS processing for multi-resolution output, JWT-secured ownership model, auto-thumbnails, and performance metrics tracking.",
     techStack: ["Java", "Spring Boot", "Spring Security", "JWT", "MySQL", "FFmpeg", "HLS"],
     features: [
-      "Implemented JWT auth and protected video management endpoints",
-      "Built async FFmpeg processing for 360p, 720p, and 1080p HLS output",
-      "Added owner-based access control for video updates and deletes",
-      "Tracked upload throughput and processing latency through a metrics API",
+      "Async FFmpeg pipeline generating HLS output at 360p, 720p, and 1080p resolutions",
+      "JWT-secured upload, list, and delete with owner-based access enforcement",
+      "Auto-thumbnail generation with optional custom thumbnail upload support",
+      "Performance metrics API tracking upload throughput, processing latency, and RTF",
     ],
     github: "https://github.com/NiranjanS8/video-streaming-application",
     readmeRawUrls: [
@@ -105,13 +105,13 @@ export const projects: Project[] = [
     slug: "patient-management-system",
     title: "Patient Management System",
     description:
-      "Production-style microservices backend system designed with Spring Boot, featuring secure service-to-service communication, event-driven architecture, and cloud-native deployment.",
-    techStack: ["Java", "Spring Boot", "Microservices", "Kafka", "gRPC", "PostgreSQL", "Docker", "AWS", "JWT", "Spring Security"],
+      "Production-style microservices backend with REST + gRPC communication, Kafka event-driven architecture, centralized auth via API Gateway, and cloud-native deployment on AWS.",
+    techStack: ["Java", "Spring Boot", "Microservices", "Kafka", "gRPC", "PostgreSQL", "Docker", "AWS"],
     features: [
-      "Built microservices with REST, gRPC billing, and Kafka event communication",
-      "Implemented centralized authentication with Spring Security, JWT, and API Gateway enforcement",
-      "Containerized services with Docker and deployed using AWS CDK with LocalStack",
-      "Designed PostgreSQL persistence with validation and integration testing via RestAssured",
+      "Microservices architecture with REST APIs and gRPC for inter-service communication",
+      "Kafka-based event-driven messaging for decoupled service-to-service workflows",
+      "Centralized JWT authentication enforced at the API Gateway layer",
+      "Containerized with Docker and deployed using AWS CDK with LocalStack testing",
     ],
     github: "https://github.com/NiranjanS8/patient-management-system",
     readmeRawUrls: [
