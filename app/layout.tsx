@@ -23,6 +23,22 @@ export const metadata: Metadata = {
     shortcut: "/n_icon.png",
     apple: "/n_icon.png",
   },
+  openGraph: {
+    title: "Niranjan | Backend Developer",
+    description:
+      "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs. View projects and get in touch.",
+    url: "https://niranjans8.github.io/Niranjan",
+    siteName: "Niranjan's Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Niranjan | Backend Developer",
+    description:
+      "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
+  },
+  metadataBase: new URL("https://niranjans8.github.io"),
 };
 
 export default function RootLayout({
