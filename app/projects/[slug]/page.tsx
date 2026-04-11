@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExternalLink, FolderGit2, Github } from "lucide-react";
+import BackToProjects from "@/components/BackToProjects";
 import type { ReactNode } from "react";
 import { getProjectBySlug } from "@/lib/projects";
 
@@ -190,9 +190,7 @@ export default async function ProjectDetailsPage({
   return (
     <main className="min-h-screen bg-background px-6 py-24">
       <div className="mx-auto max-w-5xl">
-        <Link href="/#projects" className="text-sm text-accent transition-colors hover:text-white">
-          Back to projects
-        </Link>
+        <BackToProjects />
 
         <section className="mt-6 rounded-[2rem] border border-white/[0.05] bg-white/[0.035] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-md">
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">

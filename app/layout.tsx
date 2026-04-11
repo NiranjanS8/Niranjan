@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Niranjan | Backend Developer",
     description:
       "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs. View projects and get in touch.",
-    url: "https://niranjans8.github.io/Niranjan",
+    url: "https://www.niranjans.tech",
     siteName: "Niranjan's Portfolio",
     locale: "en_US",
     type: "website",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
   },
-  metadataBase: new URL("https://niranjans8.github.io"),
+  metadataBase: new URL("https://www.niranjans.tech"),
 };
 
 export default function RootLayout({
@@ -48,7 +48,37 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${ubuntu.variable} ${kreon.variable}`}>{children}</body>
+      <body className={`${ubuntu.variable} ${kreon.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Niranjan",
+              url: "https://www.niranjans.tech",
+              jobTitle: "Backend Developer",
+              description:
+                "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
+              sameAs: [
+                "https://github.com/NiranjanS8",
+                "https://www.linkedin.com/in/niranjans8/",
+              ],
+              knowsAbout: [
+                "Java",
+                "Spring Boot",
+                "PostgreSQL",
+                "Redis",
+                "Docker",
+                "AWS",
+                "REST APIs",
+                "Microservices",
+              ],
+            }),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
