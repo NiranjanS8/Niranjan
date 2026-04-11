@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import { Kreon, Ubuntu } from "next/font/google";
 import "./globals.css";
+
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-body",
+});
+
+const kreon = Kreon({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-heading",
+});
 
 export const metadata: Metadata = {
   title: "Niranjan | Backend Developer",
@@ -14,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${ubuntu.variable} ${kreon.variable}`}>{children}</body>
     </html>
   );
 }

@@ -160,14 +160,15 @@ const projects = [
 
 const experience = [
   {
-    role: "Backend / Java Intern",
-    company: "Internship Experience",
-    duration: "Recent Experience",
+    role: "Java Developer",
+    company: "Dyashin Technosoft",
+    duration: "",
     responsibilities: [
-      "Worked with JDBC and PostgreSQL for database connectivity and CRUD operations",
-      "Learned Maven project setup and dependency management",
-      "Explored Hibernate concepts including entities, DTOs, and session handling",
-      "Strengthened understanding of backend architecture and persistence flow",
+      "Built and deployed a Java-based backend application using Spring Boot, implementing REST APIs for user authentication and data management.",
+      "Designed and integrated PostgreSQL database schemas, optimizing queries to improve data retrieval performance.",
+      "Implemented core features using OOP principles, ensuring modular, reusable, and maintainable code structure.",
+      "Used Git for version control, managing code changes and collaborating through branches and pull requests.",
+      "Tested and debugged applications using tools like Postman and logging techniques, reducing errors and improving stability.",
     ],
   },
 ] as const;
@@ -277,12 +278,36 @@ function BackToTop() {
 function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleSectionTracking = () => {
+      const scrollPosition = window.scrollY + 180;
+
+      for (const section of sections) {
+        const element = document.getElementById(section.id);
+        if (!element) continue;
+
+        const offsetTop = element.offsetTop;
+        const offsetHeight = element.offsetHeight;
+
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          setActiveSection(section.id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleSectionTracking);
+    handleSectionTracking();
+    return () => window.removeEventListener("scroll", handleSectionTracking);
   }, []);
 
   return (
@@ -302,7 +327,9 @@ function NavBar() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm text-gray-300 transition-colors hover:text-accent"
+                className={`text-sm transition-colors hover:text-accent ${
+                  activeSection === item.id ? "text-accent" : "text-gray-300"
+                }`}
               >
                 {item.label}
               </button>
@@ -335,7 +362,9 @@ function NavBar() {
                     scrollToSection(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className="text-2xl text-gray-300 transition-colors hover:text-accent"
+                  className={`text-2xl transition-colors hover:text-accent ${
+                    activeSection === item.id ? "text-accent" : "text-gray-300"
+                  }`}
                 >
                   {item.label}
                 </motion.button>
@@ -665,14 +694,14 @@ export default function Home() {
                       <h3 className="text-xl font-bold text-white transition-colors group-hover:text-accent">{item.role}</h3>
                       <p className="text-accent">{item.company}</p>
                     </div>
-                    <p className="mt-2 text-sm text-gray-400 md:mt-0">{item.duration}</p>
+                    {item.duration ? <p className="mt-2 text-sm text-gray-400 md:mt-0">{item.duration}</p> : null}
                   </div>
 
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {item.responsibilities.map((responsibility) => (
-                      <li key={responsibility} className="flex items-start gap-2">
-                        <span className="mt-1.5 text-accent">-</span>
-                        <p className="text-gray-400">{responsibility}</p>
+                      <li key={responsibility} className="grid grid-cols-[12px_1fr] items-start gap-x-3">
+                        <span className="mt-[0.55rem] h-1.5 w-1.5 rounded-full bg-accent/80" />
+                        <p className="leading-7 text-gray-400">{responsibility}</p>
                       </li>
                     ))}
                   </ul>
