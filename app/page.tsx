@@ -317,12 +317,12 @@ function NavBar() {
           scrolled ? "border-b border-white/10 bg-background/80 backdrop-blur-md" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <button onClick={() => scrollToSection("home")} className="text-xl font-bold text-white transition-colors hover:text-accent">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
+          <button onClick={() => scrollToSection("home")} className="text-lg font-bold text-white transition-colors hover:text-accent sm:text-xl">
             Niranjan
           </button>
 
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-6 md:flex lg:gap-8">
             {sections.map((item) => (
               <button
                 key={item.id}
@@ -336,7 +336,7 @@ function NavBar() {
             ))}
           </div>
 
-          <button className="z-50 text-white md:hidden" onClick={() => setMobileMenuOpen((value) => !value)}>
+          <button className="z-50 rounded-lg p-1.5 text-white md:hidden" onClick={() => setMobileMenuOpen((value) => !value)}>
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -351,7 +351,7 @@ function NavBar() {
             transition={{ type: "tween", duration: 0.3 }}
             className="fixed inset-0 z-40 bg-background/95 backdrop-blur-lg md:hidden"
           >
-            <div className="flex h-full flex-col items-center justify-center gap-8">
+            <div className="flex h-full flex-col items-center justify-center gap-6 px-6">
               {sections.map((item, index) => (
                 <motion.button
                   key={item.id}
@@ -362,7 +362,7 @@ function NavBar() {
                     scrollToSection(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-2xl transition-colors hover:text-accent ${
+                  className={`w-full max-w-xs rounded-xl border border-white/8 bg-white/[0.03] px-5 py-3 text-xl transition-colors hover:text-accent ${
                     activeSection === item.id ? "text-accent" : "text-gray-300"
                   }`}
                 >
@@ -388,7 +388,7 @@ function SocialLinks() {
   );
 
   return (
-    <div className="flex gap-4 pt-4">
+    <div className="flex flex-wrap justify-center gap-3 pt-4 sm:gap-4">
       {links.map((item) => (
         <a
           key={item.label}
@@ -421,23 +421,23 @@ export default function Home() {
       <ScrollProgress />
       <NavBar />
       <SectionIndicators />
-      <section id="home" className="relative flex min-h-[82vh] items-center overflow-hidden px-6 pb-16 pt-20 md:min-h-[88vh]">
+      <section id="home" className="relative flex min-h-[78vh] items-center overflow-hidden px-4 pb-14 pt-20 sm:px-6 sm:pb-16 md:min-h-[88vh]">
         <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-4xl justify-center">
-          <div className="space-y-6 text-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-2">
-              <p className="text-lg text-accent">Hi, I&apos;m</p>
-              <h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">Niranjan</h1>
-              <h2 className="text-3xl font-bold text-gray-400 md:text-4xl">Backend Developer</h2>
+          <div className="space-y-5 text-center sm:space-y-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-2 sm:space-y-3">
+              <p className="text-base text-accent sm:text-lg">Hi, I&apos;m</p>
+              <h1 className="text-4xl font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl">Niranjan</h1>
+              <h2 className="text-2xl font-bold text-gray-400 sm:text-3xl md:text-4xl">Backend Developer</h2>
             </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-400"
+              className="mx-auto max-w-2xl text-base leading-8 text-gray-400 sm:max-w-3xl sm:text-lg"
             >
               I build backend applications and APIs with a focus on clean architecture, database design, authentication,
               and scalable development. I enjoy turning ideas into practical, real-world software projects.
@@ -447,13 +447,13 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap justify-center gap-4"
+              className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
             >
-              <button onClick={() => scrollToSection("projects")} className="primary-button group">
+              <button onClick={() => scrollToSection("projects")} className="primary-button group w-full sm:w-auto">
                 View Projects
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <a href="/Niranjans_resume.pdf" className="outline-button">
+              <a href="/Niranjans_resume.pdf" className="outline-button w-full sm:w-auto">
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
               </a>
@@ -466,7 +466,7 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-        <div className="absolute inset-x-0 bottom-4 hidden overflow-hidden sm:block">
+        <div className="absolute inset-x-0 bottom-4 hidden overflow-hidden md:block">
           <div className="hero-marquee">
             <div className="hero-marquee-track">
               {[...heroTechStack, ...heroTechStack].map((item, index) => (
@@ -480,7 +480,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="relative border-t border-white/[0.06] bg-white/[0.02] px-6 pb-20 pt-20">
+      <section id="about" className="relative border-t border-white/[0.06] bg-white/[0.02] px-4 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-20">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
@@ -488,13 +488,13 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-12 flex items-center gap-3"
+            className="mb-8 flex items-center gap-3 sm:mb-12"
           >
             <Code2 className="h-8 w-8 text-accent" />
-            <h2 className="text-4xl font-bold text-white">About Me</h2>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">About Me</h2>
           </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             {[
               "I am a final-year engineering student focused on backend development and building real-world software systems. I enjoy working with Java, Spring Boot, and PostgreSQL to design clean, scalable APIs and backend architectures.",
               "Through hands-on projects and internship experience, I have worked on database integration, authentication, ORM frameworks like Hibernate, and backend application structure. I focus on writing clean, maintainable code and understanding how systems work beyond just implementation.",
@@ -506,7 +506,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-                className="text-lg leading-relaxed text-gray-400"
+                className="text-base leading-8 text-gray-400 sm:text-lg"
               >
                 {paragraph}
               </motion.p>
@@ -517,7 +517,7 @@ export default function Home() {
 
       <SectionDivider />
 
-      <section id="skills" className="relative bg-white/[0.02] px-6 pb-20 pt-14">
+      <section id="skills" className="relative bg-white/[0.02] px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-14">
         <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-6xl">
           <motion.div
@@ -525,13 +525,13 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-12 flex items-center gap-3"
+            className="mb-8 flex items-center gap-3 sm:mb-12"
           >
             <Layers className="h-8 w-8 text-accent" />
-            <h2 className="text-4xl font-bold text-white">Skills &amp; Technologies</h2>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">Skills &amp; Technologies</h2>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {skillCategories.map((category, index) => (
               <motion.div
                 key={category.title}
@@ -539,7 +539,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group rounded-[1.5rem] border border-white/[0.07] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.12] hover:bg-white/[0.055] hover:shadow-[0_24px_70px_rgba(0,0,0,0.2)]"
+                className="group rounded-[1.35rem] border border-white/[0.07] bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.12] hover:bg-white/[0.055] hover:shadow-[0_24px_70px_rgba(0,0,0,0.2)] sm:rounded-[1.5rem] sm:p-6"
               >
                 <div className="mb-4 flex items-center gap-3">
                   <div className="rounded-xl bg-accent/10 p-3 transition-all duration-300 group-hover:bg-accent/15 group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)]">
@@ -565,7 +565,7 @@ export default function Home() {
 
       <SectionDivider />
 
-      <section id="projects" className="relative px-6 py-24">
+      <section id="projects" className="relative px-4 py-16 sm:px-6 sm:py-24">
         <div className="absolute left-0 top-1/2 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <motion.div
@@ -573,13 +573,13 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-12 flex items-center gap-3"
+            className="mb-8 flex items-center gap-3 sm:mb-12"
           >
             <FolderGit2 className="h-8 w-8 text-accent" />
-            <h2 className="text-4xl font-bold text-white">Featured Projects</h2>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">Featured Projects</h2>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
             {projects.map((project, index) => (
               <motion.article
                 key={project.title}
@@ -587,7 +587,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="group rounded-[1.5rem] border border-white/[0.06] bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.1] hover:bg-white/[0.05] hover:shadow-[0_24px_70px_rgba(0,0,0,0.18)]"
+                className="group rounded-[1.35rem] border border-white/[0.06] bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.1] hover:bg-white/[0.05] hover:shadow-[0_24px_70px_rgba(0,0,0,0.18)] sm:rounded-[1.5rem] sm:p-6"
               >
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
@@ -610,15 +610,20 @@ export default function Home() {
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech) => (
+                    {project.techStack.slice(0, 5).map((tech) => (
                       <span key={tech} className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-gray-400">
                         {tech}
                       </span>
                     ))}
+                    {project.techStack.length > 5 ? (
+                      <span className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-gray-500">
+                        +{project.techStack.length - 5}
+                      </span>
+                    ) : null}
                   </div>
 
                   <div className="space-y-1 pt-2">
-                    {project.features.map((feature) => (
+                    {project.features.slice(0, 3).map((feature) => (
                       <div key={feature} className="flex items-start gap-2">
                         <span className="mt-1 text-xs text-accent">+</span>
                         <p className="text-xs text-gray-400">{feature}</p>
@@ -626,7 +631,7 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <div className="flex gap-2 pt-2">
+                  <div className="flex flex-col gap-2 pt-2 sm:flex-row">
                     <a
                       href={project.github}
                       target="_blank"
@@ -657,7 +662,7 @@ export default function Home() {
 
       <SectionDivider />
 
-      <section id="experience" className="relative bg-white/[0.02] px-6 py-24">
+      <section id="experience" className="relative bg-white/[0.02] px-4 py-16 sm:px-6 sm:py-24">
         <div className="absolute bottom-0 right-1/2 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
@@ -665,10 +670,10 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-12 flex items-center gap-3"
+            className="mb-8 flex items-center gap-3 sm:mb-12"
           >
             <Briefcase className="h-8 w-8 text-accent" />
-            <h2 className="text-4xl font-bold text-white">Experience</h2>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">Experience</h2>
           </motion.div>
 
           <div className="space-y-8">
@@ -679,7 +684,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="relative border-l-2 border-gradient pl-8 pb-8 last:pb-0"
+                className="relative border-l-2 border-gradient pl-6 pb-8 last:pb-0 sm:pl-8"
                 style={{ borderImage: "linear-gradient(to bottom, #3B82F6, rgba(59, 130, 246, 0.2)) 1" }}
               >
                 <div className="absolute -left-[9px] top-0">
@@ -714,28 +719,28 @@ export default function Home() {
 
       <SectionDivider />
 
-      <section id="contact" className="relative px-6 py-24">
+      <section id="contact" className="relative px-4 py-16 sm:px-6 sm:py-24">
         <div className="relative z-10 mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mb-12 text-center"
+            className="mb-8 text-center sm:mb-12"
           >
             <div className="mb-4 flex justify-center">
               <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium tracking-[0.16em] text-accent">
                 Available for opportunities
               </span>
             </div>
-            <h2 className="mb-3 text-4xl font-bold text-white">Get In Touch</h2>
-            <p className="mx-auto max-w-xl text-base leading-7 text-gray-400 md:text-lg">
+            <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">Get In Touch</h2>
+            <p className="mx-auto max-w-xl text-sm leading-7 text-gray-400 sm:text-base md:text-lg">
               Open to backend roles, internships, and collaborations.
               <span className="block">Feel free to reach out - I usually respond quickly.</span>
             </p>
           </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-2 md:items-stretch">
+          <div className="grid gap-5 sm:gap-8 md:grid-cols-2 md:items-stretch">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -743,7 +748,7 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               className="flex h-full"
             >
-              <div className="flex h-full w-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md">
+              <div className="flex h-full w-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md sm:p-6">
                 <h3 className="mb-6 text-xl font-bold text-white">Let&apos;s Connect</h3>
                 <div className="space-y-4">
                   {[
@@ -761,7 +766,7 @@ export default function Home() {
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-4 rounded-xl border border-white/[0.045] bg-white/[0.045] p-4 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.06] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)]"
+                      className="group flex items-center gap-3 rounded-xl border border-white/[0.045] bg-white/[0.045] p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.06] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] sm:gap-4 sm:p-4"
                     >
                       <div className="rounded-lg bg-accent/10 p-3 transition-all duration-200 group-hover:bg-accent/15">
                         <item.icon className="h-5 w-5 text-accent transition-transform duration-200 group-hover:scale-105" />
@@ -798,7 +803,7 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="flex h-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md"
+              className="flex h-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md sm:p-6"
             >
               <h3 className="text-xl font-bold text-white">Best Ways To Reach Me</h3>
               <ul className="mt-4 space-y-2 text-sm leading-6 text-gray-300">
@@ -836,12 +841,12 @@ export default function Home() {
                 </section>
               </div>
 
-              <div className="mt-auto flex flex-wrap gap-3 pt-6">
-                <a href="mailto:niranjansankeshwari9@gmail.com" className="primary-button shadow-[0_10px_30px_rgba(59,130,246,0.2)]">
+              <div className="mt-auto flex flex-col gap-3 pt-6 sm:flex-row sm:flex-wrap">
+                <a href="mailto:niranjansankeshwari9@gmail.com" className="primary-button w-full shadow-[0_10px_30px_rgba(59,130,246,0.2)] sm:w-auto">
                   <Send className="mr-2 h-4 w-4" />
                   Email Me
                 </a>
-                <a href="https://www.linkedin.com/in/niranjans8/" target="_blank" rel="noopener noreferrer" className="outline-button">
+                <a href="https://www.linkedin.com/in/niranjans8/" target="_blank" rel="noopener noreferrer" className="outline-button w-full sm:w-auto">
                   <Linkedin className="mr-2 h-4 w-4" />
                   LinkedIn
                 </a>

@@ -18,6 +18,11 @@ export const metadata: Metadata = {
   title: "Niranjan | Backend Developer",
   description:
     "Minimalist portfolio for Niranjan, a backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
+  icons: {
+    icon: "/n_icon.png",
+    shortcut: "/n_icon.png",
+    apple: "/n_icon.png",
+  },
 };
 
 export default function RootLayout({
