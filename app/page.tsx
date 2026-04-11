@@ -466,7 +466,7 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-        <div className="absolute inset-x-0 bottom-6 overflow-hidden">
+        <div className="absolute inset-x-0 bottom-4 hidden overflow-hidden sm:block">
           <div className="hero-marquee">
             <div className="hero-marquee-track">
               {[...heroTechStack, ...heroTechStack].map((item, index) => (

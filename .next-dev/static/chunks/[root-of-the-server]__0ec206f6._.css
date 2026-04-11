@@ -1179,6 +1179,10 @@
     bottom: 25%;
   }
 
+  .bottom-4 {
+    bottom: calc(var(--spacing) * 4);
+  }
+
   .bottom-6 {
     bottom: calc(var(--spacing) * 6);
   }
@@ -3483,6 +3487,12 @@
   }
 
   @media (min-width: 40rem) {
+    .sm\:block {
+      display: block;
+    }
+  }
+
+  @media (min-width: 40rem) {
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -3645,7 +3655,8 @@
   --border: rgba(255, 255, 255, .1);
   --muted: #9ca3af;
   --input-background: #1e2936;
-  --font-inter: "Inter", sans-serif;
+  --font-body: "Ubuntu", sans-serif;
+  --font-heading: "Kreon", serif;
 }
 
 * {
@@ -3661,10 +3672,14 @@ body {
   background-color: var(--background);
   min-height: 100vh;
   color: var(--foreground);
-  font-family: var(--font-inter);
+  font-family: var(--font-body);
   background-image: radial-gradient(rgba(255, 255, 255, .05) 1px, rgba(0, 0, 0, 0) 1px);
   background-size: 30px 30px;
   margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
 
 a {
@@ -3771,9 +3786,11 @@ a {
 }
 
 .hero-marquee {
+  width: 100%;
   max-width: 960px;
   margin: 0 auto;
   position: relative;
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), #000 12%, #000 88%, rgba(0, 0, 0, 0));
   mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), #000 12%, #000 88%, rgba(0, 0, 0, 0));
 }
@@ -3798,6 +3815,21 @@ a {
   padding: .75rem 1rem;
   display: inline-flex;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+}
+
+@media (max-width: 640px) {
+  .hero-marquee {
+    max-width: 100%;
+  }
+
+  .hero-marquee-track {
+    gap: .75rem;
+  }
+
+  .hero-tech-pill {
+    padding: .65rem .85rem;
+    font-size: .85rem;
+  }
 }
 
 @keyframes marquee-scroll {

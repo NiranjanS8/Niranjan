@@ -160,7 +160,9 @@ a {
   position: relative;
   margin: 0 auto;
   max-width: 960px;
+  width: 100%;
   mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  overflow: hidden;
 }
 
 .hero-marquee-track {
@@ -182,6 +184,21 @@ a {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(10px);
   white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .hero-marquee {
+    max-width: 100%;
+  }
+
+  .hero-marquee-track {
+    gap: 0.75rem;
+  }
+
+  .hero-tech-pill {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
+  }
 }
 
 @keyframes marquee-scroll {
