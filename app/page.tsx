@@ -200,53 +200,6 @@ function ScrollProgress() {
   return <motion.div className="fixed left-0 right-0 top-0 z-[60] h-1 origin-left bg-accent" style={{ scaleX }} />;
 }
 
-function SectionIndicators() {
-  const [activeSection, setActiveSection] = useState("home");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 220;
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
-        if (!element) continue;
-        const offsetTop = element.offsetTop;
-        const offsetHeight = element.offsetHeight;
-        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-          setActiveSection(section.id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div className="fixed right-8 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
-      <div className="flex flex-col gap-4">
-        {sections.map((section) => (
-          <button key={section.id} onClick={() => scrollToSection(section.id)} className="group flex items-center gap-3">
-            <span
-              className={`text-right text-xs transition-opacity ${
-                activeSection === section.id ? "text-accent opacity-100" : "text-gray-400 opacity-0 group-hover:opacity-100"
-              }`}
-            >
-              {section.label}
-            </span>
-            <div
-              className={`rounded-full transition-all ${
-                activeSection === section.id ? "h-2 w-8 bg-accent" : "h-2 w-2 bg-gray-600 group-hover:bg-accent/50"
-              }`}
-            />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -420,10 +373,9 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <ScrollProgress />
       <NavBar />
-      <SectionIndicators />
       <section id="home" className="relative flex min-h-[78vh] items-center overflow-hidden px-4 pb-14 pt-20 sm:px-6 sm:pb-16 md:min-h-[88vh]">
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute left-1/2 top-1/3 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl sm:h-96 sm:w-96" />
+        <div className="absolute bottom-1/3 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl sm:h-96 sm:w-96" />
 
         <div className="relative z-10 mx-auto flex w-full max-w-4xl justify-center">
           <div className="space-y-5 text-center sm:space-y-6">
