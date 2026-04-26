@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Kreon, Ubuntu } from "next/font/google";
+import { Kalam, Patrick_Hand } from "next/font/google";
 import "./globals.css";
 
-const ubuntu = Ubuntu({
+const patrickHand = Patrick_Hand({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["400"],
   variable: "--font-body",
 });
 
-const kreon = Kreon({
+const kalam = Kalam({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "700"],
   variable: "--font-heading",
 });
 
@@ -48,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${ubuntu.variable} ${kreon.variable}`}>
+      <body className={`${patrickHand.variable} ${kalam.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

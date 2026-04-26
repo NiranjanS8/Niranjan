@@ -6,18 +6,19 @@ import { experience } from "@/lib/experience";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative bg-white/[0.02] px-4 py-16 sm:px-6 sm:py-24">
-      <div className="absolute bottom-0 right-1/2 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
-      <div className="relative z-10 mx-auto max-w-4xl">
+    <section id="experience" className="relative px-4 py-20 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-8 flex items-center gap-3 sm:mb-12"
+          className="mb-8 flex items-center justify-center gap-3 sm:mb-12 md:justify-start"
         >
-          <Briefcase className="h-8 w-8 text-accent" />
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Experience</h2>
+          <span className="icon-badge h-12 w-12">
+            <Briefcase className="h-6 w-6" />
+          </span>
+          <h2 className="scribble-underline text-4xl font-bold text-foreground sm:text-5xl">Experience</h2>
         </motion.div>
 
         <div className="space-y-8">
@@ -28,29 +29,26 @@ export default function ExperienceSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="relative border-l-2 border-gradient pl-6 pb-8 last:pb-0 sm:pl-8"
-              style={{ borderImage: "linear-gradient(to bottom, #3B82F6, rgba(59, 130, 246, 0.2)) 1" }}
+              className="relative border-l-[3px] border-dashed border-foreground pb-8 pl-6 last:pb-0 sm:pl-8"
             >
-              <div className="absolute -left-[9px] top-0">
-                <div className="relative h-4 w-4 rounded-full border-4 border-background bg-accent">
-                  <div className="absolute inset-0 rounded-full bg-accent opacity-75 animate-ping" />
-                </div>
+              <div className="absolute -left-[12px] top-1">
+                <div className="h-5 w-5 rounded-full border-[3px] border-foreground bg-accent shadow-[2px_2px_0px_0px_var(--foreground)]" />
               </div>
 
-              <div className="group rounded-xl border border-white/10 bg-card p-6 transition-all hover:border-accent/50">
+              <div className="sketch-card group rotate-[-0.4deg] p-6 transition-transform duration-100 hover:rotate-[0.7deg] hover:bg-[var(--post-it)]">
                 <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
                   <div>
-                    <h3 className="text-xl font-bold text-white transition-colors group-hover:text-accent">{item.role}</h3>
-                    <p className="text-accent">{item.company}</p>
+                    <h3 className="text-2xl font-bold text-foreground transition-colors group-hover:text-accent">{item.role}</h3>
+                    <p className="text-xl text-[var(--secondary-accent)]">{item.company}</p>
                   </div>
-                  {item.duration ? <p className="mt-2 text-sm text-gray-400 md:mt-0">{item.duration}</p> : null}
+                  {item.duration ? <p className="section-label mt-2 text-base md:mt-0">{item.duration}</p> : null}
                 </div>
 
                 <ul className="space-y-3">
                   {item.responsibilities.map((responsibility) => (
                     <li key={responsibility} className="grid grid-cols-[12px_1fr] items-start gap-x-3">
-                      <span className="mt-[0.55rem] h-1.5 w-1.5 rounded-full bg-accent/80" />
-                      <p className="leading-7 text-gray-400">{responsibility}</p>
+                      <span className="mt-[0.55rem] h-2 w-2 rounded-full border border-foreground bg-accent" />
+                      <p className="text-lg leading-7 text-foreground/75">{responsibility}</p>
                     </li>
                   ))}
                 </ul>

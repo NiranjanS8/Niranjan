@@ -45,11 +45,14 @@ export default function NavBar() {
     <>
       <nav
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? "border-b border-white/10 bg-background/80 backdrop-blur-md" : "bg-transparent"
+          scrolled ? "border-b-2 border-dashed border-foreground bg-background/90" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
-          <button onClick={() => scrollToSection("home")} className="text-lg font-bold text-white transition-colors hover:text-accent sm:text-xl">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
+          <button
+            onClick={() => scrollToSection("home")}
+            className="sketch-chip px-4 py-1.5 text-xl transition-transform duration-100 hover:rotate-[-1deg] hover:bg-[var(--post-it)] sm:text-2xl"
+          >
             Niranjan
           </button>
 
@@ -58,8 +61,9 @@ export default function NavBar() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm transition-colors hover:text-accent ${
-                  activeSection === item.id ? "text-accent" : "text-gray-300"
+                data-active={activeSection === item.id}
+                className={`sketch-link text-lg transition-colors hover:text-accent ${
+                  activeSection === item.id ? "text-accent" : "text-foreground"
                 }`}
               >
                 {item.label}
@@ -67,7 +71,12 @@ export default function NavBar() {
             ))}
           </div>
 
-          <button className="z-50 rounded-lg p-1.5 text-white md:hidden" onClick={() => setMobileMenuOpen((value) => !value)}>
+          <button
+            className="z-50 flex h-11 w-11 items-center justify-center border-2 border-foreground bg-white p-2 text-[var(--secondary-accent)] shadow-[3px_3px_0px_0px_var(--foreground)] transition-transform duration-100 hover:rotate-[-2deg] md:hidden"
+            style={{ borderRadius: "55% 45% 52% 48% / 44% 54% 46% 56%" }}
+            onClick={() => setMobileMenuOpen((value) => !value)}
+            aria-label="Toggle navigation"
+          >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -80,7 +89,7 @@ export default function NavBar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-lg md:hidden"
+            className="fixed inset-0 z-40 bg-background/95 md:hidden"
           >
             <div className="flex h-full flex-col items-center justify-center gap-6 px-6">
               {sections.map((item, index) => (
@@ -93,8 +102,8 @@ export default function NavBar() {
                     scrollToSection(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`w-full max-w-xs rounded-xl border border-white/8 bg-white/[0.03] px-5 py-3 text-xl transition-colors hover:text-accent ${
-                    activeSection === item.id ? "text-accent" : "text-gray-300"
+                  className={`sketch-card w-full max-w-xs px-5 py-3 text-2xl transition-transform duration-100 hover:rotate-1 hover:bg-[var(--post-it)] ${
+                    activeSection === item.id ? "text-accent" : "text-foreground"
                   }`}
                 >
                   {item.label}

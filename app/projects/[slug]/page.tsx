@@ -35,14 +35,14 @@ function renderInline(text: string): ReactNode[] {
     }
 
     if (match[2]) {
-      parts.push(<strong key={`b-${key++}`} className="font-semibold text-white">{match[2]}</strong>);
+        parts.push(<strong key={`b-${key++}`} className="font-semibold text-foreground">{match[2]}</strong>);
     } else if (match[3]) {
       parts.push(<em key={`i-${key++}`}>{match[3]}</em>);
     } else if (match[4]) {
-      parts.push(<code key={`c-${key++}`} className="rounded bg-white/10 px-1.5 py-0.5 text-sm text-accent">{match[4]}</code>);
+        parts.push(<code key={`c-${key++}`} className="sketch-chip px-1.5 py-0.5 text-sm text-accent">{match[4]}</code>);
     } else if (match[5] && match[6]) {
       parts.push(
-        <a key={`a-${key++}`} href={match[6]} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+        <a key={`a-${key++}`} href={match[6]} target="_blank" rel="noopener noreferrer" className="text-accent underline decoration-2 underline-offset-4">
           {match[5]}
         </a>,
       );
@@ -81,7 +81,7 @@ function renderMarkdown(markdown: string) {
       }
       i += 1;
       elements.push(
-        <pre key={`code-${key++}`} className="overflow-x-auto rounded-2xl border border-white/[0.06] bg-[#0f131b] p-4 text-sm text-gray-200">
+        <pre key={`code-${key++}`} className="overflow-x-auto border-2 border-foreground bg-white p-4 text-sm text-foreground" style={{ borderRadius: "28px 18px 34px 20px / 18px 34px 20px 30px" }}>
           <code>{codeLines.join("\n")}</code>
         </pre>,
       );
@@ -90,7 +90,7 @@ function renderMarkdown(markdown: string) {
 
     if (line.startsWith("# ")) {
       elements.push(
-        <h1 key={`h1-${key++}`} className="text-3xl font-bold text-white">
+        <h1 key={`h1-${key++}`} className="text-4xl font-bold text-foreground">
           {renderInline(line.slice(2))}
         </h1>,
       );
@@ -100,7 +100,7 @@ function renderMarkdown(markdown: string) {
 
     if (line.startsWith("## ")) {
       elements.push(
-        <h2 key={`h2-${key++}`} className="pt-3 text-2xl font-semibold text-white">
+        <h2 key={`h2-${key++}`} className="pt-3 text-3xl font-semibold text-foreground">
           {renderInline(line.slice(3))}
         </h2>,
       );
@@ -110,7 +110,7 @@ function renderMarkdown(markdown: string) {
 
     if (line.startsWith("### ")) {
       elements.push(
-        <h3 key={`h3-${key++}`} className="pt-2 text-xl font-semibold text-white">
+        <h3 key={`h3-${key++}`} className="pt-2 text-2xl font-semibold text-foreground">
           {renderInline(line.slice(4))}
         </h3>,
       );
@@ -128,8 +128,8 @@ function renderMarkdown(markdown: string) {
         <ul key={`ul-${key++}`} className="space-y-2 pl-1">
           {items.map((item) => (
             <li key={`${item}-${key++}`} className="grid grid-cols-[10px_1fr] gap-x-3">
-              <span className="mt-[0.7rem] h-1.5 w-1.5 rounded-full bg-accent/80" />
-              <span className="leading-7 text-gray-300">{renderInline(item)}</span>
+              <span className="mt-[0.7rem] h-2 w-2 rounded-full border border-foreground bg-accent" />
+              <span className="text-lg leading-7 text-foreground/75">{renderInline(item)}</span>
             </li>
           ))}
         </ul>,
@@ -144,7 +144,7 @@ function renderMarkdown(markdown: string) {
         i += 1;
       }
       elements.push(
-        <blockquote key={`bq-${key++}`} className="border-l-2 border-accent/40 pl-4 text-gray-400 italic">
+        <blockquote key={`bq-${key++}`} className="border-l-[3px] border-dashed border-accent pl-4 text-lg text-foreground/70 italic">
           {renderInline(quoteLines.join(" "))}
         </blockquote>,
       );
@@ -164,7 +164,7 @@ function renderMarkdown(markdown: string) {
       i += 1;
     }
     elements.push(
-      <p key={`p-${key++}`} className="leading-8 text-gray-300">
+      <p key={`p-${key++}`} className="text-lg leading-8 text-foreground/75">
         {renderInline(paragraphLines.join(" "))}
       </p>,
     );
@@ -192,14 +192,14 @@ export default async function ProjectDetailsPage({
       <div className="mx-auto max-w-5xl">
         <BackToProjects />
 
-        <section className="mt-6 rounded-[2rem] border border-white/[0.05] bg-white/[0.035] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-md">
+        <section className="sketch-card-strong tape mt-8 p-6 sm:p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
-              <div className="mb-4 inline-flex rounded-xl bg-accent/10 p-3">
-                <FolderGit2 className="h-6 w-6 text-accent" />
+              <div className="icon-badge mb-4 h-14 w-14">
+                <FolderGit2 className="h-7 w-7" />
               </div>
-              <h1 className="text-4xl font-bold text-white">{project.title}</h1>
-              <p className="mt-4 max-w-3xl text-lg leading-8 text-gray-300">{project.description}</p>
+              <h1 className="text-5xl font-bold text-foreground">{project.title}</h1>
+              <p className="mt-4 max-w-3xl text-xl leading-8 text-foreground/75">{project.description}</p>
             </div>
 
             <div className="flex flex-wrap gap-3">
@@ -207,17 +207,17 @@ export default async function ProjectDetailsPage({
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-[1rem] border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm font-medium text-white transition-all hover:border-accent/25 hover:bg-white/[0.05]"
+                className="outline-button inline-flex items-center justify-center px-4 py-3 text-lg"
               >
                 <Github className="mr-2 h-4 w-4" />
                 Code
               </a>
               {project.demo ? (
                 <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-[1rem] border border-accent/30 bg-accent px-4 py-3 text-sm font-medium text-white transition-all hover:bg-accent/90"
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                  className="primary-button inline-flex items-center justify-center px-4 py-3 text-lg"
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   Live
@@ -228,21 +228,21 @@ export default async function ProjectDetailsPage({
 
           <div className="mt-8 flex flex-wrap gap-2">
             {project.techStack.map((tech) => (
-              <span key={tech} className="rounded-full border border-white/[0.08] bg-white/[0.05] px-3 py-1 text-sm text-gray-300">
+              <span key={tech} className="sketch-chip px-3 py-1 text-base">
                 {tech}
               </span>
             ))}
           </div>
         </section>
 
-        <section className="mt-8 rounded-[2rem] border border-white/[0.05] bg-white/[0.035] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-md">
+        <section className="sketch-card mt-8 bg-white p-6 sm:p-8">
           <div className="mb-6 flex items-center justify-between gap-4">
-            <h2 className="text-2xl font-semibold text-white">README</h2>
+            <h2 className="text-3xl font-semibold text-foreground">README</h2>
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-accent transition-colors hover:text-white"
+              className="sketch-link text-lg text-accent"
             >
               Open on GitHub
             </a>
@@ -251,7 +251,7 @@ export default async function ProjectDetailsPage({
           {readme ? (
             <article className="space-y-5">{renderMarkdown(readme)}</article>
           ) : (
-            <div className="rounded-2xl border border-white/[0.05] bg-white/[0.03] p-6 text-gray-300">
+            <div className="sketch-card bg-[var(--post-it)] p-6 text-lg text-foreground/75">
               README could not be loaded automatically right now. You can still view the repository directly from the GitHub button above.
             </div>
           )}

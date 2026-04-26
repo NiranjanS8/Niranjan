@@ -6,21 +6,22 @@ import { skillCategories } from "@/lib/skills";
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="relative bg-white/[0.02] px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-14">
-      <div className="absolute right-0 top-1/2 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl" />
-      <div className="relative z-10 mx-auto max-w-6xl">
+    <section id="skills" className="relative px-4 py-20 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-8 flex items-center gap-3 sm:mb-12"
+          className="mb-8 flex items-center justify-center gap-3 sm:mb-12 md:justify-start"
         >
-          <Layers className="h-8 w-8 text-accent" />
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Skills &amp; Technologies</h2>
+          <span className="icon-badge h-12 w-12">
+            <Layers className="h-6 w-6" />
+          </span>
+          <h2 className="scribble-underline text-4xl font-bold text-foreground sm:text-5xl">Skills &amp; Technologies</h2>
         </motion.div>
 
-        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}
@@ -28,19 +29,21 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group rounded-[1.35rem] border border-white/[0.07] bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.12] hover:bg-white/[0.055] hover:shadow-[0_24px_70px_rgba(0,0,0,0.2)] sm:rounded-[1.5rem] sm:p-6"
+              className={`sketch-card group p-5 transition-transform duration-100 hover:rotate-1 hover:bg-[var(--post-it)] sm:p-6 ${
+                index % 2 === 0 ? "rotate-[-0.7deg]" : "rotate-[0.8deg]"
+              }`}
             >
               <div className="mb-4 flex items-center gap-3">
-                <div className="rounded-xl bg-accent/10 p-3 transition-all duration-300 group-hover:bg-accent/15 group-hover:shadow-[0_10px_30px_rgba(59,130,246,0.12)]">
-                  <category.icon className="h-5 w-5 text-accent transition-transform duration-300 group-hover:scale-105" />
+                <div className="icon-badge h-12 w-12 bg-white transition-transform duration-100 group-hover:rotate-[-3deg]">
+                  <category.icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-full border border-white/[0.08] bg-white/[0.05] px-3 py-1 text-sm text-gray-300 transition-all duration-200 hover:border-accent/30 hover:bg-white/[0.08] hover:text-white"
+                    className="sketch-chip px-3 py-1 text-base transition-transform duration-100 hover:rotate-[-1deg] hover:bg-white"
                   >
                     {skill}
                   </span>

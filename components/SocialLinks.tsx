@@ -15,10 +15,10 @@ export default function SocialLinks() {
           href={item.href}
           target={item.href.startsWith("http") ? "_blank" : undefined}
           rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-          className="rounded-lg border border-white/10 bg-white/5 p-3 transition-all hover:border-accent hover:bg-accent/20"
+          className="icon-badge h-12 w-12 bg-white transition-transform duration-100 hover:translate-x-0.5 hover:translate-y-0.5 hover:rotate-[-2deg] hover:bg-[var(--post-it)]"
           aria-label={item.label}
         >
-          <item.icon className="h-5 w-5 text-gray-300" />
+          <item.icon className="h-5 w-5" />
         </a>
       ))}
     </div>

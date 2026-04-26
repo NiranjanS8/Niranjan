@@ -5,8 +5,8 @@ import { ExternalLink, Github, Linkedin, Mail, Phone, Send } from "lucide-react"
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="relative px-4 py-16 sm:px-6 sm:py-24">
-      <div className="relative z-10 mx-auto max-w-4xl">
+    <section id="contact" className="paper-band relative px-4 py-20 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -15,12 +15,12 @@ export default function ContactSection() {
           className="mb-8 text-center sm:mb-12"
         >
           <div className="mb-4 flex justify-center">
-            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium tracking-[0.16em] text-accent">
+            <span className="section-label text-lg">
               Available for opportunities
             </span>
           </div>
-          <h2 className="mb-3 text-3xl font-bold text-white sm:text-4xl">Get In Touch</h2>
-          <p className="mx-auto max-w-xl text-sm leading-7 text-gray-400 sm:text-base md:text-lg">
+          <h2 className="mb-3 text-4xl font-bold text-foreground sm:text-5xl">Get In Touch</h2>
+          <p className="mx-auto max-w-2xl text-xl leading-8 text-foreground/75 sm:text-2xl">
             Open to backend roles, internships, and collaborations.
             <span className="block">Feel free to reach out - I usually respond quickly.</span>
           </p>
@@ -34,8 +34,8 @@ export default function ContactSection() {
             transition={{ delay: 0.2 }}
             className="flex h-full"
           >
-            <div className="flex h-full w-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md sm:p-6">
-              <h3 className="mb-6 text-xl font-bold text-white">Let&apos;s Connect</h3>
+            <div className="sketch-card-strong tape flex h-full w-full flex-col p-5 sm:p-6">
+              <h3 className="mb-6 text-3xl font-bold text-foreground">Let&apos;s Connect</h3>
               <div className="space-y-4">
                 {[
                   { icon: Mail, label: "Email", value: "niranjansankeshwari9@gmail.com", href: "mailto:niranjansankeshwari9@gmail.com" },
@@ -52,29 +52,29 @@ export default function ContactSection() {
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="group flex items-center gap-3 rounded-xl border border-white/[0.045] bg-white/[0.045] p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.06] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] sm:gap-4 sm:p-4"
+                    className="sketch-card group flex items-center gap-3 bg-white p-3.5 transition-transform duration-100 hover:rotate-[-0.7deg] hover:bg-[var(--post-it)] sm:gap-4 sm:p-4"
                   >
-                    <div className="rounded-lg bg-accent/10 p-3 transition-all duration-200 group-hover:bg-accent/15">
-                      <item.icon className="h-5 w-5 text-accent transition-transform duration-200 group-hover:scale-105" />
+                    <div className="icon-badge h-12 w-12 bg-white transition-transform duration-100 group-hover:rotate-[-3deg]">
+                      <item.icon className="h-5 w-5" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm text-gray-400">{item.label}</p>
-                      <p className="truncate text-white">{item.value}</p>
+                      <p className="text-base text-foreground/60">{item.label}</p>
+                      <p className="truncate text-xl text-foreground">{item.value}</p>
                     </div>
-                    <ExternalLink className="h-4 w-4 text-gray-500 transition-colors duration-200 group-hover:text-accent" />
+                    <ExternalLink className="h-4 w-4 text-[var(--secondary-accent)]" />
                   </a>
                 ))}
               </div>
 
               <div className="mt-auto pt-4">
-                <div className="rounded-xl border border-white/[0.04] bg-white/[0.03] px-4 py-3">
+                <div className="sketch-card bg-[var(--post-it)] px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-lg bg-white/[0.04] p-2">
-                      <Phone className="h-4 w-4 text-gray-500" />
+                    <div className="icon-badge h-10 w-10 bg-white">
+                      <Phone className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.16em] text-gray-500">Phone</p>
-                      <a href="tel:+919606694256" className="mt-1 inline-block text-sm text-gray-400 transition-colors hover:text-white">
+                      <p className="text-base text-foreground/60">Phone</p>
+                      <a href="tel:+919606694256" className="mt-1 inline-block text-lg text-foreground transition-colors hover:text-accent">
                         +91 9606694256
                       </a>
                     </div>
@@ -89,38 +89,38 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="flex h-full flex-col rounded-2xl border border-white/[0.04] bg-white/[0.035] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.16)] backdrop-blur-md sm:p-6"
+            className="sketch-card-strong tack flex h-full flex-col bg-[var(--post-it)] p-5 sm:p-6"
           >
-            <h3 className="text-xl font-bold text-white">Best Ways To Reach Me</h3>
-            <ul className="mt-4 space-y-2 text-sm leading-6 text-gray-300">
+            <h3 className="text-3xl font-bold text-foreground">Best Ways To Reach Me</h3>
+            <ul className="mt-4 space-y-2 text-lg leading-7 text-foreground/75">
               <li className="flex items-start gap-3">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
+                <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-accent" />
                 <span>Email and LinkedIn are the fastest</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
+                <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-accent" />
                 <span>Open to backend roles and internships</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
+                <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-accent" />
                 <span>Happy to discuss projects and collaborations</span>
               </li>
             </ul>
 
-            <div className="mt-6 space-y-3 text-sm text-gray-300">
-              <section className="rounded-xl border border-white/[0.045] bg-white/[0.045] p-4 transition-all duration-200 hover:bg-white/[0.06] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)]">
-                <h4 className="text-xs uppercase tracking-[0.18em] text-accent">Open To</h4>
+            <div className="mt-6 space-y-3 text-lg text-foreground/75">
+              <section className="sketch-card bg-white p-4">
+                <h4 className="text-xl font-bold text-accent">Open To</h4>
                 <ul className="mt-3 space-y-2">
                   <li className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/60" />
+                    <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-[var(--secondary-accent)]" />
                     <span>Backend developer roles</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/60" />
+                    <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-[var(--secondary-accent)]" />
                     <span>Internships and entry-level opportunities</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/60" />
+                    <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-[var(--secondary-accent)]" />
                     <span>Meaningful technical collaborations</span>
                   </li>
                 </ul>

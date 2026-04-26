@@ -7,21 +7,22 @@ import { projects } from "@/lib/projects";
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="relative px-4 py-16 sm:px-6 sm:py-24">
-      <div className="absolute left-0 top-1/2 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
-      <div className="relative z-10 mx-auto max-w-7xl">
+    <section id="projects" className="paper-band relative px-4 py-20 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-8 flex items-center gap-3 sm:mb-12"
+          className="mb-8 flex items-center justify-center gap-3 sm:mb-12 md:justify-start"
         >
-          <FolderGit2 className="h-8 w-8 text-accent" />
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">Featured Projects</h2>
+          <span className="icon-badge h-12 w-12">
+            <FolderGit2 className="h-6 w-6" />
+          </span>
+          <h2 className="scribble-underline text-4xl font-bold text-foreground sm:text-5xl">Featured Projects</h2>
         </motion.div>
 
-        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
@@ -29,17 +30,21 @@ export default function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="group flex flex-col rounded-[1.35rem] border border-white/[0.06] bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.14)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.1] hover:bg-white/[0.05] hover:shadow-[0_24px_70px_rgba(0,0,0,0.18)] sm:rounded-[1.5rem] sm:p-6"
+              className={`sketch-card group flex flex-col p-5 transition-transform duration-100 hover:rotate-1 hover:shadow-[6px_6px_0px_0px_var(--foreground)] sm:p-6 ${
+                index % 3 === 1 ? "post-it-card rotate-[0.7deg] tack" : "rotate-[-0.6deg] tape"
+              }`}
             >
               <div className="flex flex-1 flex-col space-y-4">
                 <div className="flex items-start justify-between">
-                  <FolderGit2 className="h-8 w-8 text-accent" />
+                  <span className="icon-badge h-12 w-12 bg-white">
+                    <FolderGit2 className="h-6 w-6" />
+                  </span>
                   <div className="flex gap-2">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 transition-colors hover:text-accent">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="icon-badge h-10 w-10 bg-white transition-transform duration-100 hover:rotate-[-3deg]" aria-label={`${project.title} GitHub`}>
                       <Github className="h-5 w-5" />
                     </a>
                     {project.demo ? (
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-gray-400 transition-colors hover:text-accent">
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="icon-badge h-10 w-10 bg-white transition-transform duration-100 hover:rotate-3" aria-label={`${project.title} live demo`}>
                         <ExternalLink className="h-5 w-5" />
                       </a>
                     ) : null}
@@ -47,20 +52,20 @@ export default function ProjectsSection() {
                 </div>
 
                 <div>
-                  <Link href={`/projects/${project.slug}`} className="mb-2 block text-xl font-bold text-white transition-colors group-hover:text-accent">
+                  <Link href={`/projects/${project.slug}`} className="mb-2 block text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-accent">
                     {project.title}
                   </Link>
-                  <p className="line-clamp-3 text-sm leading-relaxed text-gray-400">{project.description}</p>
+                  <p className="line-clamp-3 text-lg leading-7 text-foreground/75">{project.description}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.slice(0, 5).map((tech) => (
-                    <span key={tech} className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-gray-400">
+                    <span key={tech} className="sketch-chip px-2.5 py-1 text-sm">
                       {tech}
                     </span>
                   ))}
                   {project.techStack.length > 5 ? (
-                    <span className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-gray-500">
+                    <span className="sketch-chip px-2.5 py-1 text-sm">
                       +{project.techStack.length - 5}
                     </span>
                   ) : null}
@@ -69,16 +74,16 @@ export default function ProjectsSection() {
                 <div className="flex-1 space-y-1 pt-2">
                   {project.features.slice(0, 3).map((feature) => (
                     <div key={feature} className="flex items-start gap-2">
-                      <span className="mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent/80" />
-                      <p className="text-xs text-gray-400">{feature}</p>
+                      <span className="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full border border-foreground bg-accent" />
+                      <p className="text-base leading-6 text-foreground/75">{feature}</p>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex flex-col gap-2 pt-2 sm:flex-row">
+                <div className={`grid gap-3 pt-2 ${project.demo ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`}>
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="inline-flex flex-1 items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm text-white transition-colors hover:bg-accent/90"
+                    className={`primary-button px-4 py-2 text-base ${project.demo ? "col-span-2" : ""}`}
                   >
                     Details
                     <ArrowRight className="ml-1 h-4 w-4" />
@@ -87,18 +92,18 @@ export default function ProjectsSection() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex flex-1 items-center justify-center rounded-lg border border-accent/50 px-4 py-2 text-sm text-accent transition-colors hover:bg-accent/10"
+                    className="outline-button px-4 py-2 text-base"
                   >
                     <Github className="mr-1 h-4 w-4" />
                     Code
                   </a>
                   {project.demo ? (
                     <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex flex-1 items-center justify-center rounded-lg border border-white/20 px-4 py-2 text-sm text-gray-300 transition-colors hover:border-white/30 hover:bg-white/5 hover:text-white"
-                    >
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="outline-button px-4 py-2 text-base"
+                  >
                       <ExternalLink className="mr-1 h-4 w-4" />
                       Live
                     </a>

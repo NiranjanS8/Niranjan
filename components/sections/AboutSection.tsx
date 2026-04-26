@@ -11,21 +11,23 @@ const paragraphs = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative border-t border-white/[0.06] bg-white/[0.02] px-4 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-20">
-      <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/5 blur-3xl" />
-      <div className="relative z-10 mx-auto max-w-4xl">
+    <section id="about" className="paper-band relative px-4 py-20 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-8 flex items-center gap-3 sm:mb-12"
+          className="mb-8 flex items-center justify-center gap-3 sm:mb-12 md:justify-start"
         >
-          <Code2 className="h-8 w-8 text-accent" />
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">About Me</h2>
+          <span className="icon-badge h-12 w-12">
+            <Code2 className="h-6 w-6" />
+          </span>
+          <h2 className="scribble-underline text-4xl font-bold text-foreground sm:text-5xl">About Me</h2>
         </motion.div>
 
-        <div className="space-y-5 sm:space-y-6">
+        <div className="sketch-card-strong tape mx-auto max-w-4xl rotate-[-0.6deg] p-6 sm:p-8">
+          <div className="space-y-5 sm:space-y-6">
           {paragraphs.map((paragraph, index) => (
             <motion.p
               key={paragraph}
@@ -33,11 +35,12 @@ export default function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-              className="text-base leading-8 text-gray-400 sm:text-lg"
+              className="text-xl leading-8 text-foreground/80 sm:text-2xl"
             >
               {paragraph}
             </motion.p>
           ))}
+          </div>
         </div>
       </div>
     </section>
