@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Boxes,
+  Brain,
   Cloud,
   Code2,
   Database,
@@ -12,6 +13,7 @@ import {
   MessageSquareMore,
   Server,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 import SocialLinks from "@/components/SocialLinks";
@@ -19,7 +21,8 @@ import SocialLinks from "@/components/SocialLinks";
 const heroTechStack = [
   { label: "Java", icon: Code2 },
   { label: "Spring Boot", icon: Server },
-  { label: "Spring Security", icon: ShieldCheck },
+  { label: "LangChain", icon: Brain },
+  { label: "LangGraph", icon: Sparkles },
   { label: "PostgreSQL", icon: Database },
   { label: "Redis", icon: Boxes },
   { label: "AWS", icon: Cloud },
@@ -34,11 +37,10 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto grid w-full max-w-5xl items-center gap-10 md:grid-cols-[1.15fr_0.85fr]">
         <div className="space-y-6 text-center md:text-left">
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-3">
-            <p className="section-label mx-auto text-lg md:mx-0">Backend notes from</p>
             <h1 className="text-5xl font-bold leading-[1.05] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
               Niranjan<span className="inline-block rotate-6 text-accent">!</span>
             </h1>
-            <h2 className="text-3xl font-bold text-[var(--secondary-accent)] sm:text-4xl md:text-5xl">Backend Developer</h2>
+            <h2 className="text-3xl font-bold text-[var(--secondary-accent)] sm:text-4xl md:text-5xl">Backend & AI Engineer</h2>
           </motion.div>
 
           <motion.p
@@ -47,8 +49,8 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mx-auto max-w-2xl text-xl leading-8 text-foreground/80 sm:text-2xl md:mx-0"
           >
-            I build backend applications and APIs with a focus on clean architecture, database design, authentication,
-            and scalable development. I enjoy turning ideas into practical, real-world software projects.
+            I build backend systems and AI-powered applications, from scalable REST APIs with Spring Boot to RAG pipelines,
+            agentic workflows, and LLM-driven tools with LangChain and LangGraph.
           </motion.p>
 
           <motion.div
@@ -65,9 +67,13 @@ export default function HeroSection() {
               View Projects
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
-            <a href="/Niranjan_Sankeshwari.pdf" target="_blank" rel="noopener noreferrer" title="Download PDF Resume" className="outline-button w-full sm:w-auto">
+            <a href="/Niranjan_Sankeshwari.pdf" target="_blank" rel="noopener noreferrer" title="Download Backend Resume" className="outline-button w-full sm:w-auto">
               <Download className="mr-2 h-4 w-4" />
-              Download Resume
+              Backend Resume
+            </a>
+            <a href="/Niranjan_Sankeshwari_AI.pdf" target="_blank" rel="noopener noreferrer" title="Download AI Resume" className="outline-button w-full sm:w-auto">
+              <Download className="mr-2 h-4 w-4" />
+              AI Resume
             </a>
           </motion.div>
 
@@ -91,7 +97,7 @@ export default function HeroSection() {
             <div className="absolute right-4 top-4 h-10 w-10 rotate-12 border-2 border-foreground bg-white" style={{ borderRadius: "50% 42% 56% 44% / 44% 56% 42% 58%" }} />
             <div className="mb-5 pr-10">
               <span className="section-label text-base">system sketch</span>
-              <p className="mt-3 font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">Backend flow I build</p>
+              <p className="mt-3 font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">Systems I build</p>
             </div>
 
             <div className="relative mx-auto max-w-sm text-center">
@@ -113,7 +119,7 @@ export default function HeroSection() {
                 <path d="M112 24C149 25 174 28 202 36" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 7" />
               </svg>
 
-              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <div className="grid grid-cols-4 gap-2 sm:gap-3">
                 <div className="sketch-card rotate-[-1deg] bg-white p-3">
                   <KeyRound className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">Auth</p>
@@ -126,11 +132,15 @@ export default function HeroSection() {
                   <Database className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">SQL</p>
                 </div>
+                <div className="sketch-card rotate-[-0.5deg] bg-white p-3">
+                  <Brain className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />
+                  <p className="mt-1 text-lg leading-none">RAG</p>
+                </div>
               </div>
 
               <div className="sketch-card mt-4 flex items-center justify-center gap-2 bg-white px-3 py-2">
                 <MessageSquareMore className="h-5 w-5 text-accent" strokeWidth={2.7} />
-                <span className="text-lg leading-5">Events keep slow work off the request path</span>
+                <span className="text-lg leading-5">Agents and events keep systems intelligent</span>
               </div>
             </div>
           </div>

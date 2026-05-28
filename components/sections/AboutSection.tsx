@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { Code2 } from "lucide-react";
 
 const paragraphs = [
-  "I am a software engineer focused on backend development and building real-world software systems. I enjoy working with Java, Spring Boot, and PostgreSQL to design clean, scalable APIs and backend architectures.",
-  "Through hands-on projects and internship experience, I have worked on database integration, authentication, ORM frameworks like Hibernate, and backend application structure. I focus on writing clean, maintainable code and understanding how systems work beyond just implementation.",
-  "Currently, I am looking for backend developer roles and internships where I can contribute to real-world products, improve my system design skills, and grow as a software engineer.",
+  "I am a software engineer focused on backend development and applied AI. I enjoy building scalable APIs with Java and Spring Boot, as well as RAG pipelines, agentic workflows, and LLM-powered tools with LangChain, LangGraph, and FastAPI.",
+  "Through hands-on projects and internship experience, I have worked on database integration, authentication, ORM frameworks, vector retrieval systems, prompt engineering, and AI evaluation workflows. I focus on writing clean, maintainable code and understanding how systems work beyond just implementation.",
+  "Currently, I am looking for backend developer and AI engineer roles where I can contribute to real-world products, build intelligent systems, and grow as a software engineer.",
 ];
 
 export default function AboutSection() {

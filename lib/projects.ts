@@ -7,9 +7,11 @@ export type Project = {
   github: string;
   demo?: string;
   readmeRawUrls: string[];
+  category: "backend" | "ai";
 };
 
 export const projects: Project[] = [
+  // Alternating backend / ai for the "All" view
   {
     slug: "snapurl",
     title: "SnapURL",
@@ -28,6 +30,26 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/snapurl/main/README.md",
       "https://raw.githubusercontent.com/NiranjanS8/snapurl/master/README.md",
     ],
+    category: "backend",
+  },
+  {
+    slug: "curex-healthcare-ai",
+    title: "CureX Healthcare AI",
+    description:
+      "Agentic healthcare RAG assistant with document ingestion, pgvector retrieval, medical safety guardrails, faithfulness scoring, evaluation dashboard, and MCP healthcare tools.",
+    techStack: ["FastAPI", "LangGraph", "LangChain", "pgvector", "React", "Gemini"],
+    features: [
+      "Healthcare-focused chat with streamed responses and source citations over uploaded clinical documents",
+      "Medical safety guardrails, faithfulness scoring, and human-in-the-loop review workflows",
+      "JWT authentication with user-scoped chat sessions and memory isolation",
+      "MCP tool server for ICD-10 lookup, drug interaction checks, BMI calculation, and retrieval search",
+    ],
+    github: "https://github.com/NiranjanS8/curex-healthcare-ai",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/curex-healthcare-ai/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/curex-healthcare-ai/master/README.md",
+    ],
+    category: "ai",
   },
   {
     slug: "quizze",
@@ -46,6 +68,26 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/Quizze/main/README.md",
       "https://raw.githubusercontent.com/NiranjanS8/Quizze/master/README.md",
     ],
+    category: "backend",
+  },
+  {
+    slug: "debugging-intelligence-system",
+    title: "Debugging Intelligence System",
+    description:
+      "AI-powered debugging knowledge base that ingests incidents, builds hybrid retrieval with ChromaDB, generates RAG-based explanations, detects semantic duplicates, and maps root-cause relationships in Neo4j.",
+    techStack: ["FastAPI", "LangChain", "ChromaDB", "Neo4j", "Pydantic", "Gemini"],
+    features: [
+      "LLM-backed incident structuring with fallback rule-based extraction and markdown knowledge pages",
+      "Hybrid retrieval combining semantic vector search and lexical scoring with filters and reranking",
+      "Semantic deduplication detection to identify recurring incidents on ingest",
+      "Neo4j knowledge graph modeling relationships between bugs, root causes, technologies, and failure patterns",
+    ],
+    github: "https://github.com/NiranjanS8/debugging-intelligence-system",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/debugging-intelligence-system/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/debugging-intelligence-system/master/README.md",
+    ],
+    category: "ai",
   },
   {
     slug: "whisprly",
@@ -64,6 +106,26 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/Whisprly/main/README.md",
       "https://raw.githubusercontent.com/NiranjanS8/Whisprly/master/README.md",
     ],
+    category: "backend",
+  },
+  {
+    slug: "text-to-sql-agent",
+    title: "Text-to-SQL Agent",
+    description:
+      "Agentic Text-to-SQL system converting natural-language questions into validated SQL and MongoDB queries with schema-aware RAG, semantic safety guardrails, Redis caching, and an evaluation harness.",
+    techStack: ["FastAPI", "LangChain", "Mistral", "Redis", "SQLite", "PostgreSQL", "MongoDB"],
+    features: [
+      "Schema-aware RAG pipeline with business-rule retrieval and live domain-value grounding",
+      "Semantic safety guardrails blocking unsafe execution, ambiguous queries, and sensitive-data exposure",
+      "Multi-database support for SQLite, PostgreSQL, and MongoDB with dialect-aware generation",
+      "Evaluation harness measuring SQL validity, execution success, row-count match, and latency",
+    ],
+    github: "https://github.com/NiranjanS8/text-to-sql-agent",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/text-to-sql-agent/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/text-to-sql-agent/master/README.md",
+    ],
+    category: "ai",
   },
   {
     slug: "expense-tracker",
@@ -82,6 +144,26 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/Expense_Tracker/main/README.md",
       "https://raw.githubusercontent.com/NiranjanS8/Expense_Tracker/master/README.md",
     ],
+    category: "backend",
+  },
+  {
+    slug: "agentic-research-assistant",
+    title: "Agentic Research Assistant",
+    description:
+      "Multi-stage research agent with Tavily web search, source quality scoring, citation-aware Markdown reports, critic feedback loops, streaming pipeline updates, and SQLite research history.",
+    techStack: ["FastAPI", "LangChain", "Mistral", "Tavily", "SQLite"],
+    features: [
+      "Multi-stage agent pipeline: search, score, scrape, draft, critique, and persist",
+      "Source quality scoring using position, trusted domains, snippet depth, and recency signals",
+      "Citation-aware report generation with structured extraction and coverage metadata",
+      "Streaming pipeline updates with partial failure handling and step-by-step progress",
+    ],
+    github: "https://github.com/NiranjanS8/agentic-research-assistant",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/agentic-research-assistant/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/agentic-research-assistant/master/README.md",
+    ],
+    category: "ai",
   },
   {
     slug: "video-streaming-application",
@@ -100,6 +182,26 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/video-streaming-application/main/README.md",
       "https://raw.githubusercontent.com/NiranjanS8/video-streaming-application/master/README.md",
     ],
+    category: "backend",
+  },
+  {
+    slug: "ai-video-assistant",
+    title: "AI Video Assistant",
+    description:
+      "Agentic meeting analysis system that ingests YouTube or local media, transcribes with Whisper, extracts structured meeting outputs, builds per-meeting RAG with ChromaDB, and supports follow-up Q&A.",
+    techStack: ["Streamlit", "LangChain", "Whisper", "ChromaDB", "Gemini"],
+    features: [
+      "Coordinator agent deciding next pipeline step with retry and clarification support",
+      "Multi-language transcription with Whisper (English) and Sarvam AI (Hinglish)",
+      "Structured extraction of action items, key decisions, and open questions",
+      "Per-meeting ChromaDB vector store with retrieval-augmented follow-up Q&A",
+    ],
+    github: "https://github.com/NiranjanS8/ai-video-assistant",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/ai-video-assistant/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/ai-video-assistant/master/README.md",
+    ],
+    category: "ai",
   },
   {
     slug: "patient-management-system",
@@ -118,6 +220,26 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/patient-management-system/main/README.md",
       "https://raw.githubusercontent.com/NiranjanS8/patient-management-system/master/README.md",
     ],
+    category: "backend",
+  },
+  {
+    slug: "certificate-generation-system",
+    title: "Certificate Generation System",
+    description:
+      "Multi-tenant backend for issuing, managing, and publicly verifying digital certificates with Spring Boot, JWT authentication, PostgreSQL tenant isolation, and OpenPDF-based certificate generation.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "JWT", "PostgreSQL", "OpenPDF"],
+    features: [
+      "Multi-tenant architecture with JWT-based tenant isolation and organization-scoped queries",
+      "Course management with eligibility rules, recipient enrollment, and signatory assignment",
+      "Branded PDF certificate generation with OpenPDF and downloadable asset workflows",
+      "Access + refresh token auth with session control and BCrypt password hashing",
+    ],
+    github: "https://github.com/NiranjanS8/certificate-generation-system",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/certificate-generation-system/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/certificate-generation-system/master/README.md",
+    ],
+    category: "backend",
   },
 ];
 
