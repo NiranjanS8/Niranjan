@@ -65,7 +65,7 @@ export default function HeroSection() {
               View Projects
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
-            <a href="/Niranjans_resume.pdf" download title="Download PDF Resume" className="outline-button w-full sm:w-auto">
+            <a href="/Niranjan_Sankeshwari.pdf" target="_blank" rel="noopener noreferrer" title="Download PDF Resume" className="outline-button w-full sm:w-auto">
               <Download className="mr-2 h-4 w-4" />
               Download Resume
             </a>

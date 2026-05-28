@@ -7,15 +7,15 @@ export type ExperienceEntry = {
 
 export const experience: ExperienceEntry[] = [
   {
-    role: "Java Developer",
+    role: "Java Developer Intern",
     company: "Dyashin Technosoft",
-    duration: "", // TODO: Add your actual duration (e.g., "Jan 2025 – Apr 2025")
+    duration: "Feb 2026 - June 2026",
     responsibilities: [
-      "Built and deployed a Java-based backend application using Spring Boot, implementing REST APIs for user authentication and data management.",
-      "Designed and integrated PostgreSQL database schemas, optimizing queries to improve data retrieval performance.",
-      "Implemented core features using OOP principles, ensuring modular, reusable, and maintainable code structure.",
-      "Used Git for version control, managing code changes and collaborating through branches and pull requests.",
-      "Tested and debugged applications using tools like Postman and logging techniques, reducing errors and improving stability.",
+      "Contributed to the development of a certificate generation system using Spring Boot and PostgreSQL, enabling automated certificate creation and recipient management.",
+      "Built REST APIs for participant registration, template management, eligibility validation, and certificate generation workflows.",
+      "Implemented JWT-based authentication and role-based access control for secure access to administrative features.",
+      "Worked with file generation and storage workflows for dynamically generated certificates and downloadable assets.",
+      "Designed asynchronous certificate generation workflows for bulk recipient processing using queue-based architecture concepts.",
     ],
   },
 ];

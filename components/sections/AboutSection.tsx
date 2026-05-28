@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Code2 } from "lucide-react";
 
 const paragraphs = [
-  "I am a final-year engineering student focused on backend development and building real-world software systems. I enjoy working with Java, Spring Boot, and PostgreSQL to design clean, scalable APIs and backend architectures.",
+  "I am a software engineer focused on backend development and building real-world software systems. I enjoy working with Java, Spring Boot, and PostgreSQL to design clean, scalable APIs and backend architectures.",
   "Through hands-on projects and internship experience, I have worked on database integration, authentication, ORM frameworks like Hibernate, and backend application structure. I focus on writing clean, maintainable code and understanding how systems work beyond just implementation.",
   "Currently, I am looking for backend developer roles and internships where I can contribute to real-world products, improve my system design skills, and grow as a software engineer.",
 ];
@@ -28,18 +28,18 @@ export default function AboutSection() {
 
         <div className="sketch-card-strong tape mx-auto max-w-4xl rotate-[-0.6deg] p-6 sm:p-8">
           <div className="space-y-5 sm:space-y-6">
-          {paragraphs.map((paragraph, index) => (
-            <motion.p
-              key={paragraph}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-              className="text-xl leading-8 text-foreground/80 sm:text-2xl"
-            >
-              {paragraph}
-            </motion.p>
-          ))}
+            {paragraphs.map((paragraph, index) => (
+              <motion.p
+                key={paragraph}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                className="text-xl leading-8 text-foreground/80 sm:text-2xl"
+              >
+                {paragraph}
+              </motion.p>
+            ))}
           </div>
         </div>
       </div>
