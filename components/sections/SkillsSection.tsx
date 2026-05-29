@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Layers } from "lucide-react";
-import { skillCategories } from "@/lib/skills";
+import { skillCategories, skillIconMap } from "@/lib/skills";
 
 export default function SkillsSection() {
   return (
@@ -40,14 +40,31 @@ export default function SkillsSection() {
                 <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="sketch-chip px-3 py-1 text-base transition-transform duration-100 hover:rotate-[-1deg] hover:bg-white"
-                  >
-                    {skill}
-                  </span>
-                ))}
+                {category.skills.map((skill) => {
+                  const iconUrl = skillIconMap[skill];
+                  return (
+                    <span
+                      key={skill}
+                      className="sketch-chip flex items-center gap-1.5 px-3 py-1 text-base transition-transform duration-100 hover:rotate-[-1deg] hover:bg-white"
+                    >
+                      {iconUrl && (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={iconUrl}
+                          alt=""
+                          width={18}
+                          height={18}
+                          className="h-[18px] w-[18px] shrink-0"
+                          loading="lazy"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).style.display = "none";
+                          }}
+                        />
+                      )}
+                      {skill}
+                    </span>
+                  );
+                })}
               </div>
             </motion.div>
           ))}

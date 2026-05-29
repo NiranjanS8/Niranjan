@@ -5,27 +5,31 @@ import {
   ArrowRight,
   Boxes,
   Brain,
-  Cloud,
   Code2,
   Database,
   Download,
   KeyRound,
   MessageSquareMore,
   Server,
-  ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 import SocialLinks from "@/components/SocialLinks";
 
+const devicon = (name: string, variant = "original") =>
+  `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${name}/${name}-${variant}.svg`;
+
 const heroTechStack = [
-  { label: "Java", icon: Code2 },
-  { label: "Spring Boot", icon: Server },
-  { label: "LangChain", icon: Brain },
-  { label: "LangGraph", icon: Sparkles },
-  { label: "PostgreSQL", icon: Database },
-  { label: "Redis", icon: Boxes },
-  { label: "AWS", icon: Cloud },
+  { label: "Java", iconUrl: devicon("java") },
+  { label: "Spring Boot", iconUrl: devicon("spring") },
+  { label: "Python", iconUrl: devicon("python") },
+  { label: "LangChain", iconUrl: "https://cdn.simpleicons.org/langchain/1C3C3C" },
+  { label: "RAG", iconUrl: "" },
+  { label: "PostgreSQL", iconUrl: devicon("postgresql") },
+  { label: "Redis", iconUrl: devicon("redis") },
+  { label: "Vector DBs", iconUrl: "" },
+  { label: "JavaScript", iconUrl: devicon("javascript") },
+  { label: "Docker", iconUrl: devicon("docker") },
+  { label: "AWS", iconUrl: devicon("amazonwebservices", "original-wordmark") },
 ] as const;
 
 export default function HeroSection() {
@@ -152,7 +156,12 @@ export default function HeroSection() {
           <div className="hero-marquee-track">
             {[...heroTechStack, ...heroTechStack].map((item, index) => (
               <div key={`${item.label}-${index}`} className="hero-tech-pill">
-                <item.icon className="h-4 w-4 text-accent" />
+                {item.iconUrl ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={item.iconUrl} alt="" className="h-4 w-4 shrink-0" loading="lazy" />
+                ) : (
+                  <Brain className="h-4 w-4 text-accent" />
+                )}
                 <span>{item.label}</span>
               </div>
             ))}

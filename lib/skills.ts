@@ -7,6 +7,59 @@ export type SkillCategory = {
   skills: readonly string[];
 };
 
+// Devicon CDN base URL
+const devicon = (name: string, variant = "original") =>
+  `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${name}/${name}-${variant}.svg`;
+
+// Maps skill names to their brand icon URLs
+export const skillIconMap: Record<string, string> = {
+  // Languages
+  "Java": devicon("java"),
+  "Python": devicon("python"),
+  "JavaScript": devicon("javascript"),
+
+  // AI Frameworks
+  "LangChain": "https://cdn.simpleicons.org/langchain/1C3C3C",
+  "LangGraph": "https://cdn.simpleicons.org/langchain/1C3C3C",
+  "FastAPI": devicon("fastapi"),
+  "PyTorch": devicon("pytorch"),
+  "Scikit-learn": devicon("scikitlearn"),
+  "Pydantic": devicon("pydantic"),
+
+  // Backend
+  "Spring Boot": devicon("spring"),
+  "Hibernate": devicon("hibernate"),
+  "Spring Security": devicon("spring"),
+  "Spring Data JPA": devicon("spring"),
+  "RESTful APIs": "",
+  "JWT Authentication": "",
+
+  // Databases
+  "MySQL": devicon("mysql"),
+  "PostgreSQL": devicon("postgresql"),
+  "Redis": devicon("redis"),
+  "Neo4j": devicon("neo4j"),
+  "ChromaDB": "",
+  "FAISS": "",
+  "pgvector": "",
+
+  // Cloud
+  "AWS (EC2, S3, RDS, IAM)": devicon("amazonwebservices", "original-wordmark"),
+  "Docker": devicon("docker"),
+  "Docker Compose": devicon("docker"),
+
+  // Tools
+  "Git": devicon("git"),
+  "Maven": devicon("maven"),
+  "Postman": devicon("postman"),
+  "LangSmith": "https://cdn.simpleicons.org/langchain/1C3C3C",
+  "Streamlit": devicon("streamlit"),
+
+  // Testing
+  "JUnit": devicon("junit"),
+  "Mockito": "",
+};
+
 export const skillCategories: SkillCategory[] = [
   {
     title: "Languages",
