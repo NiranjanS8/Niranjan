@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -23,6 +24,7 @@ const heroTechStack = [
   { label: "Spring Boot", iconUrl: devicon("spring") },
   { label: "Python", iconUrl: devicon("python") },
   { label: "LangChain", iconUrl: "https://cdn.simpleicons.org/langchain/1C3C3C" },
+  { label: "FastAPI", iconUrl: devicon("fastapi") },
   { label: "RAG", iconUrl: "" },
   { label: "PostgreSQL", iconUrl: devicon("postgresql") },
   { label: "Redis", iconUrl: devicon("redis") },
@@ -44,7 +46,7 @@ export default function HeroSection() {
             <h1 className="text-5xl font-bold leading-[1.05] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
               Niranjan<span className="inline-block rotate-6 text-accent">!</span>
             </h1>
-            <h2 className="text-3xl font-bold text-[var(--secondary-accent)] sm:text-4xl md:text-5xl">Backend & AI Engineer</h2>
+            <Typewriter />
           </motion.div>
 
           <motion.p
@@ -169,5 +171,42 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Typewriter() {
+  const TITLES = [
+    "Backend Developer",
+    "AI Engineer",
+    "RAG Pipeline Builder",
+    "Agentic AI Developer",
+  ];
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentTitle = TITLES[index];
+    const typingSpeed = isDeleting ? 40 : 80;
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting && text === currentTitle) {
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % TITLES.length);
+      } else {
+        setText(currentTitle.substring(0, text.length + (isDeleting ? -1 : 1)));
+      }
+    }, text === currentTitle && !isDeleting ? 1500 : typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, index]);
+
+  return (
+    <h2 className="text-3xl font-bold text-[var(--secondary-accent)] sm:text-4xl md:text-5xl flex items-center justify-center md:justify-start h-[36px] sm:h-[40px] md:h-[48px]">
+      <span>{text}</span>
+      <span className="animate-pulse ml-1">|</span>
+    </h2>
   );
 }

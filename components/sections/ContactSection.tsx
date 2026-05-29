@@ -21,7 +21,7 @@ export default function ContactSection() {
           </div>
           <h2 className="mb-3 text-4xl font-bold text-foreground sm:text-5xl">Get In Touch</h2>
           <p className="mx-auto max-w-2xl text-xl leading-8 text-foreground/75 sm:text-2xl">
-            Open to backend roles, internships, and collaborations.
+            Open to backend and AI engineer roles, and collaborations.
             <span className="block">Feel free to reach out - I usually respond quickly.</span>
           </p>
         </motion.div>
@@ -99,7 +99,7 @@ export default function ContactSection() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-accent" />
-                <span>Open to backend roles and internships</span>
+                <span>Open to backend and AI engineering roles</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-accent" />
@@ -113,7 +113,7 @@ export default function ContactSection() {
                 <ul className="mt-3 space-y-2">
                   <li className="flex items-start gap-3">
                     <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-[var(--secondary-accent)]" />
-                    <span>Backend developer roles</span>
+                    <span>Backend and AI engineer roles</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="mt-2 h-2 w-2 rounded-full border border-foreground bg-[var(--secondary-accent)]" />

@@ -15,18 +15,18 @@ const kalam = Kalam({
 });
 
 export const metadata: Metadata = {
-  title: "Niranjan | Backend Developer",
+  title: "Niranjan | Backend & AI Engineer",
   description:
-    "Minimalist portfolio for Niranjan, a backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
+    "Portfolio of Niranjan — Backend & AI Engineer building scalable APIs with Spring Boot and intelligent systems with LangChain, RAG pipelines, and agentic workflows.",
   icons: {
     icon: "/n_icon.png",
     shortcut: "/n_icon.png",
     apple: "/n_icon.png",
   },
   openGraph: {
-    title: "Niranjan | Backend Developer",
+    title: "Niranjan | Backend & AI Engineer",
     description:
-      "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs. View projects and get in touch.",
+      "Backend & AI Engineer building scalable APIs with Spring Boot and intelligent systems with LangChain, RAG pipelines, and agentic workflows. View projects and get in touch.",
     url: "https://www.niranjans.tech",
     siteName: "Niranjan's Portfolio",
     locale: "en_US",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Niranjan | Backend Developer",
+    title: "Niranjan | Backend & AI Engineer",
     description:
-      "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
+      "Backend & AI Engineer building scalable APIs with Spring Boot and intelligent systems with LangChain, RAG, and agentic workflows.",
   },
   metadataBase: new URL("https://www.niranjans.tech"),
 };
@@ -57,9 +57,9 @@ export default function RootLayout({
               "@type": "Person",
               name: "Niranjan",
               url: "https://www.niranjans.tech",
-              jobTitle: "Backend Developer",
+              jobTitle: "Backend & AI Engineer",
               description:
-                "Backend developer focused on Java, Spring Boot, PostgreSQL, and scalable APIs.",
+                "Backend & AI Engineer building scalable APIs with Spring Boot and intelligent systems with LangChain, RAG pipelines, and agentic workflows.",
               sameAs: [
                 "https://github.com/NiranjanS8",
                 "https://www.linkedin.com/in/niranjans8/",
@@ -67,6 +67,12 @@ export default function RootLayout({
               knowsAbout: [
                 "Java",
                 "Spring Boot",
+                "Python",
+                "LangChain",
+                "LangGraph",
+                "RAG Pipelines",
+                "AI Agents",
+                "FastAPI",
                 "PostgreSQL",
                 "Redis",
                 "Docker",

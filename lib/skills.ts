@@ -79,7 +79,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Backend",
     icon: Layers,
-    skills: ["Spring Boot", "Hibernate", "Spring Security", "Spring Data JPA", "RESTful APIs", "JWT Authentication"],
+    skills: ["Spring Boot", "Hibernate", "Spring Security", "Spring Data JPA", "FastAPI", "RESTful APIs", "JWT Authentication"],
   },
   {
     title: "Databases",
