@@ -7,7 +7,7 @@ export type Project = {
   github: string;
   demo?: string;
   readmeRawUrls: string[];
-  category: "backend" | "ai";
+  category: "backend" | "ai" | "frontend";
 };
 
 export const projects: Project[] = [
@@ -240,6 +240,66 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/certificate-generation-system/master/README.md",
     ],
     category: "backend",
+  },
+  {
+    slug: "sorting-algorithm-visualizer",
+    title: "Sorting Algorithm Visualizer",
+    description:
+      "An interactive frontend application to visualize various sorting algorithms (Bubble Sort, Selection Sort, Insertion Sort, Merge Sort, Quick Sort, etc.) in real time, with speed controls, array size adjustments, and audio feedback.",
+    techStack: ["HTML", "CSS", "JavaScript", "React"],
+    features: [
+      "Real-time step-by-step visualization of sorting algorithms",
+      "Interactive controls for speed and array size",
+      "Color-coded bars highlighting comparisons, swaps, and sorted elements",
+      "Audio synthesis feedback synchronized with operations",
+    ],
+    github: "https://github.com/NiranjanS8/sorting-algorithm-visualizer",
+    demo: "https://sortlab.niranjans.tech/",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/sorting-algorithm-visualizer/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/sorting-algorithm-visualizer/master/README.md",
+    ],
+    category: "frontend",
+  },
+  {
+    slug: "tic-tac-toe",
+    title: "Tic Tac Toe",
+    description:
+      "A clean, interactive Tic Tac Toe game featuring player vs player modes, minimax-based unbeatable AI mode, move history log with time-travel functionality, and responsive retro sketch themes.",
+    techStack: ["HTML", "CSS", "JavaScript", "React"],
+    features: [
+      "Local 2-player mode and single-player VS computer mode",
+      "Minimax algorithm for an unbeatable computer opponent",
+      "Interactive history list allowing players to jump back in time",
+      "Fully responsive hand-drawn UI style matching desktop and mobile",
+    ],
+    github: "https://github.com/NiranjanS8/tic-tac-toe",
+    demo: "https://xo.niranjans.tech/",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/tic-tac-toe/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/tic-tac-toe/master/README.md",
+    ],
+    category: "frontend",
+  },
+  {
+    slug: "college-fest-landing-page",
+    title: "College Fest Landing Page",
+    description:
+      "A modern, responsive landing page for a college national-level technical-cultural fest featuring dynamic event listings, registration modals, interactive schedule tables, and smooth scroll animations.",
+    techStack: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
+    features: [
+      "Responsive multi-section layout highlighting cultural and technical events",
+      "Registration modals with local storage form persistence",
+      "Interactive schedule timetable with dynamic filtering",
+      "Smooth parallax and scrolling animation effects",
+    ],
+    github: "https://github.com/NiranjanS8/college-fest-landing-page",
+    demo: "http://clg-fest.niranjans.tech/",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/college-fest-landing-page/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/college-fest-landing-page/master/README.md",
+    ],
+    category: "frontend",
   },
 ];
 

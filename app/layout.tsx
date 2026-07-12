@@ -47,7 +47,43 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme');
+                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark-theme');
+                  } else {
+                    document.documentElement.classList.remove('dark-theme');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener('load', () => {
+                setTimeout(() => {
+                  const docWidth = document.documentElement.clientWidth;
+                  console.warn('CLIENT_WIDTH_IS:', docWidth);
+                  document.querySelectorAll('*').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.right > docWidth + 1) {
+                      console.warn('OVERFLOW_ELEMENT:', el.tagName, el.className, 'rect.right:', rect.right, 'width:', rect.width);
+                    }
+                  });
+                }, 1000);
+              });
+            `,
+          }}
+        />
+      </head>
       <body className={`${patrickHand.variable} ${kalam.variable}`}>
         <script
           type="application/ld+json"

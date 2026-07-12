@@ -36,12 +36,12 @@ const heroTechStack = [
 
 export default function HeroSection() {
   return (
-    <section id="home" className="relative flex min-h-[86vh] items-center overflow-hidden px-4 pb-24 pt-24 sm:px-6 md:min-h-[92vh]">
-      <div className="absolute left-6 top-24 hidden h-28 w-28 rotate-[-8deg] border-2 border-dashed border-foreground md:block" style={{ borderRadius: "55% 45% 52% 48% / 40% 60% 44% 56%" }} />
-      <div className="absolute bottom-28 right-10 hidden h-20 w-20 rotate-6 border-[3px] border-foreground bg-[var(--post-it)] md:block" style={{ borderRadius: "45% 55% 40% 60% / 58% 38% 62% 42%" }} />
+    <section id="home" className="relative flex min-h-[86vh] items-center overflow-hidden px-4 pb-24 pt-24 sm:px-6 min-[744px]:min-h-[92vh]">
+      <div className="absolute left-6 top-24 hidden h-28 w-28 rotate-[-8deg] border-2 border-dashed border-foreground min-[744px]:block" style={{ borderRadius: "55% 45% 52% 48% / 40% 60% 44% 56%" }} />
+      <div className="absolute bottom-28 right-10 hidden h-20 w-20 rotate-6 border-[3px] border-[var(--solid-circle-border)] bg-[var(--post-it)] min-[744px]:block" style={{ borderRadius: "45% 55% 40% 60% / 58% 38% 62% 42%" }} />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-5xl items-center gap-10 md:grid-cols-[1.15fr_0.85fr]">
-        <div className="space-y-6 text-center md:text-left">
+      <div className="relative z-10 mx-auto grid w-full max-w-5xl items-center gap-10 min-[744px]:grid-cols-[1.15fr_0.85fr]">
+        <div className="space-y-6 text-center min-[744px]:text-left">
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="space-y-3">
             <h1 className="text-5xl font-bold leading-[1.05] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
               Niranjan<span className="inline-block rotate-6 text-accent">!</span>
@@ -63,9 +63,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="relative flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4 md:justify-start"
+            className="relative flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4 min-[744px]:justify-start"
           >
-            <svg className="absolute -right-12 -top-16 hidden h-20 w-28 text-foreground md:block" viewBox="0 0 120 80" fill="none" aria-hidden="true">
+            <svg className="absolute -right-12 -top-16 hidden h-20 w-28 text-foreground min-[744px]:block" viewBox="0 0 120 80" fill="none" aria-hidden="true">
               <path d="M7 58C31 12 64 12 95 39" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="7 8" />
               <path d="M89 24L101 43L79 44" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -84,7 +84,7 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.6 }}>
-            <div className="flex justify-center md:justify-start">
+            <div className="flex justify-center min-[744px]:justify-start">
               <SocialLinks />
             </div>
           </motion.div>
@@ -94,13 +94,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, rotate: 4, y: 24 }}
           animate={{ opacity: 1, rotate: -2, y: 0 }}
           transition={{ duration: 0.55, delay: 0.15 }}
-          className="sketch-card-strong tape mx-auto w-full max-w-md bg-white p-5 sm:p-6"
+          className="sketch-card-strong tape mx-auto w-full max-w-md bg-card p-4 sm:p-6 hidden min-[744px]:block"
         >
           <div
-            className="relative overflow-hidden border-2 border-dashed border-foreground bg-[var(--post-it)] p-5 sm:p-6"
+            className="relative overflow-hidden border-2 border-dashed border-[var(--post-it-border)] bg-[var(--post-it)] p-4 sm:p-6"
             style={{ borderRadius: "36px 18px 42px 24px / 24px 40px 20px 44px" }}
           >
-            <div className="absolute right-4 top-4 h-10 w-10 rotate-12 border-2 border-foreground bg-white" style={{ borderRadius: "50% 42% 56% 44% / 44% 56% 42% 58%" }} />
+            <div className="absolute right-4 top-4 h-10 w-10 rotate-12 border-2 border-foreground bg-card" style={{ borderRadius: "50% 42% 56% 44% / 44% 56% 42% 58%" }} />
             <div className="mb-5 pr-10">
               <span className="section-label text-base">system sketch</span>
               <p className="mt-3 font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">Systems I build</p>
@@ -108,12 +108,12 @@ export default function HeroSection() {
 
             <div className="relative mx-auto max-w-sm text-center">
               <div className="mx-auto grid max-w-[17rem] grid-cols-[1fr_auto_1fr] items-center gap-3">
-                <div className="sketch-card bg-white p-3">
+                <div className="sketch-card bg-card p-3">
                   <Code2 className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">Client</p>
                 </div>
                 <ArrowRight className="h-7 w-7 rotate-[-6deg] text-foreground" strokeWidth={3} />
-                <div className="sketch-card bg-white p-3">
+                <div className="sketch-card bg-card p-3">
                   <Server className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">REST API</p>
                 </div>
@@ -125,26 +125,26 @@ export default function HeroSection() {
                 <path d="M112 24C149 25 174 28 202 36" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 7" />
               </svg>
 
-              <div className="grid grid-cols-4 gap-2 sm:gap-3">
-                <div className="sketch-card rotate-[-1deg] bg-white p-3">
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+                <div className="sketch-card rotate-[-1deg] bg-card p-3">
                   <KeyRound className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">Auth</p>
                 </div>
-                <div className="sketch-card bg-white p-3">
+                <div className="sketch-card bg-card p-3">
                   <Boxes className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">Redis</p>
                 </div>
-                <div className="sketch-card rotate-1 bg-white p-3">
+                <div className="sketch-card rotate-1 bg-card p-3">
                   <Database className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">SQL</p>
                 </div>
-                <div className="sketch-card rotate-[-0.5deg] bg-white p-3">
+                <div className="sketch-card rotate-[-0.5deg] bg-card p-3">
                   <Brain className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />
                   <p className="mt-1 text-lg leading-none">RAG</p>
                 </div>
               </div>
 
-              <div className="sketch-card mt-4 flex items-center justify-center gap-2 bg-white px-3 py-2">
+              <div className="sketch-card mt-4 flex items-center justify-center gap-2 bg-card px-3 py-2">
                 <MessageSquareMore className="h-5 w-5 text-accent" strokeWidth={2.7} />
                 <span className="text-lg leading-5">Agents and events keep systems intelligent</span>
               </div>
@@ -204,7 +204,7 @@ function Typewriter() {
   }, [text, isDeleting, index]);
 
   return (
-    <h2 className="text-3xl font-bold text-[var(--secondary-accent)] sm:text-4xl md:text-5xl flex items-center justify-center md:justify-start h-[36px] sm:h-[40px] md:h-[48px]">
+    <h2 className="text-3xl font-bold text-[var(--secondary-accent)] sm:text-4xl md:text-5xl flex items-center justify-center min-[744px]:justify-start h-[36px] sm:h-[40px] md:h-[48px]">
       <span>{text}</span>
       <span className="animate-pulse ml-1">|</span>
     </h2>

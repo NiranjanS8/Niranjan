@@ -28,7 +28,7 @@ export default function EducationSection() {
           className="relative border-l-[3px] border-dashed border-foreground pl-6 sm:pl-8"
         >
           <div className="absolute -left-[12px] top-1">
-            <div className="h-5 w-5 rounded-full border-[3px] border-foreground bg-accent shadow-[2px_2px_0px_0px_var(--foreground)]" />
+            <div className="h-5 w-5 rounded-full border-[3px] border-[var(--badge-border)] bg-accent shadow-[var(--timeline-dot-shadow)]" />
           </div>
 
           <div className="sketch-card group rotate-[-0.4deg] p-6 transition-transform duration-100 hover:rotate-[0.7deg] hover:bg-[var(--post-it)]">
@@ -50,13 +50,13 @@ export default function EducationSection() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <div className="sketch-chip flex items-center gap-1.5 bg-white px-3 py-1 text-base">
+              <div className="sketch-chip flex items-center gap-1.5 bg-card px-3 py-1 text-base">
                 <MapPin className="h-4 w-4 text-accent" />
                 Bengaluru, India
               </div>
-              <div className="sketch-chip flex items-center gap-1.5 bg-white px-3 py-1 text-base">
+              <div className="sketch-chip flex items-center gap-1.5 bg-card px-3 py-1 text-base">
                 <Award className="h-4 w-4 text-[var(--secondary-accent)]" />
-                8.3 CGPA
+                8.5 CGPA
               </div>
             </div>
           </div>

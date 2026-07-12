@@ -12,13 +12,13 @@ export default function Footer() {
         </div>
 
         <div className="flex items-center gap-4 md:pr-20">
-          <a href="https://github.com/NiranjanS8" target="_blank" rel="noopener noreferrer" className="icon-badge h-11 w-11 bg-white transition-transform duration-100 hover:rotate-[-3deg]" aria-label="GitHub">
+          <a href="https://github.com/NiranjanS8" target="_blank" rel="noopener noreferrer" className="icon-badge h-11 w-11 bg-card transition-transform duration-100 hover:rotate-[-3deg]" aria-label="GitHub">
             <Github className="h-5 w-5" />
           </a>
-          <a href="https://www.linkedin.com/in/niranjans8/" target="_blank" rel="noopener noreferrer" className="icon-badge h-11 w-11 bg-white transition-transform duration-100 hover:rotate-3" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/niranjans8/" target="_blank" rel="noopener noreferrer" className="icon-badge h-11 w-11 bg-card transition-transform duration-100 hover:rotate-3" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5" />
           </a>
-          <a href="mailto:niranjansankeshwari9@gmail.com" className="icon-badge h-11 w-11 bg-white transition-transform duration-100 hover:rotate-[-2deg]" aria-label="Email">
+          <a href="mailto:niranjansankeshwari9@gmail.com" className="icon-badge h-11 w-11 bg-card transition-transform duration-100 hover:rotate-[-2deg]" aria-label="Email">
             <AtSign className="h-5 w-5" />
           </a>
         </div>

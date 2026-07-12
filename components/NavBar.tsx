@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
+import { flushSync } from "react-dom";
 
 const sections = [
   { id: "home", label: "Home" },
@@ -19,8 +20,14 @@ export default function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    const isDark = document.documentElement.classList.contains("dark-theme");
+    setTheme(isDark ? "dark" : "light");
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
@@ -42,6 +49,39 @@ export default function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleTheme = (e: React.MouseEvent) => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+
+    const updateThemeClass = () => {
+      if (nextTheme === "dark") {
+        document.documentElement.classList.add("dark-theme");
+      } else {
+        document.documentElement.classList.remove("dark-theme");
+      }
+      localStorage.setItem("theme", nextTheme);
+      setTheme(nextTheme);
+    };
+
+    if (!(document as any).startViewTransition) {
+      updateThemeClass();
+      return;
+    }
+
+    if (e && e.clientX !== undefined && e.clientY !== undefined) {
+      document.documentElement.style.setProperty("--clip-x", `${e.clientX}px`);
+      document.documentElement.style.setProperty("--clip-y", `${e.clientY}px`);
+    } else {
+      document.documentElement.style.setProperty("--clip-x", "50%");
+      document.documentElement.style.setProperty("--clip-y", "50%");
+    }
+
+    (document as any).startViewTransition(() => {
+      flushSync(() => {
+        updateThemeClass();
+      });
+    });
+  };
+
   return (
     <>
       <nav
@@ -57,29 +97,50 @@ export default function NavBar() {
             Niranjan
           </button>
 
-          <div className="hidden items-center gap-6 md:flex lg:gap-8">
-            {sections.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                data-active={activeSection === item.id}
-                className={`sketch-link text-lg transition-colors hover:text-accent ${
-                  activeSection === item.id ? "text-accent" : "text-foreground"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
+          <div className="flex items-center gap-4">
+            <div className="hidden items-center gap-6 md:flex lg:gap-8">
+              {sections.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  data-active={activeSection === item.id}
+                  className={`sketch-link text-lg transition-colors hover:text-accent ${
+                    activeSection === item.id ? "text-accent" : "text-foreground"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
 
-          <button
-            className="z-50 flex h-11 w-11 items-center justify-center border-2 border-foreground bg-white p-2 text-[var(--secondary-accent)] shadow-[3px_3px_0px_0px_var(--foreground)] transition-transform duration-100 hover:rotate-[-2deg] md:hidden"
-            style={{ borderRadius: "55% 45% 52% 48% / 44% 54% 46% 56%" }}
-            onClick={() => setMobileMenuOpen((value) => !value)}
-            aria-label="Toggle navigation"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+            {/* Theme Toggle Button */}
+            <button
+              onClick={(e) => toggleTheme(e)}
+              className="sketch-chip flex h-11 w-11 cursor-pointer items-center justify-center p-0 transition-transform duration-100 hover:rotate-[-3deg]"
+              style={{ borderRadius: "55% 45% 52% 48% / 44% 54% 46% 56%" }}
+              aria-label="Toggle theme"
+              title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {mounted ? (
+                theme === "dark" ? (
+                  <Sun className="h-5 w-5 text-accent" />
+                ) : (
+                  <Moon className="h-5 w-5 text-[var(--secondary-accent)]" />
+                )
+              ) : (
+                <div className="h-5 w-5" />
+              )}
+            </button>
+
+            <button
+              className="z-50 flex h-11 w-11 items-center justify-center border-2 border-foreground bg-card p-2 text-[var(--secondary-accent)] shadow-[3px_3px_0px_0px_var(--foreground)] transition-transform duration-100 hover:rotate-[-2deg] md:hidden"
+              style={{ borderRadius: "55% 45% 52% 48% / 44% 54% 46% 56%" }}
+              onClick={() => setMobileMenuOpen((value) => !value)}
+              aria-label="Toggle navigation"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </nav>
 

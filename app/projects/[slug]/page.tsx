@@ -24,7 +24,7 @@ async function fetchReadme(urls: string[]) {
 
 function renderInline(text: string): ReactNode[] {
   const parts: ReactNode[] = [];
-  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|`(.+?)`|\[([^\]]+)\]\(([^)]+)\))/g;
+  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|`(.+?)`|!\[([^\]]*?)\]\(([^)]+?)\)|\[([^\]]+?)\]\(([^)]+?)\))/g;
   let lastIndex = 0;
   let key = 0;
   let match;
@@ -40,10 +40,15 @@ function renderInline(text: string): ReactNode[] {
       parts.push(<em key={`i-${key++}`}>{match[3]}</em>);
     } else if (match[4]) {
         parts.push(<code key={`c-${key++}`} className="sketch-chip px-1.5 py-0.5 text-sm text-accent">{match[4]}</code>);
-    } else if (match[5] && match[6]) {
+    } else if (match[5] !== undefined && match[6] !== undefined) {
       parts.push(
-        <a key={`a-${key++}`} href={match[6]} target="_blank" rel="noopener noreferrer" className="text-accent underline decoration-2 underline-offset-4">
-          {match[5]}
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img key={`img-${key++}`} src={match[6]} alt={match[5] || ""} className="max-w-full h-auto border-2 border-foreground my-4 bg-card inline-block" style={{ borderRadius: "12px 24px 15px 20px / 20px 15px 24px 12px" }} />
+      );
+    } else if (match[7] && match[8]) {
+      parts.push(
+        <a key={`a-${key++}`} href={match[8]} target="_blank" rel="noopener noreferrer" className="text-accent underline decoration-2 underline-offset-4">
+          {match[7]}
         </a>,
       );
     }
@@ -81,7 +86,7 @@ function renderMarkdown(markdown: string) {
       }
       i += 1;
       elements.push(
-        <pre key={`code-${key++}`} className="overflow-x-auto border-2 border-foreground bg-white p-4 text-sm text-foreground" style={{ borderRadius: "28px 18px 34px 20px / 18px 34px 20px 30px" }}>
+        <pre key={`code-${key++}`} className="overflow-x-auto border-2 border-foreground bg-card p-4 text-sm text-foreground" style={{ borderRadius: "28px 18px 34px 20px / 18px 34px 20px 30px" }}>
           <code>{codeLines.join("\n")}</code>
         </pre>,
       );
@@ -113,6 +118,14 @@ function renderMarkdown(markdown: string) {
         <h3 key={`h3-${key++}`} className="pt-2 text-2xl font-semibold text-foreground">
           {renderInline(line.slice(4))}
         </h3>,
+      );
+      i += 1;
+      continue;
+    }
+
+    if (/^(?:-{3,}|\*{3,}|_{3,})$/.test(line.trim())) {
+      elements.push(
+        <hr key={`hr-${key++}`} className="my-6 border-t-2 border-dashed border-foreground/30" />
       );
       i += 1;
       continue;
@@ -151,6 +164,65 @@ function renderMarkdown(markdown: string) {
       continue;
     }
 
+    if (line.trim().startsWith("|")) {
+      const tableLines: string[] = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) {
+        tableLines.push(lines[i].trim());
+        i += 1;
+      }
+      
+      const getCells = (rowText: string) => {
+        let cells = rowText.split("|").map((c) => c.trim());
+        if (rowText.startsWith("|")) cells.shift();
+        if (rowText.endsWith("|")) cells.pop();
+        return cells;
+      };
+
+      if (tableLines.length >= 1) {
+        const headerCells = getCells(tableLines[0]);
+        let startIndex = 1;
+        if (tableLines[1] && tableLines[1].includes("-")) {
+          startIndex = 2;
+        }
+
+        const rows: string[][] = [];
+        for (let r = startIndex; r < tableLines.length; r++) {
+          const cells = getCells(tableLines[r]);
+          if (cells.length > 0) {
+            rows.push(cells);
+          }
+        }
+
+        elements.push(
+          <div key={`table-wrapper-${key++}`} className="overflow-x-auto my-6 border-2 border-foreground bg-card p-4" style={{ borderRadius: "18px 24px 15px 22px / 22px 15px 24px 18px" }}>
+            <table className="min-w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b-2 border-foreground">
+                  {headerCells.map((cell, idx) => (
+                    <th key={`th-${idx}`} className="px-4 py-2 font-bold font-heading text-lg">
+                      {renderInline(cell)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, rowIdx) => (
+                  <tr key={`tr-${rowIdx}`} className="border-b border-foreground/30 last:border-0 hover:bg-foreground/5">
+                    {row.map((cell, cellIdx) => (
+                      <td key={`td-${cellIdx}`} className="px-4 py-2 text-lg">
+                        {renderInline(cell)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      continue;
+    }
+
     const paragraphLines: string[] = [];
     while (
       i < lines.length &&
@@ -158,7 +230,9 @@ function renderMarkdown(markdown: string) {
       !lines[i].startsWith("#") &&
       !lines[i].startsWith("```") &&
       !/^[-*]\s+/.test(lines[i]) &&
-      !lines[i].startsWith("> ")
+      !lines[i].startsWith("> ") &&
+      !lines[i].trim().startsWith("|") &&
+      !/^(?:-{3,}|\*{3,}|_{3,})$/.test(lines[i].trim())
     ) {
       paragraphLines.push(lines[i].trim());
       i += 1;
@@ -235,7 +309,7 @@ export default async function ProjectDetailsPage({
           </div>
         </section>
 
-        <section className="sketch-card mt-8 bg-white p-6 sm:p-8">
+        <section className="sketch-card mt-8 bg-card p-6 sm:p-8">
           <div className="mb-6 flex items-center justify-between gap-4">
             <h2 className="text-3xl font-semibold text-foreground">README</h2>
             <a

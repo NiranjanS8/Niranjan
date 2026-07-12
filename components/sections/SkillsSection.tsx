@@ -34,7 +34,7 @@ export default function SkillsSection() {
               }`}
             >
               <div className="mb-4 flex items-center gap-3">
-                <div className="icon-badge h-12 w-12 bg-white transition-transform duration-100 group-hover:rotate-[-3deg]">
+                <div className="icon-badge h-12 w-12 bg-card transition-transform duration-100 group-hover:rotate-[-3deg]">
                   <category.icon className="h-5 w-5" />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
@@ -45,7 +45,7 @@ export default function SkillsSection() {
                   return (
                     <span
                       key={skill}
-                      className="sketch-chip flex items-center gap-1.5 px-3 py-1 text-base transition-transform duration-100 hover:rotate-[-1deg] hover:bg-white"
+                      className="sketch-chip flex items-center gap-1.5 px-3 py-1 text-base transition-transform duration-100 hover:rotate-[-1deg] hover:bg-card"
                     >
                       {iconUrl && (
                         /* eslint-disable-next-line @next/next/no-img-element */

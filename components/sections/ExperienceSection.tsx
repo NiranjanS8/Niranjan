@@ -32,7 +32,7 @@ export default function ExperienceSection() {
               className="relative border-l-[3px] border-dashed border-foreground pb-8 pl-6 last:pb-0 sm:pl-8"
             >
               <div className="absolute -left-[12px] top-1">
-                <div className="h-5 w-5 rounded-full border-[3px] border-foreground bg-accent shadow-[2px_2px_0px_0px_var(--foreground)]" />
+                <div className="h-5 w-5 rounded-full border-[3px] border-[var(--badge-border)] bg-accent shadow-[var(--timeline-dot-shadow)]" />
               </div>
 
               <div className="sketch-card group rotate-[-0.4deg] p-6 transition-transform duration-100 hover:rotate-[0.7deg] hover:bg-[var(--post-it)]">

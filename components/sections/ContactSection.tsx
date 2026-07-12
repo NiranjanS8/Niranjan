@@ -52,9 +52,9 @@ export default function ContactSection() {
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="sketch-card group flex items-center gap-3 bg-white p-3.5 transition-transform duration-100 hover:rotate-[-0.7deg] hover:bg-[var(--post-it)] sm:gap-4 sm:p-4"
+                    className="sketch-card group flex items-center gap-3 bg-card p-3.5 transition-transform duration-100 hover:rotate-[-0.7deg] hover:bg-[var(--post-it)] sm:gap-4 sm:p-4"
                   >
-                    <div className="icon-badge h-12 w-12 bg-white transition-transform duration-100 group-hover:rotate-[-3deg]">
+                    <div className="icon-badge h-12 w-12 bg-card transition-transform duration-100 group-hover:rotate-[-3deg]">
                       <item.icon className="h-5 w-5" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -69,7 +69,7 @@ export default function ContactSection() {
               <div className="mt-auto pt-4">
                 <div className="sketch-card bg-[var(--post-it)] px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <div className="icon-badge h-10 w-10 bg-white">
+                    <div className="icon-badge h-10 w-10 bg-card">
                       <Phone className="h-4 w-4" />
                     </div>
                     <div>
@@ -108,7 +108,7 @@ export default function ContactSection() {
             </ul>
 
             <div className="mt-6 space-y-3 text-lg text-foreground/75">
-              <section className="sketch-card bg-white p-4">
+              <section className="sketch-card bg-card p-4">
                 <h4 className="text-xl font-bold text-accent">Open To</h4>
                 <ul className="mt-3 space-y-2">
                   <li className="flex items-start gap-3">
