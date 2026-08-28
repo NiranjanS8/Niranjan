@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import type { ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   Boxes,
@@ -15,6 +16,8 @@ import {
 } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 import SocialLinks from "@/components/SocialLinks";
+
+type SystemNodeId = "client" | "api" | "auth" | "redis" | "sql" | "rag";
 
 const devicon = (name: string, variant = "original") =>
   `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${name}/${name}-${variant}.svg`;
@@ -34,7 +37,26 @@ const heroTechStack = [
   { label: "AWS", iconUrl: devicon("amazonwebservices", "original-wordmark") },
 ] as const;
 
+const nodeStatus: Record<SystemNodeId, string> = {
+  client: "request queued",
+  api: "route matched",
+  auth: "token verified",
+  redis: "cache warmed",
+  sql: "query planned",
+  rag: "context grounded",
+};
+
+const activityFeed = [
+  "auth checked",
+  "cache hit",
+  "vector search",
+  "agent response",
+  "audit event saved",
+] as const;
+
 export default function HeroSection() {
+  const [activeNode, setActiveNode] = useState<SystemNodeId | null>(null);
+
   return (
     <section id="home" className="relative flex min-h-[86vh] items-center overflow-hidden px-4 pb-24 pt-24 sm:px-6 min-[744px]:min-h-[92vh]">
       <div className="absolute left-6 top-24 hidden h-28 w-28 rotate-[-8deg] border-2 border-dashed border-foreground min-[744px]:block" style={{ borderRadius: "55% 45% 52% 48% / 40% 60% 44% 56%" }} />
@@ -107,46 +129,88 @@ export default function HeroSection() {
             </div>
 
             <div className="relative mx-auto max-w-sm text-center">
-              <div className="mx-auto grid max-w-[17rem] grid-cols-[1fr_auto_1fr] items-center gap-3">
-                <div className="sketch-card bg-card p-3">
-                  <Code2 className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
-                  <p className="mt-1 text-lg leading-none">Client</p>
+              <div
+                className="system-sketch-board"
+                data-active-node={activeNode ?? "none"}
+                onPointerLeave={() => setActiveNode(null)}
+              >
+                <div className="system-topology mx-auto">
+                  <SystemNode
+                    id="client"
+                    label="Client"
+                    activeNode={activeNode}
+                    onActivate={setActiveNode}
+                    className="system-node-client rotate-[-1deg]"
+                    icon={<Code2 className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />}
+                  />
+                  <div className="system-arrow-wrap" aria-hidden="true">
+                    <span className="system-packet system-packet-horizontal" />
+                    <ArrowRight className="h-7 w-7 rotate-[-6deg] text-foreground" strokeWidth={3} />
+                  </div>
+                  <SystemNode
+                    id="api"
+                    label="REST API"
+                    activeNode={activeNode}
+                    onActivate={setActiveNode}
+                    className="system-node-api rotate-[0.8deg]"
+                    icon={<Server className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />}
+                  />
                 </div>
-                <ArrowRight className="h-7 w-7 rotate-[-6deg] text-foreground" strokeWidth={3} />
-                <div className="sketch-card bg-card p-3">
-                  <Server className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />
-                  <p className="mt-1 text-lg leading-none">REST API</p>
+
+                <svg className="system-flow-lines mx-auto my-1 h-12 w-64 text-foreground" viewBox="0 0 256 52" fill="none" aria-hidden="true">
+                  <path className="system-line system-line-api" d="M128 4C128 18 128 28 128 48" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  <path className="system-line system-line-auth" d="M128 30C88 31 60 36 25 48" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  <path className="system-line system-line-rag" d="M128 30C168 31 196 36 231 48" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                  <circle className="system-packet-dot packet-to-auth" r="4" fill="currentColor">
+                    <animateMotion dur="2.8s" repeatCount="indefinite" path="M128 30C88 31 60 36 25 48" />
+                  </circle>
+                  <circle className="system-packet-dot packet-to-sql" r="4" fill="currentColor">
+                    <animateMotion dur="3.2s" begin="0.45s" repeatCount="indefinite" path="M128 4C128 18 128 28 128 48" />
+                  </circle>
+                  <circle className="system-packet-dot packet-to-rag" r="4" fill="currentColor">
+                    <animateMotion dur="3s" begin="0.9s" repeatCount="indefinite" path="M128 30C168 31 196 36 231 48" />
+                  </circle>
+                </svg>
+
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+                  <SystemNode
+                    id="auth"
+                    label="Auth"
+                    activeNode={activeNode}
+                    onActivate={setActiveNode}
+                    className="rotate-[-1deg]"
+                    icon={<KeyRound className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />}
+                  />
+                  <SystemNode
+                    id="redis"
+                    label="Redis"
+                    activeNode={activeNode}
+                    onActivate={setActiveNode}
+                    className="rotate-[0.4deg]"
+                    icon={<Boxes className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />}
+                  />
+                  <SystemNode
+                    id="sql"
+                    label="SQL"
+                    activeNode={activeNode}
+                    onActivate={setActiveNode}
+                    className="rotate-1"
+                    icon={<Database className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />}
+                  />
+                  <SystemNode
+                    id="rag"
+                    label="RAG"
+                    activeNode={activeNode}
+                    onActivate={setActiveNode}
+                    className="rotate-[-0.5deg]"
+                    icon={<Brain className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />}
+                  />
                 </div>
               </div>
 
-              <svg className="mx-auto my-1 h-10 w-56 text-foreground" viewBox="0 0 224 40" fill="none" aria-hidden="true">
-                <path d="M112 4C112 17 112 23 112 36" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 7" />
-                <path d="M112 24C75 25 50 28 22 36" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 7" />
-                <path d="M112 24C149 25 174 28 202 36" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="6 7" />
-              </svg>
-
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
-                <div className="sketch-card rotate-[-1deg] bg-card p-3">
-                  <KeyRound className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
-                  <p className="mt-1 text-lg leading-none">Auth</p>
-                </div>
-                <div className="sketch-card bg-card p-3">
-                  <Boxes className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />
-                  <p className="mt-1 text-lg leading-none">Redis</p>
-                </div>
-                <div className="sketch-card rotate-1 bg-card p-3">
-                  <Database className="mx-auto h-6 w-6 text-[var(--secondary-accent)]" strokeWidth={2.7} />
-                  <p className="mt-1 text-lg leading-none">SQL</p>
-                </div>
-                <div className="sketch-card rotate-[-0.5deg] bg-card p-3">
-                  <Brain className="mx-auto h-6 w-6 text-accent" strokeWidth={2.7} />
-                  <p className="mt-1 text-lg leading-none">RAG</p>
-                </div>
-              </div>
-
-              <div className="sketch-card mt-4 flex items-center justify-center gap-2 bg-card px-3 py-2">
+              <div className="system-status-card sketch-card mt-4 flex items-center justify-center gap-2 bg-card px-3 py-2">
                 <MessageSquareMore className="h-5 w-5 text-accent" strokeWidth={2.7} />
-                <span className="text-lg leading-5">Agents and events keep systems intelligent</span>
+                <ActivityStatus />
               </div>
             </div>
           </div>
@@ -171,6 +235,73 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function SystemNode({
+  id,
+  label,
+  icon,
+  activeNode,
+  onActivate,
+  className = "",
+}: {
+  id: SystemNodeId;
+  label: string;
+  icon: ReactNode;
+  activeNode: SystemNodeId | null;
+  onActivate: (id: SystemNodeId | null) => void;
+  className?: string;
+}) {
+  const isActive = activeNode === id;
+
+  return (
+    <button
+      type="button"
+      className={`system-node sketch-card bg-card p-3 ${className}`}
+      data-node={id}
+      data-active={isActive}
+      onPointerEnter={() => onActivate(id)}
+      onPointerLeave={() => onActivate(null)}
+      onFocus={() => onActivate(id)}
+      onBlur={() => onActivate(null)}
+      aria-label={`${label}: ${nodeStatus[id]}`}
+    >
+      {icon}
+      <p className="mt-1 text-lg leading-none">{label}</p>
+      <span className="system-node-status">{nodeStatus[id]}</span>
+    </button>
+  );
+}
+
+function ActivityStatus() {
+  const [feedIndex, setFeedIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setFeedIndex((current) => (current + 1) % activityFeed.length);
+    }, 1650);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const activeStatus = activityFeed[feedIndex];
+
+  return (
+    <span className="system-status-text text-lg leading-5">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={activeStatus}
+          className="system-status-feed"
+          initial={{ opacity: 0, y: 8, rotate: -1 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          exit={{ opacity: 0, y: -8, rotate: 1 }}
+          transition={{ duration: 0.22, ease: "easeOut" }}
+        >
+          {activeStatus}
+        </motion.span>
+      </AnimatePresence>
+    </span>
   );
 }
 

@@ -22,8 +22,6 @@ export const skillIconMap: Record<string, string> = {
   "LangChain": "https://cdn.simpleicons.org/langchain/1C3C3C",
   "LangGraph": "https://cdn.simpleicons.org/langchain/1C3C3C",
   "FastAPI": devicon("fastapi"),
-  "PyTorch": devicon("pytorch"),
-  "Scikit-learn": devicon("scikitlearn"),
   "Pydantic": devicon("pydantic"),
 
   // Backend
@@ -53,11 +51,11 @@ export const skillIconMap: Record<string, string> = {
   "Maven": devicon("maven"),
   "Postman": devicon("postman"),
   "LangSmith": "https://cdn.simpleicons.org/langchain/1C3C3C",
-  "Streamlit": devicon("streamlit"),
 
   // Testing
   "JUnit": devicon("junit"),
   "Mockito": "",
+  "PyTest": devicon("pytest"),
 };
 
 export const skillCategories: SkillCategory[] = [
@@ -74,7 +72,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "AI Frameworks",
     icon: Sparkles,
-    skills: ["LangChain", "LangGraph", "FastAPI", "PyTorch", "Scikit-learn", "Pydantic"],
+    skills: ["LangChain", "LangGraph", "FastAPI", "Pydantic"],
   },
   {
     title: "Backend",
@@ -94,11 +92,11 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Tools",
     icon: Wrench,
-    skills: ["Git", "Maven", "Postman", "LangSmith", "Streamlit"],
+    skills: ["Git", "Maven", "Postman", "LangSmith"],
   },
   {
     title: "Testing",
     icon: FlaskConical,
-    skills: ["JUnit", "Mockito"],
+    skills: ["JUnit", "Mockito", "PyTest"],
   },
 ];
