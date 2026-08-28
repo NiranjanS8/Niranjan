@@ -32,7 +32,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex h-full"
+            className="flex h-full w-full min-w-0"
           >
             <div className="sketch-card-strong tape flex h-full w-full flex-col p-5 sm:p-6">
               <h3 className="mb-6 text-3xl font-bold text-foreground">Let&apos;s Connect</h3>
@@ -59,7 +59,7 @@ export default function ContactSection() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="text-base text-foreground/60">{item.label}</p>
-                      <p className="truncate text-xl text-foreground">{item.value}</p>
+                      <p className="truncate text-lg sm:text-xl text-foreground">{item.value}</p>
                     </div>
                     <ExternalLink className="h-4 w-4 text-[var(--secondary-accent)]" />
                   </a>
@@ -89,7 +89,7 @@ export default function ContactSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="sketch-card-strong tack flex h-full flex-col bg-[var(--post-it)] p-5 sm:p-6"
+            className="sketch-card-strong tack flex h-full w-full flex-col bg-[var(--post-it)] p-5 sm:p-6"
           >
             <h3 className="text-3xl font-bold text-foreground">Best Ways To Reach Me</h3>
             <ul className="mt-4 space-y-2 text-lg leading-7 text-foreground/75">

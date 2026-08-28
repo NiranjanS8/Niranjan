@@ -11,7 +11,26 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  // Alternating backend / ai for the "All" view
+  // Featured projects for the "All" view.
+  {
+    slug: "recruitiq",
+    title: "RecruitIQ",
+    description:
+      "Agentic AI recruiting platform that parses resumes, ranks candidates with grounded reasoning, supports human-in-the-loop review, and powers recruiter workflows from job descriptions to interview scheduling.",
+    techStack: ["FastAPI", "LangGraph", "React", "TypeScript", "PostgreSQL", "LiteLLM"],
+    features: [
+      "Resume ingestion for PDFs, images, and text with OCR, heuristics, structured extraction, and parsing-confidence flags",
+      "LangGraph agent pipeline scoring candidates across nine rubric dimensions with per-dimension reasoning",
+      "Grounded candidate Q&A with resume citations plus generated interview questions from skill gaps and strongest claims",
+      "Recruiter tooling for approval workflows, saved filters, candidate comparison, notes, audit logs, and scheduling integrations",
+    ],
+    github: "https://github.com/NiranjanS8/RecruitIQ",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/RecruitIQ/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/RecruitIQ/master/README.md",
+    ],
+    category: "ai",
+  },
   {
     slug: "snapurl",
     title: "SnapURL",

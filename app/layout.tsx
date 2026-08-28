@@ -65,24 +65,6 @@ export default function RootLayout({
             `,
           }}
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.addEventListener('load', () => {
-                setTimeout(() => {
-                  const docWidth = document.documentElement.clientWidth;
-                  console.warn('CLIENT_WIDTH_IS:', docWidth);
-                  document.querySelectorAll('*').forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.right > docWidth + 1) {
-                      console.warn('OVERFLOW_ELEMENT:', el.tagName, el.className, 'rect.right:', rect.right, 'width:', rect.width);
-                    }
-                  });
-                }, 1000);
-              });
-            `,
-          }}
-        />
       </head>
       <body className={`${patrickHand.variable} ${kalam.variable}`}>
         <script
