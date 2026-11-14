@@ -1,15 +1,24 @@
 import { notFound } from "next/navigation";
 import { ExternalLink, FolderGit2, Github } from "lucide-react";
 import BackToProjects from "@/components/BackToProjects";
-import type { ReactNode } from "react";
-import { getProjectBySlug } from "@/lib/projects";
+import { Suspense, type ReactNode } from "react";
+import { getProjectBySlug, projects } from "@/lib/projects";
 
 export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
 
 async function fetchReadme(urls: string[]) {
   for (const url of urls) {
     try {
-      const response = await fetch(url, { next: { revalidate: 3600 } });
+      const response = await fetch(url, {
+        next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(5000),
+      });
       if (response.ok) {
         const text = await response.text();
         if (text.trim()) return text;
@@ -247,6 +256,67 @@ function renderMarkdown(markdown: string) {
   return elements;
 }
 
+function ReadmeSkeleton({ github }: { github: string }) {
+  return (
+    <section className="sketch-card mt-8 bg-card p-6 sm:p-8">
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <h2 className="text-3xl font-semibold text-foreground">README</h2>
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sketch-link text-lg text-accent"
+        >
+          Open on GitHub
+        </a>
+      </div>
+      <div className="space-y-4">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <div
+            key={index}
+            className="h-5 animate-pulse border-2 border-foreground/40 bg-card"
+            style={{ width: `${85 - index * 5}%` }}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+async function ReadmeSection({
+  readmeRawUrls,
+  github,
+}: {
+  readmeRawUrls: string[];
+  github: string;
+}) {
+  const readme = await fetchReadme(readmeRawUrls);
+
+  return (
+    <section className="sketch-card mt-8 bg-card p-6 sm:p-8">
+      <div className="mb-6 flex items-center justify-between gap-4">
+        <h2 className="text-3xl font-semibold text-foreground">README</h2>
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sketch-link text-lg text-accent"
+        >
+          Open on GitHub
+        </a>
+      </div>
+
+      {readme ? (
+        <article className="space-y-5">{renderMarkdown(readme)}</article>
+      ) : (
+        <div className="sketch-card bg-[var(--post-it)] p-6 text-lg text-foreground/75">
+          README could not be loaded automatically right now. You can still view the repository directly from the GitHub button above.
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default async function ProjectDetailsPage({
   params,
 }: {
@@ -258,8 +328,6 @@ export default async function ProjectDetailsPage({
   if (!project) {
     notFound();
   }
-
-  const readme = await fetchReadme(project.readmeRawUrls);
 
   return (
     <main className="min-h-screen bg-background px-6 py-24">
@@ -309,27 +377,9 @@ export default async function ProjectDetailsPage({
           </div>
         </section>
 
-        <section className="sketch-card mt-8 bg-card p-6 sm:p-8">
-          <div className="mb-6 flex items-center justify-between gap-4">
-            <h2 className="text-3xl font-semibold text-foreground">README</h2>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sketch-link text-lg text-accent"
-            >
-              Open on GitHub
-            </a>
-          </div>
-
-          {readme ? (
-            <article className="space-y-5">{renderMarkdown(readme)}</article>
-          ) : (
-            <div className="sketch-card bg-[var(--post-it)] p-6 text-lg text-foreground/75">
-              README could not be loaded automatically right now. You can still view the repository directly from the GitHub button above.
-            </div>
-          )}
-        </section>
+        <Suspense fallback={<ReadmeSkeleton github={project.github} />}>
+          <ReadmeSection readmeRawUrls={project.readmeRawUrls} github={project.github} />
+        </Suspense>
       </div>
     </main>
   );
