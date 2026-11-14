@@ -21,6 +21,7 @@ export const skillIconMap: Record<string, string> = {
   // AI Frameworks
   "LangChain": "https://cdn.simpleicons.org/langchain/1C3C3C",
   "LangGraph": "https://cdn.simpleicons.org/langchain/1C3C3C",
+  "LangSmith": "https://cdn.simpleicons.org/langchain/1C3C3C",
   "FastAPI": devicon("fastapi"),
   "Pydantic": devicon("pydantic"),
 
@@ -36,6 +37,7 @@ export const skillIconMap: Record<string, string> = {
   "MySQL": devicon("mysql"),
   "PostgreSQL": devicon("postgresql"),
   "Redis": devicon("redis"),
+  "Qdrant": "https://cdn.simpleicons.org/qdrant",
   "Neo4j": devicon("neo4j"),
   "ChromaDB": "",
   "FAISS": "",
@@ -50,7 +52,6 @@ export const skillIconMap: Record<string, string> = {
   "Git": devicon("git"),
   "Maven": devicon("maven"),
   "Postman": devicon("postman"),
-  "LangSmith": "https://cdn.simpleicons.org/langchain/1C3C3C",
 
   // Testing
   "JUnit": devicon("junit"),
@@ -72,7 +73,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "AI Frameworks",
     icon: Sparkles,
-    skills: ["LangChain", "LangGraph", "FastAPI", "Pydantic"],
+    skills: ["LangChain", "LangGraph", "LangSmith", "FastAPI", "Pydantic"],
   },
   {
     title: "Backend",
@@ -82,7 +83,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Databases",
     icon: Database,
-    skills: ["MySQL", "PostgreSQL", "Redis", "ChromaDB", "FAISS", "pgvector", "Neo4j"],
+    skills: ["MySQL", "PostgreSQL", "Redis", "Qdrant", "ChromaDB", "FAISS", "pgvector", "Neo4j"],
   },
   {
     title: "Cloud",
@@ -92,7 +93,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: "Tools",
     icon: Wrench,
-    skills: ["Git", "Maven", "Postman", "LangSmith"],
+    skills: ["Git", "Maven", "Postman"],
   },
   {
     title: "Testing",

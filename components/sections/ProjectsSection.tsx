@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ExternalLink, FolderGit2, Github } from "lucide-react";
-import { projects } from "@/lib/projects";
+import { projects, getAlternatingProjects } from "@/lib/projects";
 
 type CategoryFilter = "all" | "ai" | "backend" | "frontend";
 
@@ -20,7 +20,9 @@ export default function ProjectsSection() {
   const [showAll, setShowAll] = useState(false);
 
   const filteredProjects =
-    activeFilter === "all" ? projects : projects.filter((p) => p.category === activeFilter);
+    activeFilter === "all"
+      ? getAlternatingProjects(projects)
+      : projects.filter((p) => p.category === activeFilter);
   
   const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
 

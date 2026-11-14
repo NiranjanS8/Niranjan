@@ -307,6 +307,7 @@ function ActivityStatus() {
 
 function Typewriter() {
   const TITLES = [
+    "Software Engineer",
     "Backend Developer",
     "AI Engineer",
     "RAG Pipeline Builder",

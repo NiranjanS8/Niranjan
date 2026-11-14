@@ -13,21 +13,21 @@ export type Project = {
 export const projects: Project[] = [
   // Featured projects for the "All" view.
   {
-    slug: "recruitiq",
-    title: "RecruitIQ",
+    slug: "resolveai",
+    title: "ResolveAI",
     description:
-      "Agentic AI recruiting platform that parses resumes, ranks candidates with grounded reasoning, supports human-in-the-loop review, and powers recruiter workflows from job descriptions to interview scheduling.",
-    techStack: ["FastAPI", "LangGraph", "React", "TypeScript", "PostgreSQL", "LiteLLM"],
+      "Autonomous AI customer-support agent with confidence-based routing, LangGraph human-in-the-loop review workflows, pgvector retrieval, code-enforced guardrails, and Postgres-backed job queues.",
+    techStack: ["FastAPI", "Python", "LangGraph", "LangChain", "PostgreSQL", "pgvector", "React"],
     features: [
-      "Resume ingestion for PDFs, images, and text with OCR, heuristics, structured extraction, and parsing-confidence flags",
-      "LangGraph agent pipeline scoring candidates across nine rubric dimensions with per-dimension reasoning",
-      "Grounded candidate Q&A with resume citations plus generated interview questions from skill gaps and strongest claims",
-      "Recruiter tooling for approval workflows, saved filters, candidate comparison, notes, audit logs, and scheduling integrations",
+      "Confidence-based routing directing tickets to auto-resolve, human review, or escalation using routing scores",
+      "Human review powered by LangGraph interrupt workflows persisted with a PostgreSQL checkpointer",
+      "Code-level safety guardrails including action allowlists, hard refund caps, and prompt-injection sanitization",
+      "Retrieval-augmented answers with pgvector indexing and live operational analytics for deflection and reply time",
     ],
-    github: "https://github.com/NiranjanS8/RecruitIQ",
+    github: "https://github.com/NiranjanS8/ResolveAI",
     readmeRawUrls: [
-      "https://raw.githubusercontent.com/NiranjanS8/RecruitIQ/main/README.md",
-      "https://raw.githubusercontent.com/NiranjanS8/RecruitIQ/master/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/ResolveAI/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/ResolveAI/master/README.md",
     ],
     category: "ai",
   },
@@ -50,6 +50,25 @@ export const projects: Project[] = [
       "https://raw.githubusercontent.com/NiranjanS8/snapurl/master/README.md",
     ],
     category: "backend",
+  },
+  {
+    slug: "recruitiq",
+    title: "RecruitIQ",
+    description:
+      "Agentic AI recruiting platform that parses resumes, ranks candidates with grounded reasoning, supports human-in-the-loop review, and powers recruiter workflows from job descriptions to interview scheduling.",
+    techStack: ["FastAPI", "LangGraph", "React", "TypeScript", "PostgreSQL", "LiteLLM"],
+    features: [
+      "Resume ingestion for PDFs, images, and text with OCR, heuristics, structured extraction, and parsing-confidence flags",
+      "LangGraph agent pipeline scoring candidates across nine rubric dimensions with per-dimension reasoning",
+      "Grounded candidate Q&A with resume citations plus generated interview questions from skill gaps and strongest claims",
+      "Recruiter tooling for approval workflows, saved filters, candidate comparison, notes, audit logs, and scheduling integrations",
+    ],
+    github: "https://github.com/NiranjanS8/RecruitIQ",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/RecruitIQ/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/RecruitIQ/master/README.md",
+    ],
+    category: "ai",
   },
   {
     slug: "curex-healthcare-ai",
@@ -261,6 +280,45 @@ export const projects: Project[] = [
     category: "backend",
   },
   {
+    slug: "event-ticket-management-system",
+    title: "Event Ticket Management System",
+    description:
+      "Event ticketing and validation backend with pessimistic locking concurrency, Keycloak OAuth2/JWT auth, PostgreSQL full-text search, Caffeine caching, and ZXing QR code generation.",
+    techStack: ["Java", "Spring Boot", "Spring Security", "PostgreSQL", "Keycloak", "Caffeine", "Docker"],
+    features: [
+      "Pessimistic write locking on ticket purchases to prevent overselling under concurrent requests",
+      "Dynamic QR code generation with ZXing and one-time gate scan validation to prevent duplicate entry",
+      "OAuth2 and JWT authentication backed by Keycloak with automated local user provisioning",
+      "PostgreSQL full-text search for events and Caffeine in-memory caching with automatic eviction",
+    ],
+    github: "https://github.com/NiranjanS8/event-ticket-management-system",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/event-ticket-management-system/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/event-ticket-management-system/master/README.md",
+    ],
+    category: "backend",
+  },
+  {
+    slug: "glance-readme-viewer",
+    title: "Glance — README Viewer",
+    description:
+      "Lightweight cross-platform desktop Markdown and README reader with clean GitHub-style formatting, folder browsing, live reload, local Mermaid and KaTeX rendering, and dark/light themes.",
+    techStack: ["Electron", "JavaScript", "HTML", "CSS", "Mermaid", "KaTeX"],
+    features: [
+      "Markdown file and folder browsing with sidebar tree, root README auto-opening, and relative link resolution",
+      "GitHub-flavored markdown rendering with local Mermaid diagrams, KaTeX math expressions, and alert callouts",
+      "Live reload file watcher, contents navigation rail, folder-wide search, and document history",
+      "Sandboxed renderer architecture with strict CSP, DOMPurify sanitization, and native OS theme persistence",
+    ],
+    github: "https://github.com/NiranjanS8/glance-readme-viewer",
+    demo: "https://glance.niranjans.tech/",
+    readmeRawUrls: [
+      "https://raw.githubusercontent.com/NiranjanS8/glance-readme-viewer/main/README.md",
+      "https://raw.githubusercontent.com/NiranjanS8/glance-readme-viewer/master/README.md",
+    ],
+    category: "frontend",
+  },
+  {
     slug: "sorting-algorithm-visualizer",
     title: "Sorting Algorithm Visualizer",
     description:
@@ -324,4 +382,26 @@ export const projects: Project[] = [
 
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
+}
+
+export function getAlternatingProjects(projectList: Project[] = projects): Project[] {
+  const aiProjects = projectList.filter((project) => project.category === "ai");
+  const backendProjects = projectList.filter((project) => project.category === "backend");
+  const otherProjects = projectList.filter(
+    (project) => project.category !== "ai" && project.category !== "backend"
+  );
+
+  const alternated: Project[] = [];
+  const maxCategoryCount = Math.max(aiProjects.length, backendProjects.length);
+
+  for (let index = 0; index < maxCategoryCount; index++) {
+    if (index < aiProjects.length) {
+      alternated.push(aiProjects[index]);
+    }
+    if (index < backendProjects.length) {
+      alternated.push(backendProjects[index]);
+    }
+  }
+
+  return [...alternated, ...otherProjects];
 }
