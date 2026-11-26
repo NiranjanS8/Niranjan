@@ -1,7 +1,11 @@
 import { notFound } from "next/navigation";
 import { ExternalLink, FolderGit2, Github } from "lucide-react";
 import BackToProjects from "@/components/BackToProjects";
-import { Suspense, type ReactNode } from "react";
+import MermaidDiagram from "@/components/MermaidDiagram";
+import ScrollToHash from "@/components/ScrollToHash";
+import fs from "node:fs";
+import path from "node:path";
+import type { ReactNode } from "react";
 import { getProjectBySlug, projects } from "@/lib/projects";
 
 export const revalidate = 3600;
@@ -12,7 +16,66 @@ export async function generateStaticParams() {
   }));
 }
 
-async function fetchReadme(urls: string[]) {
+type ReadmeData = {
+  content: string;
+  sourceUrl: string;
+};
+
+interface RenderContext {
+  baseRawDir: string;
+  githubUrl: string;
+  branch: string;
+}
+
+function getRenderContext(sourceUrl: string, githubUrl: string): RenderContext {
+  const lastSlash = sourceUrl.lastIndexOf("/");
+  const baseRawDir = lastSlash !== -1 ? sourceUrl.substring(0, lastSlash) : sourceUrl;
+
+  const rawPrefix = "https://raw.githubusercontent.com/";
+  let branch = "main";
+  if (sourceUrl.startsWith(rawPrefix)) {
+    const segments = sourceUrl.slice(rawPrefix.length).split("/");
+    if (segments.length >= 3) {
+      branch = segments[2];
+    }
+  }
+
+  return {
+    baseRawDir,
+    githubUrl,
+    branch,
+  };
+}
+
+function resolveAssetUrl(url: string, baseRawDir: string): string {
+  const trimmed = url.trim();
+  if (
+    trimmed.startsWith("http://") ||
+    trimmed.startsWith("https://") ||
+    trimmed.startsWith("data:") ||
+    trimmed.startsWith("//")
+  ) {
+    return trimmed;
+  }
+  const cleanPath = trimmed.replace(/^\.?\//, "");
+  return `${baseRawDir}/${cleanPath}`;
+}
+
+function resolveDocUrl(url: string, githubUrl: string, branch: string): string {
+  const trimmed = url.trim();
+  if (
+    trimmed.startsWith("http://") ||
+    trimmed.startsWith("https://") ||
+    trimmed.startsWith("mailto:") ||
+    trimmed.startsWith("#")
+  ) {
+    return trimmed;
+  }
+  const cleanPath = trimmed.replace(/^\.?\//, "");
+  return `${githubUrl.replace(/\/$/, "")}/blob/${branch}/${cleanPath}`;
+}
+
+async function fetchReadme(urls: string[]): Promise<ReadmeData | null> {
   for (const url of urls) {
     try {
       const response = await fetch(url, {
@@ -21,7 +84,7 @@ async function fetchReadme(urls: string[]) {
       });
       if (response.ok) {
         const text = await response.text();
-        if (text.trim()) return text;
+        if (text.trim()) return { content: text, sourceUrl: url };
       }
     } catch {
       // Try the next fallback URL.
@@ -31,7 +94,7 @@ async function fetchReadme(urls: string[]) {
   return null;
 }
 
-function renderInline(text: string): ReactNode[] {
+function renderInline(text: string, context: RenderContext): ReactNode[] {
   const parts: ReactNode[] = [];
   const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|`(.+?)`|!\[([^\]]*?)\]\(([^)]+?)\)|\[([^\]]+?)\]\(([^)]+?)\))/g;
   let lastIndex = 0;
@@ -44,20 +107,46 @@ function renderInline(text: string): ReactNode[] {
     }
 
     if (match[2]) {
-        parts.push(<strong key={`b-${key++}`} className="font-semibold text-foreground">{match[2]}</strong>);
+      parts.push(<strong key={`b-${key++}`} className="font-semibold text-foreground">{match[2]}</strong>);
     } else if (match[3]) {
       parts.push(<em key={`i-${key++}`}>{match[3]}</em>);
     } else if (match[4]) {
-        parts.push(<code key={`c-${key++}`} className="sketch-chip px-1.5 py-0.5 text-sm text-accent">{match[4]}</code>);
+      parts.push(<code key={`c-${key++}`} className="sketch-chip px-1.5 py-0.5 text-sm text-accent">{match[4]}</code>);
     } else if (match[5] !== undefined && match[6] !== undefined) {
+      const altText = match[5] || "";
+      const rawSrc = match[6];
+      const resolvedSrc = resolveAssetUrl(rawSrc, context.baseRawDir);
       parts.push(
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img key={`img-${key++}`} src={match[6]} alt={match[5] || ""} className="max-w-full h-auto border-2 border-foreground my-4 bg-card inline-block" style={{ borderRadius: "12px 24px 15px 20px / 20px 15px 24px 12px" }} />
+        <span key={`img-${key++}`} className="my-4 block text-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={resolvedSrc}
+            alt={altText}
+            className="inline-block max-w-full h-auto border-2 border-foreground bg-card p-2 shadow-[4px_4px_0px_0px_var(--foreground)]"
+            style={{ borderRadius: "14px 22px 16px 20px / 20px 16px 22px 14px" }}
+            loading="lazy"
+          />
+          {altText && (
+            <span className="mt-1.5 block text-sm italic text-foreground/60 font-body">
+              {altText}
+            </span>
+          )}
+        </span>,
       );
     } else if (match[7] && match[8]) {
+      const linkText = match[7];
+      const rawHref = match[8];
+      const resolvedHref = resolveDocUrl(rawHref, context.githubUrl, context.branch);
+      const isExternal = resolvedHref.startsWith("http://") || resolvedHref.startsWith("https://");
       parts.push(
-        <a key={`a-${key++}`} href={match[8]} target="_blank" rel="noopener noreferrer" className="text-accent underline decoration-2 underline-offset-4">
-          {match[7]}
+        <a
+          key={`a-${key++}`}
+          href={resolvedHref}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          className="text-accent underline decoration-2 underline-offset-4 hover:opacity-80"
+        >
+          {linkText}
         </a>,
       );
     }
@@ -72,7 +161,7 @@ function renderInline(text: string): ReactNode[] {
   return parts.length > 0 ? parts : [text];
 }
 
-function renderMarkdown(markdown: string) {
+function renderMarkdown(markdown: string, context: RenderContext) {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const elements: ReactNode[] = [];
   let i = 0;
@@ -86,7 +175,17 @@ function renderMarkdown(markdown: string) {
       continue;
     }
 
+    // Skip HTML comment blocks
+    if (line.trim().startsWith("<!--")) {
+      while (i < lines.length && !lines[i].includes("-->")) {
+        i += 1;
+      }
+      i += 1;
+      continue;
+    }
+
     if (line.startsWith("```")) {
+      const lang = line.slice(3).trim().toLowerCase();
       const codeLines: string[] = [];
       i += 1;
       while (i < lines.length && !lines[i].startsWith("```")) {
@@ -94,18 +193,58 @@ function renderMarkdown(markdown: string) {
         i += 1;
       }
       i += 1;
+
+      if (lang === "mermaid") {
+        elements.push(
+          <MermaidDiagram key={`mermaid-${key++}`} chart={codeLines.join("\n")} />,
+        );
+        continue;
+      }
+
       elements.push(
-        <pre key={`code-${key++}`} className="overflow-x-auto border-2 border-foreground bg-card p-4 text-sm text-foreground" style={{ borderRadius: "28px 18px 34px 20px / 18px 34px 20px 30px" }}>
+        <pre
+          key={`code-${key++}`}
+          className="overflow-x-auto border-2 border-foreground bg-card p-4 text-sm text-foreground"
+          style={{ borderRadius: "28px 18px 34px 20px / 18px 34px 20px 30px" }}
+        >
           <code>{codeLines.join("\n")}</code>
         </pre>,
       );
       continue;
     }
 
+    // Standalone HTML <img> tags
+    const imgTagMatch = line.match(/<img\s+[^>]*src=["']([^"']+)["'][^>]*>/i);
+    if (imgTagMatch) {
+      const rawSrc = imgTagMatch[1];
+      const altMatch = line.match(/alt=["']([^"']*)["']/i);
+      const altText = altMatch ? altMatch[1] : "";
+      const resolvedSrc = resolveAssetUrl(rawSrc, context.baseRawDir);
+      elements.push(
+        <div key={`html-img-${key++}`} className="my-6 text-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={resolvedSrc}
+            alt={altText}
+            className="inline-block max-w-full h-auto border-2 border-foreground bg-card p-2 shadow-[4px_4px_0px_0px_var(--foreground)]"
+            style={{ borderRadius: "14px 22px 16px 20px / 20px 16px 22px 14px" }}
+            loading="lazy"
+          />
+          {altText && (
+            <span className="mt-1.5 block text-sm italic text-foreground/60 font-body">
+              {altText}
+            </span>
+          )}
+        </div>,
+      );
+      i += 1;
+      continue;
+    }
+
     if (line.startsWith("# ")) {
       elements.push(
         <h1 key={`h1-${key++}`} className="text-4xl font-bold text-foreground">
-          {renderInline(line.slice(2))}
+          {renderInline(line.slice(2), context)}
         </h1>,
       );
       i += 1;
@@ -115,7 +254,7 @@ function renderMarkdown(markdown: string) {
     if (line.startsWith("## ")) {
       elements.push(
         <h2 key={`h2-${key++}`} className="pt-3 text-3xl font-semibold text-foreground">
-          {renderInline(line.slice(3))}
+          {renderInline(line.slice(3), context)}
         </h2>,
       );
       i += 1;
@@ -125,7 +264,7 @@ function renderMarkdown(markdown: string) {
     if (line.startsWith("### ")) {
       elements.push(
         <h3 key={`h3-${key++}`} className="pt-2 text-2xl font-semibold text-foreground">
-          {renderInline(line.slice(4))}
+          {renderInline(line.slice(4), context)}
         </h3>,
       );
       i += 1;
@@ -134,7 +273,7 @@ function renderMarkdown(markdown: string) {
 
     if (/^(?:-{3,}|\*{3,}|_{3,})$/.test(line.trim())) {
       elements.push(
-        <hr key={`hr-${key++}`} className="my-6 border-t-2 border-dashed border-foreground/30" />
+        <hr key={`hr-${key++}`} className="my-6 border-t-2 border-dashed border-foreground/30" />,
       );
       i += 1;
       continue;
@@ -151,7 +290,9 @@ function renderMarkdown(markdown: string) {
           {items.map((item) => (
             <li key={`${item}-${key++}`} className="grid grid-cols-[10px_1fr] gap-x-3">
               <span className="mt-[0.7rem] h-2 w-2 rounded-full border border-foreground bg-accent" />
-              <span className="text-lg leading-7 text-foreground/75">{renderInline(item)}</span>
+              <span className="text-lg leading-7 text-foreground/75">
+                {renderInline(item, context)}
+              </span>
             </li>
           ))}
         </ul>,
@@ -166,8 +307,11 @@ function renderMarkdown(markdown: string) {
         i += 1;
       }
       elements.push(
-        <blockquote key={`bq-${key++}`} className="border-l-[3px] border-dashed border-accent pl-4 text-lg text-foreground/70 italic">
-          {renderInline(quoteLines.join(" "))}
+        <blockquote
+          key={`bq-${key++}`}
+          className="border-l-[3px] border-dashed border-accent pl-4 text-lg text-foreground/70 italic"
+        >
+          {renderInline(quoteLines.join(" "), context)}
         </blockquote>,
       );
       continue;
@@ -179,7 +323,7 @@ function renderMarkdown(markdown: string) {
         tableLines.push(lines[i].trim());
         i += 1;
       }
-      
+
       const getCells = (rowText: string) => {
         let cells = rowText.split("|").map((c) => c.trim());
         if (rowText.startsWith("|")) cells.shift();
@@ -203,30 +347,37 @@ function renderMarkdown(markdown: string) {
         }
 
         elements.push(
-          <div key={`table-wrapper-${key++}`} className="overflow-x-auto my-6 border-2 border-foreground bg-card p-4" style={{ borderRadius: "18px 24px 15px 22px / 22px 15px 24px 18px" }}>
+          <div
+            key={`table-wrapper-${key++}`}
+            className="overflow-x-auto my-6 border-2 border-foreground bg-card p-4"
+            style={{ borderRadius: "18px 24px 15px 22px / 22px 15px 24px 18px" }}
+          >
             <table className="min-w-full text-left border-collapse">
               <thead>
                 <tr className="border-b-2 border-foreground">
                   {headerCells.map((cell, idx) => (
                     <th key={`th-${idx}`} className="px-4 py-2 font-bold font-heading text-lg">
-                      {renderInline(cell)}
+                      {renderInline(cell, context)}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {rows.map((row, rowIdx) => (
-                  <tr key={`tr-${rowIdx}`} className="border-b border-foreground/30 last:border-0 hover:bg-foreground/5">
+                  <tr
+                    key={`tr-${rowIdx}`}
+                    className="border-b border-foreground/30 last:border-0 hover:bg-foreground/5"
+                  >
                     {row.map((cell, cellIdx) => (
                       <td key={`td-${cellIdx}`} className="px-4 py-2 text-lg">
-                        {renderInline(cell)}
+                        {renderInline(cell, context)}
                       </td>
                     ))}
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </div>,
         );
       }
       continue;
@@ -241,6 +392,8 @@ function renderMarkdown(markdown: string) {
       !/^[-*]\s+/.test(lines[i]) &&
       !lines[i].startsWith("> ") &&
       !lines[i].trim().startsWith("|") &&
+      !lines[i].trim().startsWith("<!--") &&
+      !lines[i].match(/<img\s+/i) &&
       !/^(?:-{3,}|\*{3,}|_{3,})$/.test(lines[i].trim())
     ) {
       paragraphLines.push(lines[i].trim());
@@ -248,7 +401,7 @@ function renderMarkdown(markdown: string) {
     }
     elements.push(
       <p key={`p-${key++}`} className="text-lg leading-8 text-foreground/75">
-        {renderInline(paragraphLines.join(" "))}
+        {renderInline(paragraphLines.join(" "), context)}
       </p>,
     );
   }
@@ -256,65 +409,16 @@ function renderMarkdown(markdown: string) {
   return elements;
 }
 
-function ReadmeSkeleton({ github }: { github: string }) {
-  return (
-    <section className="sketch-card mt-8 bg-card p-6 sm:p-8">
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <h2 className="text-3xl font-semibold text-foreground">README</h2>
-        <a
-          href={github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="sketch-link text-lg text-accent"
-        >
-          Open on GitHub
-        </a>
-      </div>
-      <div className="space-y-4">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div
-            key={index}
-            className="h-5 animate-pulse border-2 border-foreground/40 bg-card"
-            style={{ width: `${85 - index * 5}%` }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-async function ReadmeSection({
-  readmeRawUrls,
-  github,
-}: {
-  readmeRawUrls: string[];
-  github: string;
-}) {
-  const readme = await fetchReadme(readmeRawUrls);
-
-  return (
-    <section className="sketch-card mt-8 bg-card p-6 sm:p-8">
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <h2 className="text-3xl font-semibold text-foreground">README</h2>
-        <a
-          href={github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="sketch-link text-lg text-accent"
-        >
-          Open on GitHub
-        </a>
-      </div>
-
-      {readme ? (
-        <article className="space-y-5">{renderMarkdown(readme)}</article>
-      ) : (
-        <div className="sketch-card bg-[var(--post-it)] p-6 text-lg text-foreground/75">
-          README could not be loaded automatically right now. You can still view the repository directly from the GitHub button above.
-        </div>
-      )}
-    </section>
-  );
+function getLocalReadme(slug: string): string | null {
+  try {
+    const filePath = path.join(process.cwd(), "content", "readmes", `${slug}.md`);
+    if (fs.existsSync(filePath)) {
+      return fs.readFileSync(filePath, "utf-8");
+    }
+  } catch {
+    // Ignore and fallback to remote fetch
+  }
+  return null;
 }
 
 export default async function ProjectDetailsPage({
@@ -329,8 +433,25 @@ export default async function ProjectDetailsPage({
     notFound();
   }
 
+  const localContent = getLocalReadme(slug);
+  const result: ReadmeData | null = localContent
+    ? {
+        content: localContent,
+        sourceUrl: project.readmeRawUrls[0] || `${project.github}/raw/main/README.md`,
+      }
+    : await fetchReadme(project.readmeRawUrls);
+
+  const context = result
+    ? getRenderContext(result.sourceUrl, project.github)
+    : {
+        baseRawDir: project.github.replace("github.com", "raw.githubusercontent.com") + "/main",
+        githubUrl: project.github,
+        branch: "main",
+      };
+
   return (
     <main className="min-h-screen bg-background px-6 py-24">
+      <ScrollToHash />
       <div className="mx-auto max-w-5xl">
         <BackToProjects />
 
@@ -356,9 +477,9 @@ export default async function ProjectDetailsPage({
               </a>
               {project.demo ? (
                 <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="primary-button inline-flex items-center justify-center px-4 py-3 text-lg"
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
@@ -377,9 +498,27 @@ export default async function ProjectDetailsPage({
           </div>
         </section>
 
-        <Suspense fallback={<ReadmeSkeleton github={project.github} />}>
-          <ReadmeSection readmeRawUrls={project.readmeRawUrls} github={project.github} />
-        </Suspense>
+        <section id="readme" className="sketch-card mt-8 scroll-mt-24 bg-card p-6 sm:p-8">
+          <div className="mb-6 flex items-center justify-between gap-4">
+            <h2 className="text-3xl font-semibold text-foreground">README</h2>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sketch-link text-lg text-accent"
+            >
+              Open on GitHub
+            </a>
+          </div>
+
+          {result ? (
+            <article className="space-y-5">{renderMarkdown(result.content, context)}</article>
+          ) : (
+            <div className="sketch-card bg-[var(--post-it)] p-6 text-lg text-foreground/75">
+              README could not be loaded automatically right now. You can still view the repository directly from the GitHub button above.
+            </div>
+          )}
+        </section>
       </div>
     </main>
   );

@@ -1,0 +1,110 @@
+# SortLab — Interactive Sorting Algorithm Workbench
+
+An elegant, high-fidelity interactive visual workspace designed for learning, comparing, and analyzing classical sorting algorithms. Built with React, Vite, and custom CSS variables, SortLab lets you control and observe sorting operations at the level of atomic comparisons and swaps.
+
+---
+
+## Key Features
+
+*   **Interactive Playback Controls**: Start, pause, resume, reset, or step through algorithms frame-by-frame with standard playback buttons.
+*   **Nine Implemented Algorithms**: Visualize a wide range of comparison-based and non-comparison-based sorting algorithms.
+*   **Real-time Statistics Tracker**: Live-monitors the exact number of:
+    *   **Comparisons** performed
+    *   **Swaps** executed
+    *   **Array Accesses** made
+    *   **Iterations/Steps** processed
+    *   **Elapsed Time** down to centiseconds (e.g., `1.45s`)
+*   **Dynamic Dataset Controls**:
+    *   Adjust array size dynamically from 5 to 100 elements.
+    *   Control playback speed (1% to 100%) with automated delay scaling.
+    *   Generate random arrays or enter your own custom comma-separated numeric inputs (values between 0 and 999).
+*   **Educational Details Panel**: View comprehensive summaries for the selected algorithm, including:
+    *   Time Complexity (Best, Average, and Worst cases)
+    *   Space Complexity (Auxiliary)
+    *   Attributes (Stability, In-place vs. Out-of-place)
+    *   Detailed explanation of operational principles, advantages, disadvantages, and typical real-world use cases.
+*   **Premium Aesthetics & Theme Support**: Supports fluid Dark and Light themes with coordinate-based circular transitions powered by the View Transitions API.
+
+---
+
+## Supported Algorithms
+
+SortLab includes visualizers for the following 9 algorithms:
+
+| Algorithm | Best Case | Average Case | Worst Case | Space Complexity | Stable | In-Place |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: |
+| **Bubble Sort** | $O(n)$ | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Yes | Yes |
+| **Selection Sort** | $O(n^2)$ | $O(n^2)$ | $O(n^2)$ | $O(1)$ | No | Yes |
+| **Insertion Sort** | $O(n)$ | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Yes | Yes |
+| **Merge Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$ | $O(n)$ | Yes | No |
+| **Quick Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n^2)$ | $O(\log n)$ | No | Yes |
+| **Heap Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | No | Yes |
+| **Shell Sort** | $O(n \log n)$ | $O(n^{1.3})$ | $O(n^2)$ | $O(1)$ | No | Yes |
+| **Counting Sort** | $O(n+k)$ | $O(n+k)$ | $O(n+k)$ | $O(n+k)$ | Yes | No |
+| **Radix Sort** | $O(d(n+b))$ | $O(d(n+b))$ | $O(d(n+b))$ | $O(n+b)$ | Yes | No |
+
+---
+
+## Tech Stack & Architecture
+
+SortLab is built using a modern, lightweight frontend architecture:
+
+*   **React (v18.3.1)**: Manages state transitions and user controls.
+*   **Vite (v6.0.5)**: Bundler and dev server configuration for rapid building and hot modular replacement.
+*   **Lucide React**: Vector icons for playback buttons and panels.
+*   **Vanilla CSS & CSS Variables**: A unified theme token system (`DARK` and `LIGHT`) that controls CSS variables directly from state to toggle colors, animations, and typography (`Space Grotesk`, `Inter`, `JetBrains Mono`).
+
+### How the Visualizer Engine Works
+Rather than sorting the array instantly, SortLab utilizes **JavaScript Generators (`function*` and `yield`)** to model the sorting process as a stream of discrete operations.
+
+Each sorting function yields step objects that specify:
+*   `type`: The action being performed (e.g., `'compare'`, `'swap'`, `'overwrite'`, `'access'`, `'pivot'`, `'sorted'`).
+*   `indices` or `index`: The indices of the array elements involved in this operation.
+*   `value`: The new value for an overwrite operation (e.g., in Merge Sort or Radix Sort).
+
+The runtime visualizer loop pulls these events step-by-step and updates the array visual state and counters, enabling pausing, resuming, stepping forward, and rendering elements with different color-coded states:
+*   🔵 **Default** (Unsorted)
+*   🟡 **Comparing** (Comparing two elements)
+*   🔴 **Swapping** (Exchanging elements)
+*   🟣 **Pivot** (Active pivot element)
+*   🟢 **Sorted** (Sorted elements)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+*   [Node.js](https://nodejs.org/) (v16+ recommended)
+*   npm (installed with Node.js)
+
+### Installation
+
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/NiranjanS8/sorting-algorithm-visualizer.git
+    cd sorting-algorithm-visualizer
+    ```
+
+2.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
+
+3.  **Run Development Server**:
+    ```bash
+    npm run dev
+    ```
+    Open your browser and navigate to `http://localhost:5173`.
+
+4.  **Build for Production**:
+    ```bash
+    npm run build
+    ```
+    This generates highly optimized production build files in the `dist` directory.
+
+5.  **Preview Production Build**:
+    ```bash
+    npm run preview
+    ```
+    

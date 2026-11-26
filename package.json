@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "sync-readmes": "node scripts/sync-readmes.mjs",
     "clean": "powershell -Command \"if (Test-Path .next) { Remove-Item -LiteralPath .next -Recurse -Force }\""
   },
   "dependencies": {
     "framer-motion": "^12.6.2",
     "lucide-react": "^0.511.0",
+    "mermaid": "^12.3.0",
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -18,6 +18,7 @@ const filterOptions: { value: CategoryFilter; label: string }[] = [
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState<CategoryFilter>("all");
   const [showAll, setShowAll] = useState(false);
+  const [openingSlug, setOpeningSlug] = useState<string | null>(null);
 
   const filteredProjects =
     activeFilter === "all"
@@ -114,7 +115,12 @@ export default function ProjectsSection() {
                   </div>
 
                   <div>
-                    <Link href={`/projects/${project.slug}`} className="mb-2 block text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-accent">
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      prefetch={true}
+                      onClick={() => setOpeningSlug(project.slug)}
+                      className="mb-2 block text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-accent"
+                    >
                       {project.title}
                     </Link>
                     <p className="line-clamp-3 text-lg leading-7 text-foreground/75">{project.description}</p>
@@ -144,11 +150,33 @@ export default function ProjectsSection() {
 
                   <div className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
                     <Link
-                      href={`/projects/${project.slug}`}
+                      href={`/projects/${project.slug}#readme`}
+                      prefetch={true}
+                      scroll={false}
+                      onClick={() => setOpeningSlug(project.slug)}
                       className={`primary-button px-4 py-2 text-base ${project.demo ? "sm:col-span-2" : ""}`}
                     >
-                      Details
-                      <ArrowRight className="ml-1 h-4 w-4" />
+                      {openingSlug === project.slug ? (
+                        <span className="inline-flex items-center gap-1.5">
+                          <span>Opening</span>
+                          <span className="inline-flex items-center gap-0.5" aria-hidden="true">
+                            <span className="sketch-dot-bounce h-1.5 w-1.5 rounded-full bg-current" />
+                            <span
+                              className="sketch-dot-bounce h-1.5 w-1.5 rounded-full bg-current"
+                              style={{ animationDelay: "0.18s" }}
+                            />
+                            <span
+                              className="sketch-dot-bounce h-1.5 w-1.5 rounded-full bg-current"
+                              style={{ animationDelay: "0.36s" }}
+                            />
+                          </span>
+                        </span>
+                      ) : (
+                        <>
+                          Details
+                          <ArrowRight className="ml-1 h-4 w-4" />
+                        </>
+                      )}
                     </Link>
                     <a
                       href={project.github}
